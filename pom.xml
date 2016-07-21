@@ -8,7 +8,7 @@
     <artifactId>android-automation-library</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <description>Support android ui automaton such as Toast and PopupWindow for appium</description>
+    <description>Support android ui automaton such as identify Toast and PopupWindow for appium</description>
     <url>https://github.com/lwfwind/android-automation-library</url>
 
     <parent>
@@ -16,6 +16,15 @@
         <artifactId>oss-parent</artifactId>
         <version>3</version>
     </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>android</groupId>
+            <artifactId>android</artifactId>
+            <version>5.1.1_r2</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
     <licenses>
         <license>
@@ -117,8 +126,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>

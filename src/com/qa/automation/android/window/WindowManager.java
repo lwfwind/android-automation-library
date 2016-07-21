@@ -1,4 +1,4 @@
-package com.qa.automation.android.Window;
+package com.qa.automation.android.window;
 
 import android.app.Activity;
 import android.text.TextUtils;
@@ -188,8 +188,7 @@ public class WindowManager {
      * Invoke this method to register a new view hierarchy.
      *
      * @param view A view that belongs to the view hierarchy/window to register
-     * @param name the name
-     * @name name The name of the view hierarchy/window to register
+     * @param name The name of the view hierarchy/window to register
      * @see #removeWindow(View) #removeWindow(View)
      */
     public void addWindow(View view, String name) {

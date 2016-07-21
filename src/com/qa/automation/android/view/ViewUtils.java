@@ -1,4 +1,4 @@
-package com.qa.automation.android.View;
+package com.qa.automation.android.view;
 
 import android.view.View;
 import android.widget.TextView;

@@ -1,4 +1,4 @@
-package com.qa.automation.android.View;
+package com.qa.automation.android.view;
 
 /**
  * The type Sleeper.

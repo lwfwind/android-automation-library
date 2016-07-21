@@ -1,4 +1,4 @@
-package com.qa.automation.android.Window;
+package com.qa.automation.android.window;
 
 /**
  * Created by kcgw001 on 2016/6/21.
