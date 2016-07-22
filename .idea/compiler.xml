@@ -33,7 +33,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="android-automation-library" target="1.8" />
+      <module name="android-automation-library" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

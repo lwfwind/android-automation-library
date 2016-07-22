@@ -26,6 +26,10 @@ import android.widget.TextView;
 import com.qa.automation.android.view.Getter;
 import com.qa.automation.android.window.WindowListener;
 import com.qa.automation.android.window.WindowManager;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 import java.io.*;
 import java.lang.reflect.Method;
@@ -425,7 +429,6 @@ public class AutomationServer implements Runnable {
                     command = request.substring(0, index);
                     parameters = request.substring(index + 1);
                 }
-
                 boolean result;
                 if (COMMAND_PROTOCOL_VERSION.equalsIgnoreCase(command)) {
                     result = writeValue(mClient, VALUE_PROTOCOL_VERSION);
@@ -438,8 +441,25 @@ public class AutomationServer implements Runnable {
                 } else if (COMMAND_WINDOW_MANAGER_AUTOLIST.equalsIgnoreCase(command)) {
                     result = windowManagerAutolistLoop();
                 } else if (COMMAND_GET_TOAST.equalsIgnoreCase(command)) {
-                    int timeout = Integer.parseInt(parameters);
-                    result = writeValue(mClient, getLastToast(timeout));
+                    Options options = new Options();
+                    options.addOption("t", true, "timeout");
+                    options.addOption("ex", true, "excludeText");
+                    DefaultParser parser = new DefaultParser();
+                    String[] args = parameters.split(" ");
+                    try {
+                        CommandLine cl = parser.parse(options, args);
+                        if (cl.hasOption("ex")) {
+                            String timeout = cl.getOptionValue("t");
+                            String excludeText = cl.getOptionValue("ex");
+                            result = writeValue(mClient, getLastToast(Integer.parseInt(timeout), excludeText));
+                        } else {
+                            String timeout = cl.getOptionValue("t");
+                            result = writeValue(mClient, getLastToast(Integer.parseInt(timeout)));
+                        }
+                    } catch (ParseException e) {
+                        Log.w(LOG_TAG, e.getCause());
+                        result = false;
+                    }
                 } else if (COMMAND_IS_MUSIC_ACTIVE.equalsIgnoreCase(command)) {
                     result = writeValue(mClient, isMusicActive(mContext) ? "true" : "false");
 
@@ -472,8 +492,17 @@ public class AutomationServer implements Runnable {
         }
 
         private String getLastToast(int timeout) {
-            Getter getter = new Getter(mContext,timeout);
+            Getter getter = new Getter(mContext, timeout);
             TextView toastTextView = (TextView) getter.getView("message", 0);
+            if (null != toastTextView) {
+                return toastTextView.getText().toString();
+            }
+            return "";
+        }
+
+        private String getLastToast(int timeout, String excludeText) {
+            Getter getter = new Getter(mContext, timeout);
+            TextView toastTextView = (TextView) getter.getTextView("message", excludeText, 0);
             if (null != toastTextView) {
                 return toastTextView.getText().toString();
             }
