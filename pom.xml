@@ -6,7 +6,7 @@
 
     <groupId>com.github.lwfwind.automation</groupId>
     <artifactId>android-automation-library</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     <packaging>jar</packaging>
     <description>Support android ui automaton such as identify Toast and PopupWindow for appium</description>
     <url>https://github.com/lwfwind/android-automation-library</url>
@@ -49,7 +49,7 @@
         <url>https://github.com/lwfwind/android-automation-library</url>
         <connection>scm:git:ssh://git@github.com/lwfwind/android-automation-library.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/lwfwind/android-automation-library.git</developerConnection>
-        <tag>1.1.0</tag>
+        <tag>1.2.0</tag>
     </scm>
 
     <developers>
