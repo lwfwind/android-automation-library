@@ -4,11 +4,13 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.testng.annotations.Test;
 
-public class test {
-    @Test
-    public void testParse() {
+public class ParseTest {
+    public static void main(String[] args) {
+        testParse();
+        testParse2();
+    }
+    public static void testParse() {
         String parameters = "-t 20000 -ex 请稍候...";
         Options options = new Options();
         options.addOption("t", true, "timeout");
@@ -31,8 +33,7 @@ public class test {
         }
     }
 
-    @Test
-    public void testParse2() {
+    public static void testParse2() {
         String parameters = "-t 20000";
         Options options = new Options();
         options.addOption("t", true, "timeout");
