@@ -146,6 +146,53 @@ public class AutomationServer implements Runnable {
         mPort = port;
     }
 
+
+    /**
+     * Gets last toast.
+     *
+     * @param timeout the timeout
+     * @return the last toast
+     */
+    public static String getLastToast(int timeout) {
+        Getter getter = new Getter(mContext, timeout);
+        TextView toastTextView = (TextView) getter.getView("message", 0);
+        if (null != toastTextView) {
+            return toastTextView.getText().toString();
+        }
+        return "";
+    }
+
+    /**
+     * Gets last toast.
+     *
+     * @param timeout     the timeout
+     * @param excludeText the exclude text
+     * @return the last toast
+     */
+    public static String getLastToast(int timeout, String excludeText) {
+        Getter getter = new Getter(mContext, timeout);
+        TextView toastTextView = (TextView) getter.getTextView("message", excludeText, 0);
+        if (null != toastTextView) {
+            return toastTextView.getText().toString();
+        }
+        return "";
+    }
+
+    /**
+     * Checks whether any music is active
+     *
+     * @param context the context
+     * @return the boolean
+     */
+    public static boolean isMusicActive(Context context) {
+        final AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        if (am == null) {
+            Log.d(LOG_TAG, "isMusicActive: couldn't get AudioManager reference");
+            return false;
+        }
+        return am.isMusicActive();
+    }
+
     /**
      * Returns a unique instance of the AutomationServer. This method should only be
      * called from the main thread of your application. The server will have
@@ -237,8 +284,8 @@ public class AutomationServer implements Runnable {
      *
      * @return True if the server was successfully created, or false if it already exists.
      * @throws IOException If the server cannot be created.
-     * @see #stop() #stop()
-     * @see #isRunning() #isRunning()
+     * @see #stop() #stop()#stop()#stop()
+     * @see #isRunning() #isRunning()#isRunning()#isRunning()
      */
     public boolean start() throws IOException {
         if (mThread != null) {
@@ -254,8 +301,8 @@ public class AutomationServer implements Runnable {
      * Stops the server.
      *
      * @return True if the server was stopped, false if an error occurred or if the server wasn't started.
-     * @see #start() #start()
-     * @see #isRunning() #isRunning()
+     * @see #start() #start()#start()#start()
+     * @see #isRunning() #isRunning()#isRunning()#isRunning()
      */
     public boolean stop() {
         if (mThread != null) {
@@ -287,8 +334,8 @@ public class AutomationServer implements Runnable {
      * Indicates whether the server is currently running.
      *
      * @return True if the server is running, false otherwise.
-     * @see #start() #start()
-     * @see #stop() #stop()
+     * @see #start() #start()#start()#start()
+     * @see #stop() #stop()#stop()#stop()
      */
     public boolean isRunning() {
         return mThread != null && mThread.isAlive();
@@ -491,38 +538,6 @@ public class AutomationServer implements Runnable {
             }
         }
 
-        private String getLastToast(int timeout) {
-            Getter getter = new Getter(mContext, timeout);
-            TextView toastTextView = (TextView) getter.getView("message", 0);
-            if (null != toastTextView) {
-                return toastTextView.getText().toString();
-            }
-            return "";
-        }
-
-        private String getLastToast(int timeout, String excludeText) {
-            Getter getter = new Getter(mContext, timeout);
-            TextView toastTextView = (TextView) getter.getTextView("message", excludeText, 0);
-            if (null != toastTextView) {
-                return toastTextView.getText().toString();
-            }
-            return "";
-        }
-
-        /**
-         * Checks whether any music is active
-         *
-         * @param context the context
-         * @return the boolean
-         */
-        public boolean isMusicActive(Context context) {
-            final AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-            if (am == null) {
-                Log.d(LOG_TAG, "isMusicActive: couldn't get AudioManager reference");
-                return false;
-            }
-            return am.isMusicActive();
-        }
 
         private boolean windowCommand(Socket client, String command, String parameters) {
             boolean success = true;
