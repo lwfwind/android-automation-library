@@ -19,7 +19,7 @@ public class IterateView {
         if (view instanceof ViewGroup) {
             iterateViewChildren(view);
         } else {
-            if (view.isClickable() && view.getId() != -1) {
+            if (view.getId() != -1) {
                 views.add(view);
             }
         }
@@ -30,7 +30,7 @@ public class IterateView {
         for (int i = 0; i < vGroup.getChildCount(); i++) {
             View vChild = vGroup.getChildAt(i);
             if (!(vChild instanceof ViewGroup)) {
-                if (vChild.isClickable() && vChild.getId() != -1) {
+                if (vChild.getId() != -1) {
                     views.add(vChild);
                 }
             } else {
