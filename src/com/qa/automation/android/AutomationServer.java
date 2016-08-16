@@ -122,11 +122,13 @@ public class AutomationServer implements Runnable {
 
     private static final String COMMAND_IS_MUSIC_ACTIVE = "isMusicActive";
     private static final String COMMAND_GET_TOAST = "toast";
+    private static final String COMMAND_HIGHLIGHT = "highlight";
 
     private static AutomationServer sServer;
     private static WindowManager windowManager = new WindowManager();
     private static Context mContext;
     private final int mPort;
+    private static boolean mHighlightFlag = false;
     private ServerSocket mServer;
     private Thread mThread;
     private ExecutorService mThreadPool;
@@ -146,6 +148,13 @@ public class AutomationServer implements Runnable {
         mPort = port;
     }
 
+    public static boolean getHighlightFlag(){
+        return mHighlightFlag;
+    }
+
+    public static void setHighlightFlag(boolean flag){
+        mHighlightFlag=flag;
+    }
 
     /**
      * Gets last toast.
@@ -476,7 +485,7 @@ public class AutomationServer implements Runnable {
                     command = request.substring(0, index);
                     parameters = request.substring(index + 1);
                 }
-                boolean result;
+                boolean result=false;
                 if (COMMAND_PROTOCOL_VERSION.equalsIgnoreCase(command)) {
                     result = writeValue(mClient, VALUE_PROTOCOL_VERSION);
                 } else if (COMMAND_SERVER_VERSION.equalsIgnoreCase(command)) {
@@ -487,6 +496,14 @@ public class AutomationServer implements Runnable {
                     result = windowManager.getFocusedWindow(mClient);
                 } else if (COMMAND_WINDOW_MANAGER_AUTOLIST.equalsIgnoreCase(command)) {
                     result = windowManagerAutolistLoop();
+                } else if (COMMAND_GET_TOAST.equalsIgnoreCase(command)) {
+                    if(parameters.trim().equals("1")){
+                        setHighlightFlag(true);
+                    }
+                    else
+                    {
+                        setHighlightFlag(false);
+                    }
                 } else if (COMMAND_GET_TOAST.equalsIgnoreCase(command)) {
                     Options options = new Options();
                     options.addOption("t", true, "timeout");
