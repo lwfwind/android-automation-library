@@ -496,7 +496,7 @@ public class AutomationServer implements Runnable {
                     result = windowManager.getFocusedWindow(mClient);
                 } else if (COMMAND_WINDOW_MANAGER_AUTOLIST.equalsIgnoreCase(command)) {
                     result = windowManagerAutolistLoop();
-                } else if (COMMAND_GET_TOAST.equalsIgnoreCase(command)) {
+                } else if (COMMAND_HIGHLIGHT.equalsIgnoreCase(command)) {
                     if(parameters.trim().equals("1")){
                         setHighlightFlag(true);
                     }
