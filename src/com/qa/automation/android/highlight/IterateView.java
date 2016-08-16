@@ -11,7 +11,8 @@ import java.util.List;
  */
 public class IterateView {
     private List<View> views = new ArrayList<View>();
-    public List<View> getViews(){
+
+    public List<View> getViews() {
         return views;
     }
 

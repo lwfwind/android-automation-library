@@ -3,6 +3,7 @@ package com.qa.automation.android.highlight;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.os.Build;
@@ -10,9 +11,38 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HighlightView {
-    public void highlight(Activity activity) {
+    private static ShapeDrawable shape = null;
+    private static Activity activity = null;
+    private static ArrayList<Activity> highlightedActivityList = new ArrayList<>();
+    private static HashMap<View, Drawable> highlightedViewDrawableMap = new HashMap<>();
+    private static HashMap<Activity, ArrayList<View>> highlightedActivityViewListMap = new HashMap<>();
+
+    static {
+        // Create a border programmatically
+        shape = new ShapeDrawable(new RectShape());
+        shape.getPaint().setColor(Color.RED);
+        shape.getPaint().setStyle(Paint.Style.STROKE);
+        shape.getPaint().setStrokeWidth(15);
+    }
+
+    public static void highlight(Activity act) {
+        activity = act;
+        if (highlightedActivityList.indexOf(activity) > -1) {
+            for (View v : highlightedActivityViewListMap.get(activity)) {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    v.setBackgroundDrawable(highlightedViewDrawableMap.get(v));
+                } else {
+                    v.setBackground(highlightedViewDrawableMap.get(v));
+                }
+                v.invalidate();
+            }
+            return;
+        }
+        highlightedActivityList.add(activity);
         View.OnTouchListener touchListener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -34,6 +64,7 @@ public class HighlightView {
                 setBackground(v);
             }
         };
+
         IterateView iterateView = new IterateView();
         iterateView.iterate(activity.getWindow().getDecorView().getRootView());
         for (View view : iterateView.getViews()) {
@@ -42,27 +73,33 @@ public class HighlightView {
                 view.setOnTouchListener(touchListener);
                 flag = true;
             }
-            if(!hasClickListener(view) && !flag){
+            if (!hasClickListener(view) && !flag) {
                 view.setOnClickListener(clickListener);
             }
         }
     }
 
-    private void setBackground(View v){
-        // Create a border programmatically
-        ShapeDrawable shape = new ShapeDrawable(new RectShape());
-        shape.getPaint().setColor(Color.RED);
-        shape.getPaint().setStyle(Paint.Style.STROKE);
-        shape.getPaint().setStrokeWidth(15);
-        // Assign the created border to view
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-            v.setBackgroundDrawable(shape);
-        } else {
-            v.setBackground(shape);
+    private static void setBackground(View v) {
+        if (v.getBackground() != shape) {
+            highlightedViewDrawableMap.put(v, v.getBackground());
+            if (highlightedActivityViewListMap.get(activity) != null) {
+                highlightedActivityViewListMap.get(activity).add(v);
+            } else {
+                ArrayList<View> viewList = new ArrayList<>();
+                viewList.add(v);
+                highlightedActivityViewListMap.put(activity, viewList);
+            }
+            // Assign the created border to view
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                v.setBackgroundDrawable(shape);
+            } else {
+                v.setBackground(shape);
+            }
+            v.invalidate();
         }
     }
 
-    private boolean hasTouchListener(View view) {
+    private static boolean hasTouchListener(View view) {
         // get the nested class `android.view.View$ListenerInfo`
         Field listenerInfoField = null;
         Object listenerInfoObject = null;
@@ -71,7 +108,7 @@ public class HighlightView {
             if (listenerInfoField != null) {
                 listenerInfoField.setAccessible(true);
                 listenerInfoObject = listenerInfoField.get(view);
-                if(listenerInfoObject == null){
+                if (listenerInfoObject == null) {
                     return false;
                 }
             }
@@ -89,7 +126,7 @@ public class HighlightView {
         return true;
     }
 
-    private boolean hasClickListener(View view) {
+    private static boolean hasClickListener(View view) {
         // get the nested class `android.view.View$ListenerInfo`
         Field listenerInfoField = null;
         Object listenerInfoObject = null;
@@ -98,7 +135,7 @@ public class HighlightView {
             if (listenerInfoField != null) {
                 listenerInfoField.setAccessible(true);
                 listenerInfoObject = listenerInfoField.get(view);
-                if(listenerInfoObject == null){
+                if (listenerInfoObject == null) {
                     return false;
                 }
             }

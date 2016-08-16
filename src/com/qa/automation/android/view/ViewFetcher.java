@@ -520,9 +520,9 @@ class ViewFetcher {
     }
 
     /**
-     * Returns the WindorDecorViews shown on the screen.
+     * Returns the WindowDecorViews shown on the screen.
      *
-     * @return the WindorDecorViews shown on the screen
+     * @return the WindowDecorViews shown on the screen
      */
     @SuppressWarnings("unchecked")
     public View[] getWindowDecorViews() {
