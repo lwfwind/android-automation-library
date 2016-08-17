@@ -32,13 +32,15 @@ public class HighlightView {
     public static void highlight(Activity act) {
         activity = act;
         if (highlightedActivityList.indexOf(activity) > -1) {
-            for (View v : highlightedActivityViewListMap.get(activity)) {
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                    v.setBackgroundDrawable(highlightedViewDrawableMap.get(v));
-                } else {
-                    v.setBackground(highlightedViewDrawableMap.get(v));
+            if(highlightedActivityViewListMap.get(activity) != null) {
+                for (View v : highlightedActivityViewListMap.get(activity)) {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                        v.setBackgroundDrawable(highlightedViewDrawableMap.get(v));
+                    } else {
+                        v.setBackground(highlightedViewDrawableMap.get(v));
+                    }
+                    v.invalidate();
                 }
-                v.invalidate();
             }
             return;
         }

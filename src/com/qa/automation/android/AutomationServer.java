@@ -105,25 +105,6 @@ public class AutomationServer implements Runnable {
     // Debug facility
     private static final String LOG_TAG = "AutomationServer";
 
-    private static final String VALUE_PROTOCOL_VERSION = "4";
-    private static final String VALUE_SERVER_VERSION = "4";
-
-    // Protocol commands
-    // Returns the protocol version
-    private static final String COMMAND_PROTOCOL_VERSION = "PROTOCOL";
-    // Returns the server version
-    private static final String COMMAND_SERVER_VERSION = "SERVER";
-    // Lists all of the available windows in the system
-    private static final String COMMAND_WINDOW_MANAGER_LIST = "LIST";
-    // Keeps a connection open and notifies when the list of windows changes
-    private static final String COMMAND_WINDOW_MANAGER_AUTOLIST = "AUTOLIST";
-    // Returns the focused window
-    private static final String COMMAND_WINDOW_MANAGER_GET_FOCUS = "GET_FOCUS";
-
-    private static final String COMMAND_IS_MUSIC_ACTIVE = "isMusicActive";
-    private static final String COMMAND_GET_TOAST = "toast";
-    private static final String COMMAND_HIGHLIGHT = "highlight";
-
     private static AutomationServer sServer;
     private static WindowManager windowManager = new WindowManager();
     private static Context mContext;
@@ -148,60 +129,6 @@ public class AutomationServer implements Runnable {
         mPort = port;
     }
 
-    public static boolean getHighlightFlag(){
-        return mHighlightFlag;
-    }
-
-    public static void setHighlightFlag(boolean flag){
-        mHighlightFlag=flag;
-    }
-
-    /**
-     * Gets last toast.
-     *
-     * @param timeout the timeout
-     * @return the last toast
-     */
-    public static String getLastToast(int timeout) {
-        Getter getter = new Getter(mContext, timeout);
-        TextView toastTextView = (TextView) getter.getView("message", 0);
-        if (null != toastTextView) {
-            return toastTextView.getText().toString();
-        }
-        return "";
-    }
-
-    /**
-     * Gets last toast.
-     *
-     * @param timeout     the timeout
-     * @param excludeText the exclude text
-     * @return the last toast
-     */
-    public static String getLastToast(int timeout, String excludeText) {
-        Getter getter = new Getter(mContext, timeout);
-        TextView toastTextView = (TextView) getter.getTextView("message", excludeText, 0);
-        if (null != toastTextView) {
-            return toastTextView.getText().toString();
-        }
-        return "";
-    }
-
-    /**
-     * Checks whether any music is active
-     *
-     * @param context the context
-     * @return the boolean
-     */
-    public static boolean isMusicActive(Context context) {
-        final AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        if (am == null) {
-            Log.d(LOG_TAG, "isMusicActive: couldn't get AudioManager reference");
-            return false;
-        }
-        return am.isMusicActive();
-    }
-
     /**
      * Returns a unique instance of the AutomationServer. This method should only be
      * called from the main thread of your application. The server will have
@@ -223,69 +150,6 @@ public class AutomationServer implements Runnable {
         }
 
         return sServer;
-    }
-
-    /**
-     * Sets current context.
-     *
-     * @param context the context
-     * @return the current context
-     */
-    public static WindowManager setCurrentContext(Context context) {
-        mContext = context;
-        return windowManager;
-    }
-
-    /**
-     * Add window.
-     *
-     * @param activity the activity
-     */
-    public static void addWindow(Activity activity) {
-        windowManager.addWindow(activity);
-    }
-
-    /**
-     * Remove window.
-     *
-     * @param activity the activity
-     */
-    public static void removeWindow(Activity activity) {
-        windowManager.removeWindow(activity);
-    }
-
-    /**
-     * Sets focused window.
-     *
-     * @param activity the activity
-     */
-    public static void setFocusedWindow(Activity activity) {
-        windowManager.setFocusedWindow(activity);
-    }
-
-    private static boolean writeValue(Socket client, String value) {
-        boolean result;
-        BufferedWriter out = null;
-        try {
-            OutputStream clientStream = client.getOutputStream();
-            out = new BufferedWriter(new OutputStreamWriter(clientStream), 8 * 1024);
-            out.write(value);
-            out.write("\n");
-            out.flush();
-            result = true;
-        } catch (Exception e) {
-            result = false;
-            Log.w(LOG_TAG, "Error:", e);
-        } finally {
-            if (out != null) {
-                try {
-                    out.close();
-                } catch (IOException e) {
-                    result = false;
-                }
-            }
-        }
-        return result;
     }
 
     /**
@@ -366,7 +230,7 @@ public class AutomationServer implements Runnable {
             try {
                 Socket client = mServer.accept();
                 if (mThreadPool != null) {
-                    mThreadPool.submit(new ViewServerWorker(client));
+                    mThreadPool.submit(new AutomationServerWorker(client));
                 } else {
                     try {
                         client.close();
@@ -380,293 +244,102 @@ public class AutomationServer implements Runnable {
         }
     }
 
-    private static class UncloseableOutputStream extends OutputStream {
-        private final OutputStream mStream;
-
-        /**
-         * Instantiates a new Uncloseable output stream.
-         *
-         * @param stream the stream
-         */
-        UncloseableOutputStream(OutputStream stream) {
-            mStream = stream;
-        }
-
-        public void close() throws IOException {
-            // Don't close the stream
-        }
-
-        public boolean equals(Object o) {
-            return mStream.equals(o);
-        }
-
-        public void flush() throws IOException {
-            mStream.flush();
-        }
-
-        public int hashCode() {
-            return mStream.hashCode();
-        }
-
-        public String toString() {
-            return mStream.toString();
-        }
-
-        public void write(byte[] buffer, int offset, int count)
-                throws IOException {
-            mStream.write(buffer, offset, count);
-        }
-
-        public void write(byte[] buffer) throws IOException {
-            mStream.write(buffer);
-        }
-
-        public void write(int oneByte) throws IOException {
-            mStream.write(oneByte);
-        }
+    public static WindowManager getWindowManagerInstance(){
+        return windowManager;
     }
 
-    private static class NoopViewServer extends AutomationServer {
-        private NoopViewServer() {
-        }
-
-        @Override
-        public boolean start() throws IOException {
-            return false;
-        }
-
-        @Override
-        public boolean stop() {
-            return false;
-        }
-
-        @Override
-        public boolean isRunning() {
-            return false;
-        }
-
-        @Override
-        public void run() {
-        }
+    public static boolean getHighlightFlag(){
+        return mHighlightFlag;
     }
 
-    private class ViewServerWorker implements Runnable, WindowListener {
-        private final Object[] mLock = new Object[0];
-        private Socket mClient;
-        private boolean mNeedWindowListUpdate;
-        private boolean mNeedFocusedWindowUpdate;
-
-        /**
-         * Instantiates a new View server worker.
-         *
-         * @param client the client
-         */
-        public ViewServerWorker(Socket client) {
-            mClient = client;
-            mNeedWindowListUpdate = false;
-            mNeedFocusedWindowUpdate = false;
-        }
-
-        public void run() {
-            BufferedReader in = null;
-            try {
-                in = new BufferedReader(new InputStreamReader(mClient.getInputStream()), 1024);
-
-                final String request = in.readLine();
-
-                String command;
-                String parameters;
-
-                int index = request.indexOf(' ');
-                if (index == -1) {
-                    command = request;
-                    parameters = "";
-                } else {
-                    command = request.substring(0, index);
-                    parameters = request.substring(index + 1);
-                }
-                boolean result=false;
-                if (COMMAND_PROTOCOL_VERSION.equalsIgnoreCase(command)) {
-                    result = writeValue(mClient, VALUE_PROTOCOL_VERSION);
-                } else if (COMMAND_SERVER_VERSION.equalsIgnoreCase(command)) {
-                    result = writeValue(mClient, VALUE_SERVER_VERSION);
-                } else if (COMMAND_WINDOW_MANAGER_LIST.equalsIgnoreCase(command)) {
-                    result = windowManager.listWindows(mClient);
-                } else if (COMMAND_WINDOW_MANAGER_GET_FOCUS.equalsIgnoreCase(command)) {
-                    result = windowManager.getFocusedWindow(mClient);
-                } else if (COMMAND_WINDOW_MANAGER_AUTOLIST.equalsIgnoreCase(command)) {
-                    result = windowManagerAutolistLoop();
-                } else if (COMMAND_HIGHLIGHT.equalsIgnoreCase(command)) {
-                    if(parameters.trim().equals("1")){
-                        setHighlightFlag(true);
-                    }
-                    else
-                    {
-                        setHighlightFlag(false);
-                    }
-                } else if (COMMAND_GET_TOAST.equalsIgnoreCase(command)) {
-                    Options options = new Options();
-                    options.addOption("t", true, "timeout");
-                    options.addOption("ex", true, "excludeText");
-                    DefaultParser parser = new DefaultParser();
-                    String[] args = parameters.split(" ");
-                    try {
-                        CommandLine cl = parser.parse(options, args);
-                        if (cl.hasOption("ex")) {
-                            String timeout = cl.getOptionValue("t");
-                            String excludeText = cl.getOptionValue("ex");
-                            result = writeValue(mClient, getLastToast(Integer.parseInt(timeout), excludeText));
-                        } else {
-                            String timeout = cl.getOptionValue("t");
-                            result = writeValue(mClient, getLastToast(Integer.parseInt(timeout)));
-                        }
-                    } catch (ParseException e) {
-                        Log.w(LOG_TAG, e.getCause());
-                        result = false;
-                    }
-                } else if (COMMAND_IS_MUSIC_ACTIVE.equalsIgnoreCase(command)) {
-                    result = writeValue(mClient, isMusicActive(mContext) ? "true" : "false");
-
-                } else {
-                    result = windowCommand(mClient, command, parameters);
-                }
-                Log.w(LOG_TAG, "execute command: " + command);
-                if (!result) {
-                    Log.w(LOG_TAG, "An error occurred with the command: " + command);
-                }
-            } catch (IOException e) {
-                Log.w(LOG_TAG, "Connection error: ", e);
-            } finally {
-                if (in != null) {
-                    try {
-                        in.close();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (mClient != null) {
-                    try {
-                        mClient.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-
-
-        private boolean windowCommand(Socket client, String command, String parameters) {
-            boolean success = true;
-            BufferedWriter out = null;
-
-            try {
-                // Find the hash code of the window
-                int index = parameters.indexOf(' ');
-                if (index == -1) {
-                    index = parameters.length();
-                }
-                final String code = parameters.substring(0, index);
-                int hashCode = (int) Long.parseLong(code, 16);
-
-                // Extract the command's parameter after the window description
-                if (index < parameters.length()) {
-                    parameters = parameters.substring(index + 1);
-                } else {
-                    parameters = "";
-                }
-
-                final View window = windowManager.findWindow(hashCode);
-                if (window == null) {
-                    return false;
-                }
-
-                // call stuff
-                final Method dispatch = ViewDebug.class.getDeclaredMethod("dispatchCommand",
-                        View.class, String.class, String.class, OutputStream.class);
-                dispatch.setAccessible(true);
-                dispatch.invoke(null, window, command, parameters,
-                        new UncloseableOutputStream(client.getOutputStream()));
-
-                if (!client.isOutputShutdown()) {
-                    out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-                    out.write("DONE\n");
-                    out.flush();
-                }
-
-            } catch (Exception e) {
-                Log.w(LOG_TAG, "Could not send command " + command +
-                        " with parameters " + parameters, e);
-                success = false;
-            } finally {
-                if (out != null) {
-                    try {
-                        out.close();
-                    } catch (IOException e) {
-                        success = false;
-                    }
-                }
-            }
-            return success;
-        }
-
-        public void windowsChanged() {
-            synchronized (mLock) {
-                mNeedWindowListUpdate = true;
-                mLock.notifyAll();
-            }
-        }
-
-        public void focusChanged() {
-            synchronized (mLock) {
-                mNeedFocusedWindowUpdate = true;
-                mLock.notifyAll();
-            }
-        }
-
-        private boolean windowManagerAutolistLoop() {
-            windowManager.addWindowListener(this);
-            BufferedWriter out = null;
-            try {
-                out = new BufferedWriter(new OutputStreamWriter(mClient.getOutputStream()));
-                while (!Thread.interrupted()) {
-                    boolean needWindowListUpdate = false;
-                    boolean needFocusedWindowUpdate = false;
-                    synchronized (mLock) {
-                        while (!mNeedWindowListUpdate && !mNeedFocusedWindowUpdate) {
-                            mLock.wait();
-                        }
-                        if (mNeedWindowListUpdate) {
-                            mNeedWindowListUpdate = false;
-                            needWindowListUpdate = true;
-                        }
-                        if (mNeedFocusedWindowUpdate) {
-                            mNeedFocusedWindowUpdate = false;
-                            needFocusedWindowUpdate = true;
-                        }
-                    }
-                    if (needWindowListUpdate) {
-                        out.write("LIST UPDATE\n");
-                        out.flush();
-                    }
-                    if (needFocusedWindowUpdate) {
-                        out.write("FOCUS UPDATE\n");
-                        out.flush();
-                    }
-                }
-            } catch (Exception e) {
-                Log.w(LOG_TAG, "Connection error: ", e);
-            } finally {
-                if (out != null) {
-                    try {
-                        out.close();
-                    } catch (IOException e) {
-                        // Ignore
-                    }
-                }
-                windowManager.removeWindowListener(this);
-            }
-            return true;
-        }
+    public static void setHighlightFlag(boolean flag){
+        mHighlightFlag=flag;
     }
+
+    /**
+     * Gets last toast.
+     *
+     * @param timeout the timeout
+     * @return the last toast
+     */
+    public static String getLastToast(int timeout) {
+        Getter getter = new Getter(mContext, timeout);
+        TextView toastTextView = (TextView) getter.getView("message", 0);
+        if (null != toastTextView) {
+            return toastTextView.getText().toString();
+        }
+        return "";
+    }
+
+    /**
+     * Gets last toast.
+     *
+     * @param timeout     the timeout
+     * @param excludeText the exclude text
+     * @return the last toast
+     */
+    public static String getLastToast(int timeout, String excludeText) {
+        Getter getter = new Getter(mContext, timeout);
+        TextView toastTextView = (TextView) getter.getTextView("message", excludeText, 0);
+        if (null != toastTextView) {
+            return toastTextView.getText().toString();
+        }
+        return "";
+    }
+
+    /**
+     * Checks whether any music is active
+     *
+     * @return the boolean
+     */
+    public static boolean isMusicActive() {
+        final AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+        if (am == null) {
+            Log.d(LOG_TAG, "isMusicActive: couldn't get AudioManager reference");
+            return false;
+        }
+        return am.isMusicActive();
+    }
+
+    /**
+     * Sets current context.
+     *
+     * @param context the context
+     * @return the current context
+     */
+    public static WindowManager setCurrentContext(Context context) {
+        mContext = context;
+        return windowManager;
+    }
+
+    /**
+     * Add window.
+     *
+     * @param activity the activity
+     */
+    public static void addWindow(Activity activity) {
+        windowManager.addWindow(activity);
+    }
+
+    /**
+     * Remove window.
+     *
+     * @param activity the activity
+     */
+    public static void removeWindow(Activity activity) {
+        windowManager.removeWindow(activity);
+    }
+
+    /**
+     * Sets focused window.
+     *
+     * @param activity the activity
+     */
+    public static void setFocusedWindow(Activity activity) {
+        windowManager.setFocusedWindow(activity);
+    }
+
+
+
+
 }
