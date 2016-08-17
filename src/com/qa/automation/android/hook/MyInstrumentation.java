@@ -33,7 +33,9 @@ public class MyInstrumentation extends Instrumentation{
 
     private void afterOnStart(Activity activity){
         Log.d(TAG,"afterOnStart:"+activity.getClass().getSimpleName());
-        HighlightView.highlight(activity);
+        if(AutomationServer.getHighlightFlag()) {
+            HighlightView.highlight(activity);
+        }
     }
 
     private void beforeOnStart(Activity activity){

@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewDebug;
 import android.widget.TextView;
+import com.qa.automation.android.hook.HookHelper;
 import com.qa.automation.android.view.Getter;
 import com.qa.automation.android.window.WindowListener;
 import com.qa.automation.android.window.WindowManager;
@@ -149,6 +150,8 @@ public class AutomationServer implements Runnable {
             }
         }
 
+        // 在这里进行Hook
+        HookHelper.start();
         return sServer;
     }
 
