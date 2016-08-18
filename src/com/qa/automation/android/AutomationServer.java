@@ -22,7 +22,7 @@ import android.media.AudioManager;
 import android.util.Log;
 import android.widget.TextView;
 import com.qa.automation.android.hook.HookHelper;
-import com.qa.automation.android.popupwindow.Point;
+import com.qa.serializable.Point;
 import com.qa.automation.android.popupwindow.PopupWindow;
 import com.qa.automation.android.toast.Getter;
 import com.qa.automation.android.window.WindowManager;

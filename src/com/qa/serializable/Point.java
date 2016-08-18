@@ -1,4 +1,4 @@
-package com.qa.automation.android.popupwindow;
+package com.qa.serializable;
 
 import java.io.Serializable;
 
@@ -7,6 +7,7 @@ import java.io.Serializable;
  * The type Point.
  */
 public class Point implements Serializable {
+    private static final long serialVersionUID = 5950169519310163575L;
     private int x;
     private int y;
 

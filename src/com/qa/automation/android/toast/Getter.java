@@ -5,6 +5,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import com.qa.automation.android.find.ViewFetcher;
 
 import java.util.HashSet;
 import java.util.Set;

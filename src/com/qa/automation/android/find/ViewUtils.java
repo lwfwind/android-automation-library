@@ -1,4 +1,4 @@
-package com.qa.automation.android.toast;
+package com.qa.automation.android.find;
 
 import android.view.View;
 import android.widget.TextView;
@@ -73,27 +73,6 @@ public class ViewUtils {
             }
         }
         return filteredViews;
-    }
-
-    /**
-     * Orders Views by their location on-screen.
-     *
-     * @param views The views to sort
-     * @see ViewLocationComparator
-     */
-    public static void sortViewsByLocationOnScreen(List<? extends View> views) {
-        Collections.sort(views, new ViewLocationComparator());
-    }
-
-    /**
-     * Orders Views by their location on-screen.
-     *
-     * @param views      The views to sort
-     * @param yAxisFirst Whether the y-axis should be compared before the x-axis
-     * @see ViewLocationComparator
-     */
-    public static void sortViewsByLocationOnScreen(List<? extends View> views, boolean yAxisFirst) {
-        Collections.sort(views, new ViewLocationComparator(yAxisFirst));
     }
 
     /**

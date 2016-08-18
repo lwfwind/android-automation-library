@@ -1,4 +1,4 @@
-package com.qa.automation.android.toast;
+package com.qa.automation.android.find;
 
 import android.content.Context;
 import android.os.SystemClock;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
 import android.webkit.WebView;
+import com.qa.automation.android.toast.Sleeper;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.Set;
  *
  * @author Renas Reda, renas.reda@robotium.com
  */
-class ViewFetcher {
+public class ViewFetcher {
 
     private static Class<?> windowManager;
 
@@ -56,6 +57,16 @@ class ViewFetcher {
     public ViewFetcher(Context context, Sleeper sleeper) {
         this.mcontext = context;
         this.sleeper = sleeper;
+        setWindowManagerString();
+    }
+
+    /**
+     * Constructs this object.
+     *
+     * @param context the instance.
+     */
+    public ViewFetcher(Context context) {
+        this.mcontext = context;
         setWindowManagerString();
     }
 

@@ -2,20 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b83bb626-35d2-43fc-b093-e50d34a485a0" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/toast/ViewLocationComparator.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/AutomationServer.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/AutomationServer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/AutomationServerWorker.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/AutomationServerWorker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/highlight/HighlightView.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/highlight/HighlightView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/highlight/IterateView.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/highlight/IterateView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/hook/HookHelper.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/hook/HookHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/hook/MyInstrumentation.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/hook/MyInstrumentation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/window/WindowListener.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/window/WindowListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/window/WindowManager.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/window/WindowManager.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/view/Getter.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/toast/Getter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/view/Sleeper.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/toast/Sleeper.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/view/ViewFetcher.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/toast/ViewFetcher.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/view/ViewLocationComparator.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/toast/ViewLocationComparator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/view/ViewUtils.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/toast/ViewUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/popupwindow/PopupWindow.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/popupwindow/PopupWindow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/toast/Getter.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/toast/Getter.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/highlight/IterateView.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/find/IterateView.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/popupwindow/Point.java" afterPath="$PROJECT_DIR$/src/com/qa/serializable/Point.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/toast/ViewFetcher.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/find/ViewFetcher.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/qa/automation/android/toast/ViewUtils.java" afterPath="$PROJECT_DIR$/src/com/qa/automation/android/find/ViewUtils.java" />
     </list>
     <ignored path="android_automation_library.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,24 +37,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="AutomationServer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AutomationServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/AutomationServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5652174">
-              <caret line="237" column="5" selection-start-line="237" selection-start-column="5" selection-end-line="237" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="170" column="34" selection-start-line="170" selection-start-column="34" selection-end-line="170" selection-end-column="34" />
               <folding>
-                <element signature="e#2532#2533#0" expanded="true" />
-                <element signature="e#2566#2567#0" expanded="true" />
-                <element signature="e#2720#2721#0" expanded="true" />
-                <element signature="e#2778#2779#0" expanded="true" />
-                <element signature="e#2895#2896#0" expanded="true" />
-                <element signature="e#2930#2931#0" expanded="true" />
-                <element signature="e#3068#3069#0" expanded="true" />
-                <element signature="e#3124#3125#0" expanded="true" />
-                <element signature="e#4180#4181#0" expanded="true" />
-                <element signature="e#4217#4218#0" expanded="true" />
-                <element signature="e#4818#4819#0" expanded="true" />
-                <element signature="e#4877#4878#0" expanded="true" />
+                <element signature="e#2514#2515#0" expanded="true" />
+                <element signature="e#2548#2549#0" expanded="true" />
+                <element signature="e#2702#2703#0" expanded="true" />
+                <element signature="e#2760#2761#0" expanded="true" />
+                <element signature="e#2877#2878#0" expanded="true" />
+                <element signature="e#2912#2913#0" expanded="true" />
+                <element signature="e#3050#3051#0" expanded="true" />
+                <element signature="e#3106#3107#0" expanded="true" />
+                <element signature="e#4162#4163#0" expanded="true" />
+                <element signature="e#4199#4200#0" expanded="true" />
+                <element signature="e#4800#4801#0" expanded="true" />
+                <element signature="e#4859#4860#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -66,31 +64,45 @@
         <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/popupwindow/PopupWindow.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+              <caret line="30" column="85" selection-start-line="30" selection-start-column="85" selection-end-line="30" selection-end-column="85" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#679#685#0" expanded="true" />
+                <element signature="e#759#765#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Point.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/popupwindow/Point.java">
+      <file leaf-file-name="ViewUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/find/ViewUtils.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <caret line="62" column="44" selection-start-line="62" selection-start-column="34" selection-end-line="62" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IterateView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/find/IterateView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="38" column="21" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ViewFetcher.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/find/ViewFetcher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.47826087">
+              <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
               <folding>
-                <element signature="e#451#452#0" expanded="true" />
-                <element signature="e#475#476#0" expanded="true" />
-                <element signature="e#566#567#0" expanded="true" />
-                <element signature="e#592#593#0" expanded="true" />
-                <element signature="e#676#677#0" expanded="true" />
-                <element signature="e#700#701#0" expanded="true" />
-                <element signature="e#791#792#0" expanded="true" />
-                <element signature="e#817#818#0" expanded="true" />
-                <element signature="e#863#864#0" expanded="true" />
-                <element signature="e#906#907#0" expanded="true" />
+                <element signature="e#9693#9725#0" expanded="true" />
+                <element signature="e#14690#14720#1" expanded="true" />
+                <element signature="e#15570#15600#1" expanded="true" />
+                <element signature="e#17705#17735#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -99,47 +111,18 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.882353">
-              <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+            <state vertical-scroll-proportion="-8.176471">
+              <caret line="171" column="76" selection-start-line="171" selection-start-column="76" selection-end-line="171" selection-end-column="76" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HighlightView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/highlight/HighlightView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="78" column="37" selection-start-line="77" selection-start-column="7" selection-end-line="78" selection-end-column="79" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MyInstrumentation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/hook/MyInstrumentation.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.5217392">
-              <caret line="71" column="31" selection-start-line="71" selection-start-column="25" selection-end-line="71" selection-end-column="42" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#1394#1395#0" expanded="true" />
-                <element signature="e#1476#1477#0" expanded="true" />
-                <element signature="e#2325#2326#0" expanded="true" />
-                <element signature="e#2408#2409#0" expanded="true" />
-                <element signature="e#3048#3049#0" expanded="true" />
-                <element signature="e#3131#3132#0" expanded="true" />
-                <marker date="1471487764131" expanded="true" signature="1484:1791" placeholder="/**...*/" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Getter.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Getter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/toast/Getter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="156" column="95" selection-start-line="156" selection-start-column="16" selection-end-line="156" selection-end-column="95" />
+            <state vertical-scroll-proportion="3.3043478">
+              <caret line="86" column="62" selection-start-line="86" selection-start-column="62" selection-end-line="86" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -148,11 +131,21 @@
       <file leaf-file-name="AutomationServerWorker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/AutomationServerWorker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.142857">
-              <caret line="211" column="5" selection-start-line="211" selection-start-column="5" selection-end-line="211" selection-end-column="5" />
+            <state vertical-scroll-proportion="-6.571429">
+              <caret line="169" column="54" selection-start-line="169" selection-start-column="54" selection-end-line="169" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ObjectOutputStream.java" pinned="false" current-in-tab="false">
+        <entry file="file://E:/Tools/Android/sdk/sources/android-23/java/io/ObjectOutputStream.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.142857">
+              <caret line="258" column="29" selection-start-line="258" selection-start-column="11" selection-end-line="258" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -191,14 +184,20 @@
         <option value="$PROJECT_DIR$/src/com/qa/automation/android/view/HighlightView.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/com/qa/automation/android/highlight/HighlightView.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/com/qa/automation/android/hook/HookHelper.java" />
         <option value="$PROJECT_DIR$/src/com/qa/automation/android/hook/MyInstrumentation.java" />
-        <option value="$PROJECT_DIR$/src/com/qa/automation/android/highlight/IterateView.java" />
-        <option value="$PROJECT_DIR$/src/com/qa/automation/android/popupwindow/Point.java" />
-        <option value="$PROJECT_DIR$/src/com/qa/automation/android/popupwindow/PopupWindow.java" />
-        <option value="$PROJECT_DIR$/src/com/qa/automation/android/AutomationServerWorker.java" />
         <option value="$PROJECT_DIR$/src/com/qa/automation/android/AutomationServer.java" />
+        <option value="$PROJECT_DIR$/src/com/qa/automation/android/popupwindow/Point.java" />
+        <option value="$PROJECT_DIR$/src/com/qa/serializable/Point.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/com/qa/automation/android/AutomationServerWorker.java" />
+        <option value="$PROJECT_DIR$/src/com/qa/automation/android/popupwindow/PopupWindow.java" />
+        <option value="$PROJECT_DIR$/src/com/qa/automation/android/toast/ViewFetcher.java" />
+        <option value="$PROJECT_DIR$/src/com/qa/automation/android/toast/ViewUtils.java" />
+        <option value="$PROJECT_DIR$/src/com/qa/automation/android/toast/ViewLocationComparator.java" />
+        <option value="$PROJECT_DIR$/src/com/qa/automation/android/highlight/IterateView.java" />
+        <option value="$PROJECT_DIR$/src/com/qa/automation/android/find/IterateView.java" />
+        <option value="$PROJECT_DIR$/src/com/qa/automation/android/find/ViewUtils.java" />
       </list>
     </option>
   </component>
@@ -257,6 +256,10 @@
               <option name="myItemId" value="android-automation-library" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -300,6 +303,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="qa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="serializable" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-automation-library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-automation-library" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="android" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -315,6 +344,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -340,6 +373,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="qa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="android" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -359,6 +396,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qa" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -384,11 +425,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="qa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="android" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="hook" />
+              <option name="myItemId" value="highlight" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -406,11 +451,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="qa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="android" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="highlight" />
+              <option name="myItemId" value="find" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -426,11 +475,15 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Open Source/ViewServer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/qa/serializable" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\git\android-automation-library\src\com\qa\automation\android\find" />
+      <recent name="E:\git\android-automation-library\src\com\qa\serializable" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\git\android-automation-library\src\com\qa\automation\android\hook" />
       <recent name="E:\git\android-automation-library\src\com\qa\automation\android\view" />
@@ -1087,7 +1140,7 @@
       <workItem from="1471410317135" duration="2120000" />
       <workItem from="1471416304806" duration="1120000" />
       <workItem from="1471419572101" duration="1236000" />
-      <workItem from="1471480817639" duration="6816000" />
+      <workItem from="1471480817639" duration="18466000" />
     </task>
     <servers />
   </component>
@@ -1106,11 +1159,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41272000" />
+    <option name="totallyTimeSpent" value="52922000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="0" width="1928" height="1036" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1160,34 +1213,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.0">
-            <caret line="4" column="65" selection-start-line="4" selection-start-column="65" selection-end-line="4" selection-end-column="65" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownFxPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/AutomationServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="447" column="58" selection-start-line="447" selection-start-column="58" selection-end-line="447" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/ParseTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1398,24 +1423,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://E:/Tools/Android/sdk/sources/android-23/android/view/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="18065" column="16" selection-start-line="18065" selection-start-column="16" selection-end-line="18065" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="5.383734">
           <caret line="188" column="33" selection-start-line="188" selection-start-column="33" selection-end-line="188" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/toast/ViewFetcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63001144">
-          <caret line="194" column="38" selection-start-line="194" selection-start-column="38" selection-end-line="194" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -1497,14 +1508,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://E:/Tools/Android/sdk/sources/android-23/java/io/ObjectOutputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="258" column="11" selection-start-line="258" selection-start-column="11" selection-end-line="258" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/highlight/HighlightView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1513,26 +1516,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/highlight/IterateView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26086956">
-          <caret line="18" column="21" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/hook/HookHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7826087">
           <caret line="31" column="40" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.882353">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1554,39 +1541,84 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/toast/Getter.java">
+    <entry file="file://E:/Tools/Android/sdk/sources/android-23/android/view/View.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="156" column="95" selection-start-line="156" selection-start-column="16" selection-end-line="156" selection-end-column="95" />
+          <caret line="18184" column="8" selection-start-line="18184" selection-start-column="8" selection-end-line="18185" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/popupwindow/Point.java">
+    <entry file="file://$PROJECT_DIR$/src/com/qa/serializable/Point.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <caret line="9" column="70" selection-start-line="9" selection-start-column="70" selection-end-line="9" selection-end-column="70" />
           <folding>
-            <element signature="e#451#452#0" expanded="true" />
-            <element signature="e#475#476#0" expanded="true" />
-            <element signature="e#566#567#0" expanded="true" />
-            <element signature="e#592#593#0" expanded="true" />
-            <element signature="e#676#677#0" expanded="true" />
-            <element signature="e#700#701#0" expanded="true" />
-            <element signature="e#791#792#0" expanded="true" />
-            <element signature="e#817#818#0" expanded="true" />
-            <element signature="e#863#864#0" expanded="true" />
-            <element signature="e#906#907#0" expanded="true" />
+            <element signature="e#504#505#0" expanded="true" />
+            <element signature="e#528#529#0" expanded="true" />
+            <element signature="e#619#620#0" expanded="true" />
+            <element signature="e#645#646#0" expanded="true" />
+            <element signature="e#729#730#0" expanded="true" />
+            <element signature="e#753#754#0" expanded="true" />
+            <element signature="e#844#845#0" expanded="true" />
+            <element signature="e#870#871#0" expanded="true" />
+            <element signature="e#916#917#0" expanded="true" />
+            <element signature="e#959#960#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Tools/Android/sdk/sources/android-23/java/io/ObjectOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.142857">
+          <caret line="258" column="29" selection-start-line="258" selection-start-column="11" selection-end-line="258" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Tools/Android/sdk/sources/android-23/java/net/Socket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20173913">
+          <caret line="404" column="24" selection-start-line="404" selection-start-column="24" selection-end-line="404" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/AutomationServerWorker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.142857">
-          <caret line="211" column="5" selection-start-line="211" selection-start-column="5" selection-end-line="211" selection-end-column="5" />
+        <state vertical-scroll-proportion="-6.571429">
+          <caret line="169" column="54" selection-start-line="169" selection-start-column="54" selection-end-line="169" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.176471">
+          <caret line="171" column="76" selection-start-line="171" selection-start-column="76" selection-end-line="171" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/AutomationServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="170" column="34" selection-start-line="170" selection-start-column="34" selection-end-line="170" selection-end-column="34" />
+          <folding>
+            <element signature="e#2514#2515#0" expanded="true" />
+            <element signature="e#2548#2549#0" expanded="true" />
+            <element signature="e#2702#2703#0" expanded="true" />
+            <element signature="e#2760#2761#0" expanded="true" />
+            <element signature="e#2877#2878#0" expanded="true" />
+            <element signature="e#2912#2913#0" expanded="true" />
+            <element signature="e#3050#3051#0" expanded="true" />
+            <element signature="e#3106#3107#0" expanded="true" />
+            <element signature="e#4162#4163#0" expanded="true" />
+            <element signature="e#4199#4200#0" expanded="true" />
+            <element signature="e#4800#4801#0" expanded="true" />
+            <element signature="e#4859#4860#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1594,32 +1626,48 @@
     <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/popupwindow/PopupWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+          <caret line="30" column="85" selection-start-line="30" selection-start-column="85" selection-end-line="30" selection-end-column="85" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#679#685#0" expanded="true" />
+            <element signature="e#759#765#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/AutomationServer.java">
+    <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/find/ViewFetcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5652174">
-          <caret line="237" column="5" selection-start-line="237" selection-start-column="5" selection-end-line="237" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.47826087">
+          <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
           <folding>
-            <element signature="e#2532#2533#0" expanded="true" />
-            <element signature="e#2566#2567#0" expanded="true" />
-            <element signature="e#2720#2721#0" expanded="true" />
-            <element signature="e#2778#2779#0" expanded="true" />
-            <element signature="e#2895#2896#0" expanded="true" />
-            <element signature="e#2930#2931#0" expanded="true" />
-            <element signature="e#3068#3069#0" expanded="true" />
-            <element signature="e#3124#3125#0" expanded="true" />
-            <element signature="e#4180#4181#0" expanded="true" />
-            <element signature="e#4217#4218#0" expanded="true" />
-            <element signature="e#4818#4819#0" expanded="true" />
-            <element signature="e#4877#4878#0" expanded="true" />
+            <element signature="e#9693#9725#0" expanded="true" />
+            <element signature="e#14690#14720#1" expanded="true" />
+            <element signature="e#15570#15600#1" expanded="true" />
+            <element signature="e#17705#17735#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/find/ViewUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="44" selection-start-line="62" selection-start-column="34" selection-end-line="62" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/find/IterateView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="21" selection-start-line="38" selection-start-column="21" selection-end-line="38" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/qa/automation/android/toast/Getter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.3043478">
+          <caret line="86" column="62" selection-start-line="86" selection-start-column="62" selection-end-line="86" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>

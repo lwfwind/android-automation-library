@@ -9,6 +9,7 @@ import android.graphics.drawable.shapes.RectShape;
 import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
+import com.qa.automation.android.find.IterateView;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

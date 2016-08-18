@@ -167,6 +167,7 @@ public class AutomationServerWorker implements Runnable, WindowListener {
             } else if (COMMAND_GET_CENTER.equalsIgnoreCase(command)) {
                 Options options = new Options();
                 options.addOption("t", true, "text/id");
+                options.addOption("i", true, "index");
                 DefaultParser parser = new DefaultParser();
                 String[] args = parameters.split(" ");
                 try {
