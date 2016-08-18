@@ -14,6 +14,9 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * The type Highlight view.
+ */
 public class HighlightView {
     private static ShapeDrawable shape = null;
     private static Activity activity = null;
@@ -29,10 +32,15 @@ public class HighlightView {
         shape.getPaint().setStrokeWidth(15);
     }
 
+    /**
+     * Highlight.
+     *
+     * @param act the act
+     */
     public static void highlight(Activity act) {
         activity = act;
         if (highlightedActivityList.indexOf(activity) > -1) {
-            if(highlightedActivityViewListMap.get(activity) != null) {
+            if (highlightedActivityViewListMap.get(activity) != null) {
                 for (View v : highlightedActivityViewListMap.get(activity)) {
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
                         v.setBackgroundDrawable(highlightedViewDrawableMap.get(v));

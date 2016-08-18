@@ -6,10 +6,16 @@ import android.util.Log;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+/**
+ * The type Hook helper.
+ */
 public class HookHelper {
     private static final String TAG = "HookHelper";
 
-    public static void start(){
+    /**
+     * Start.
+     */
+    public static void start() {
         try {
             // 先获取到当前的ActivityThread对象
             Class<?> activityThreadClass = Class.forName("android.app.ActivityThread");
@@ -28,8 +34,8 @@ public class HookHelper {
 
             // 偷梁换柱
             mInstrumentationField.set(currentActivityThread, myInstrumentation);
-        }catch (Exception e){
-            Log.d(TAG,e.getMessage(),e);
+        } catch (Exception e) {
+            Log.w(TAG, e.getMessage(), e);
         }
     }
 }

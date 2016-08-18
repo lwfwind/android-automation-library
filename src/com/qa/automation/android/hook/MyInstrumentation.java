@@ -4,16 +4,26 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.os.Bundle;
 import android.util.Log;
-
 import com.qa.automation.android.AutomationServer;
 import com.qa.automation.android.highlight.HighlightView;
 
-public class MyInstrumentation extends Instrumentation{
+/**
+ * The type My instrumentation.
+ */
+public class MyInstrumentation extends Instrumentation {
     private static final String TAG = "MyInstrumentation";
 
-    // ActivityThread中原始的对象, 保存起来
+    /**
+     * The M base.
+     */
+// ActivityThread中原始的对象, 保存起来
     Instrumentation mBase;
 
+    /**
+     * Instantiates a new My instrumentation.
+     *
+     * @param base the base
+     */
     public MyInstrumentation(Instrumentation base) {
         mBase = base;
     }
@@ -31,15 +41,15 @@ public class MyInstrumentation extends Instrumentation{
         afterOnStart(activity);
     }
 
-    private void afterOnStart(Activity activity){
-        Log.d(TAG,"afterOnStart:"+activity.getClass().getSimpleName());
-        if(AutomationServer.getHighlightFlag()) {
+    private void afterOnStart(Activity activity) {
+        Log.w(TAG, "afterOnStart:" + activity.getClass().getSimpleName());
+        if (AutomationServer.getHighlightFlag()) {
             HighlightView.highlight(activity);
         }
     }
 
-    private void beforeOnStart(Activity activity){
-        Log.d(TAG,"beforeOnStart:"+activity.getClass().getSimpleName());
+    private void beforeOnStart(Activity activity) {
+        Log.w(TAG, "beforeOnStart:" + activity.getClass().getSimpleName());
     }
 
 
@@ -48,21 +58,22 @@ public class MyInstrumentation extends Instrumentation{
      * method.  The default implementation simply calls through to that method.
      *
      * @param activity The activity being created.
-     * @param icicle The previously frozen state (or null) to pass through to onCreate().
+     * @param icicle   The previously frozen state (or null) to pass through to onCreate().
      */
     public void callActivityOnCreate(Activity activity, Bundle icicle) {
         beforeOnCreate(activity);
-        mBase.callActivityOnCreate(activity,icicle);
+        mBase.callActivityOnCreate(activity, icicle);
         afterOnCreate(activity);
     }
 
-    private void afterOnCreate(Activity activity){
-        Log.d(TAG,"afterOnCreate:"+activity.getClass().getSimpleName());
+    private void afterOnCreate(Activity activity) {
+        Log.w(TAG, "afterOnCreate:" + activity.getClass().getSimpleName());
+        AutomationServer.setActivity(activity);
         AutomationServer.setCurrentContext(activity.getApplicationContext()).addWindow(activity);
     }
 
-    private void beforeOnCreate(Activity activity){
-        Log.d(TAG,"beforeOnCreate:"+activity.getClass().getSimpleName());
+    private void beforeOnCreate(Activity activity) {
+        Log.w(TAG, "beforeOnCreate:" + activity.getClass().getSimpleName());
     }
 
     /**
@@ -77,13 +88,13 @@ public class MyInstrumentation extends Instrumentation{
         afterOnResume(activity);
     }
 
-    private void afterOnResume(Activity activity){
-        Log.d(TAG,"afterOnResume:"+activity.getClass().getSimpleName());
+    private void afterOnResume(Activity activity) {
+        Log.w(TAG, "afterOnResume:" + activity.getClass().getSimpleName());
         AutomationServer.setFocusedWindow(activity);
     }
 
-    private void beforeOnResume(Activity activity){
-        Log.d(TAG,"beforeOnResume:"+activity.getClass().getSimpleName());
+    private void beforeOnResume(Activity activity) {
+        Log.w(TAG, "beforeOnResume:" + activity.getClass().getSimpleName());
     }
 
     public void callActivityOnDestroy(Activity activity) {
@@ -92,12 +103,12 @@ public class MyInstrumentation extends Instrumentation{
         afterOnDestroy(activity);
     }
 
-    private void afterOnDestroy(Activity activity){
-        Log.d(TAG,"afterOnDestroy:"+activity.getClass().getSimpleName());
+    private void afterOnDestroy(Activity activity) {
+        Log.w(TAG, "afterOnDestroy:" + activity.getClass().getSimpleName());
         AutomationServer.removeWindow(activity);
     }
 
-    private void beforeOnDestroy(Activity activity){
-        Log.d(TAG,"beforeOnDestroy:"+activity.getClass().getSimpleName());
+    private void beforeOnDestroy(Activity activity) {
+        Log.w(TAG, "beforeOnDestroy:" + activity.getClass().getSimpleName());
     }
 }

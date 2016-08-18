@@ -20,20 +20,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewDebug;
 import android.widget.TextView;
 import com.qa.automation.android.hook.HookHelper;
-import com.qa.automation.android.view.Getter;
-import com.qa.automation.android.window.WindowListener;
+import com.qa.automation.android.popupwindow.Point;
+import com.qa.automation.android.popupwindow.PopupWindow;
+import com.qa.automation.android.toast.Getter;
 import com.qa.automation.android.window.WindowManager;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
 
-import java.io.*;
-import java.lang.reflect.Method;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -41,60 +35,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * This class can be used to enable the use of HierarchyViewer inside an
- * application. HierarchyViewer is an Android SDK tool that can be used
- * to inspect and debug the user interface of running applications. For
- * security reasons, HierarchyViewer does not work on production builds
- * (for instance phones bought in store.) By using this class, you can
- * make HierarchyViewer work on any device. You must be very careful
- * however to only enable HierarchyViewer when debugging your
- * application.
- * To use this view server, your application must require the INTERNET
- * permission.
- * The recommended way to use this API is to register activities when
- * they are created, and to unregister them when they get destroyed:
- * <pre>
- * public class MyActivity extends Activity {
- *     public void onCreate(Bundle savedInstanceState) {
- *         super.onCreate(savedInstanceState);
- *         // Set content view, etc.
- *         AutomationServer.setCurrentContext(this).addWindow(this);
- *     }
- *
- *     public void onDestroy() {
- *         super.onDestroy();
- *         AutomationServer.setCurrentContext(this).removeWindow(this);
- *     }
- *
- *     public void onResume() {
- *         super.onResume();
- *         AutomationServer.setCurrentContext(this).setFocusedWindow(this);
- *     }
- * }
- * </pre>
- * In a similar fashion, you can use this API with an InputMethodService:
- * <pre>
- * public class MyInputMethodService extends InputMethodService {
- *     public void onCreate() {
- *         super.onCreate();
- *         View decorView = getWindow().getWindow().getDecorView();
- *         String name = "MyInputMethodService";
- *         AutomationServer.setCurrentContext(this).addWindow(decorView, name);
- *     }
- *
- *     public void onDestroy() {
- *         super.onDestroy();
- *         View decorView = getWindow().getWindow().getDecorView();
- *         AutomationServer.setCurrentContext(this).removeWindow(decorView);
- *     }
- *
- *     public void onStartInput(EditorInfo attribute, boolean restarting) {
- *         super.onStartInput(attribute, restarting);
- *         View decorView = getWindow().getWindow().getDecorView();
- *         AutomationServer.setCurrentContext(this).setFocusedWindow(decorView);
- *     }
- * }
- * </pre>
+ * The type Automation server.
  */
 public class AutomationServer implements Runnable {
     /**
@@ -108,9 +49,10 @@ public class AutomationServer implements Runnable {
 
     private static AutomationServer sServer;
     private static WindowManager windowManager = new WindowManager();
-    private static Context mContext;
-    private final int mPort;
+    private static Context currContext;
+    private static Activity currActivity;
     private static boolean mHighlightFlag = false;
+    private final int mPort;
     private ServerSocket mServer;
     private Thread mThread;
     private ExecutorService mThreadPool;
@@ -128,6 +70,42 @@ public class AutomationServer implements Runnable {
      */
     private AutomationServer(int port) {
         mPort = port;
+    }
+
+    /**
+     * Gets curr context.
+     *
+     * @return the curr context
+     */
+    public static Context getCurrContext() {
+        return currContext;
+    }
+
+    /**
+     * Sets curr context.
+     *
+     * @param currContext the curr context
+     */
+    public static void setCurrContext(Context currContext) {
+        AutomationServer.currContext = currContext;
+    }
+
+    /**
+     * Gets activity.
+     *
+     * @return the activity
+     */
+    public static Activity getActivity() {
+        return currActivity;
+    }
+
+    /**
+     * Sets activity.
+     *
+     * @param activity the activity
+     */
+    public static void setActivity(Activity activity) {
+        AutomationServer.currActivity = activity;
     }
 
     /**
@@ -156,12 +134,143 @@ public class AutomationServer implements Runnable {
     }
 
     /**
+     * Gets window manager instance.
+     *
+     * @return the window manager instance
+     */
+    public static WindowManager getWindowManagerInstance() {
+        return windowManager;
+    }
+
+    /**
+     * Gets highlight flag.
+     *
+     * @return the highlight flag
+     */
+    public static boolean getHighlightFlag() {
+        return mHighlightFlag;
+    }
+
+    /**
+     * Sets highlight flag.
+     *
+     * @param flag the flag
+     */
+    public static void setHighlightFlag(boolean flag) {
+        mHighlightFlag = flag;
+    }
+
+    /**
+     * Gets view center.
+     *
+     * @param text  the text
+     * @param index the index
+     * @return the view center
+     */
+    public static Point getViewCenter(String text, int index) {
+        return PopupWindow.getElementCenterByText(text, index);
+    }
+
+    /**
+     * Gets view center.
+     *
+     * @param id the id
+     * @return the view center
+     */
+    public static Point getViewCenter(String id) {
+        return PopupWindow.getElementCenterById(id);
+    }
+
+    /**
+     * Gets last toast.
+     *
+     * @param timeout the timeout
+     * @return the last toast
+     */
+    public static String getLastToast(int timeout) {
+        Getter getter = new Getter(currContext, timeout);
+        TextView toastTextView = (TextView) getter.getView("message", 0);
+        if (null != toastTextView) {
+            return toastTextView.getText().toString();
+        }
+        return "";
+    }
+
+    /**
+     * Gets last toast.
+     *
+     * @param timeout     the timeout
+     * @param excludeText the exclude text
+     * @return the last toast
+     */
+    public static String getLastToast(int timeout, String excludeText) {
+        Getter getter = new Getter(currContext, timeout);
+        TextView toastTextView = (TextView) getter.getTextView("message", excludeText, 0);
+        if (null != toastTextView) {
+            return toastTextView.getText().toString();
+        }
+        return "";
+    }
+
+    /**
+     * Checks whether any music is active
+     *
+     * @return the boolean
+     */
+    public static boolean isMusicActive() {
+        final AudioManager am = (AudioManager) currContext.getSystemService(Context.AUDIO_SERVICE);
+        if (am == null) {
+            Log.w(LOG_TAG, "isMusicActive: couldn't get AudioManager reference");
+            return false;
+        }
+        return am.isMusicActive();
+    }
+
+    /**
+     * Sets current context.
+     *
+     * @param context the context
+     * @return the current context
+     */
+    public static WindowManager setCurrentContext(Context context) {
+        currContext = context;
+        return windowManager;
+    }
+
+    /**
+     * Add window.
+     *
+     * @param activity the activity
+     */
+    public static void addWindow(Activity activity) {
+        windowManager.addWindow(activity);
+    }
+
+    /**
+     * Remove window.
+     *
+     * @param activity the activity
+     */
+    public static void removeWindow(Activity activity) {
+        windowManager.removeWindow(activity);
+    }
+
+    /**
+     * Sets focused window.
+     *
+     * @param activity the activity
+     */
+    public static void setFocusedWindow(Activity activity) {
+        windowManager.setFocusedWindow(activity);
+    }
+
+    /**
      * Starts the server.
      *
      * @return True if the server was successfully created, or false if it already exists.
      * @throws IOException If the server cannot be created.
-     * @see #stop() #stop()#stop()#stop()
-     * @see #isRunning() #isRunning()#isRunning()#isRunning()
+     * @see #stop() #stop()#stop()#stop()#stop()
+     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()
      */
     public boolean start() throws IOException {
         if (mThread != null) {
@@ -177,8 +286,8 @@ public class AutomationServer implements Runnable {
      * Stops the server.
      *
      * @return True if the server was stopped, false if an error occurred or if the server wasn't started.
-     * @see #start() #start()#start()#start()
-     * @see #isRunning() #isRunning()#isRunning()#isRunning()
+     * @see #start() #start()#start()#start()#start()
+     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()
      */
     public boolean stop() {
         if (mThread != null) {
@@ -210,13 +319,12 @@ public class AutomationServer implements Runnable {
      * Indicates whether the server is currently running.
      *
      * @return True if the server is running, false otherwise.
-     * @see #start() #start()#start()#start()
-     * @see #stop() #stop()#stop()#stop()
+     * @see #start() #start()#start()#start()#start()
+     * @see #stop() #stop()#stop()#stop()#stop()
      */
     public boolean isRunning() {
         return mThread != null && mThread.isAlive();
     }
-
 
     /**
      * Main server loop.
@@ -246,103 +354,6 @@ public class AutomationServer implements Runnable {
             }
         }
     }
-
-    public static WindowManager getWindowManagerInstance(){
-        return windowManager;
-    }
-
-    public static boolean getHighlightFlag(){
-        return mHighlightFlag;
-    }
-
-    public static void setHighlightFlag(boolean flag){
-        mHighlightFlag=flag;
-    }
-
-    /**
-     * Gets last toast.
-     *
-     * @param timeout the timeout
-     * @return the last toast
-     */
-    public static String getLastToast(int timeout) {
-        Getter getter = new Getter(mContext, timeout);
-        TextView toastTextView = (TextView) getter.getView("message", 0);
-        if (null != toastTextView) {
-            return toastTextView.getText().toString();
-        }
-        return "";
-    }
-
-    /**
-     * Gets last toast.
-     *
-     * @param timeout     the timeout
-     * @param excludeText the exclude text
-     * @return the last toast
-     */
-    public static String getLastToast(int timeout, String excludeText) {
-        Getter getter = new Getter(mContext, timeout);
-        TextView toastTextView = (TextView) getter.getTextView("message", excludeText, 0);
-        if (null != toastTextView) {
-            return toastTextView.getText().toString();
-        }
-        return "";
-    }
-
-    /**
-     * Checks whether any music is active
-     *
-     * @return the boolean
-     */
-    public static boolean isMusicActive() {
-        final AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-        if (am == null) {
-            Log.d(LOG_TAG, "isMusicActive: couldn't get AudioManager reference");
-            return false;
-        }
-        return am.isMusicActive();
-    }
-
-    /**
-     * Sets current context.
-     *
-     * @param context the context
-     * @return the current context
-     */
-    public static WindowManager setCurrentContext(Context context) {
-        mContext = context;
-        return windowManager;
-    }
-
-    /**
-     * Add window.
-     *
-     * @param activity the activity
-     */
-    public static void addWindow(Activity activity) {
-        windowManager.addWindow(activity);
-    }
-
-    /**
-     * Remove window.
-     *
-     * @param activity the activity
-     */
-    public static void removeWindow(Activity activity) {
-        windowManager.removeWindow(activity);
-    }
-
-    /**
-     * Sets focused window.
-     *
-     * @param activity the activity
-     */
-    public static void setFocusedWindow(Activity activity) {
-        windowManager.setFocusedWindow(activity);
-    }
-
-
 
 
 }

@@ -14,6 +14,9 @@ import java.io.*;
 import java.lang.reflect.Method;
 import java.net.Socket;
 
+/**
+ * The type Automation server worker.
+ */
 public class AutomationServerWorker implements Runnable, WindowListener {
     private static final String LOG_TAG = "AutomationServerWorker";
 
@@ -31,8 +34,8 @@ public class AutomationServerWorker implements Runnable, WindowListener {
     private static final String COMMAND_WINDOW_MANAGER_AUTOLIST = "AUTOLIST";
     // Returns the focused window
     private static final String COMMAND_WINDOW_MANAGER_GET_FOCUS = "GET_FOCUS";
-
     private static final String COMMAND_IS_MUSIC_ACTIVE = "isMusicActive";
+    private static final String COMMAND_GET_CENTER = "center";
     private static final String COMMAND_GET_TOAST = "toast";
     private static final String COMMAND_HIGHLIGHT = "highlight";
     private static WindowManager windowManager = AutomationServer.getWindowManagerInstance();
@@ -50,6 +53,57 @@ public class AutomationServerWorker implements Runnable, WindowListener {
         mClient = client;
         mNeedWindowListUpdate = false;
         mNeedFocusedWindowUpdate = false;
+    }
+
+    private static boolean writeValue(Socket client, String value) {
+        boolean result;
+        BufferedWriter out = null;
+        try {
+            OutputStream clientStream = client.getOutputStream();
+            out = new BufferedWriter(new OutputStreamWriter(clientStream), 8 * 1024);
+            out.write(value);
+            out.newLine();
+            out.flush();
+            result = true;
+        } catch (Exception e) {
+            result = false;
+            Log.w(LOG_TAG, "Error:", e);
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    result = false;
+                    Log.w(LOG_TAG, "error: ", e);
+                }
+            }
+        }
+        return result;
+    }
+
+    private static boolean writeObject(Socket client, Object obj) {
+        boolean result;
+        ObjectOutputStream out = null;
+        try {
+            OutputStream clientStream = client.getOutputStream();
+            out = new ObjectOutputStream(clientStream);
+            out.writeObject(obj);
+            out.flush();
+            result = true;
+        } catch (Exception e) {
+            result = false;
+            Log.w(LOG_TAG, "Error:", e);
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    result = false;
+                    Log.w(LOG_TAG, "error: ", e);
+                }
+            }
+        }
+        return result;
     }
 
     public void run() {
@@ -70,7 +124,7 @@ public class AutomationServerWorker implements Runnable, WindowListener {
                 command = request.substring(0, index);
                 parameters = request.substring(index + 1);
             }
-            boolean result=false;
+            boolean result = false;
             if (COMMAND_PROTOCOL_VERSION.equalsIgnoreCase(command)) {
                 result = writeValue(mClient, VALUE_PROTOCOL_VERSION);
             } else if (COMMAND_SERVER_VERSION.equalsIgnoreCase(command)) {
@@ -82,13 +136,12 @@ public class AutomationServerWorker implements Runnable, WindowListener {
             } else if (COMMAND_WINDOW_MANAGER_AUTOLIST.equalsIgnoreCase(command)) {
                 result = windowManagerAutolistLoop();
             } else if (COMMAND_HIGHLIGHT.equalsIgnoreCase(command)) {
-                if(parameters.trim().equals("1")){
+                if (parameters.trim().equals("1")) {
                     AutomationServer.setHighlightFlag(true);
-                }
-                else
-                {
+                } else {
                     AutomationServer.setHighlightFlag(false);
                 }
+                result = true;
             } else if (COMMAND_GET_TOAST.equalsIgnoreCase(command)) {
                 Options options = new Options();
                 options.addOption("t", true, "timeout");
@@ -111,13 +164,31 @@ public class AutomationServerWorker implements Runnable, WindowListener {
                 }
             } else if (COMMAND_IS_MUSIC_ACTIVE.equalsIgnoreCase(command)) {
                 result = writeValue(mClient, AutomationServer.isMusicActive() ? "true" : "false");
-
+            } else if (COMMAND_GET_CENTER.equalsIgnoreCase(command)) {
+                Options options = new Options();
+                options.addOption("t", true, "text/id");
+                DefaultParser parser = new DefaultParser();
+                String[] args = parameters.split(" ");
+                try {
+                    CommandLine cl = parser.parse(options, args);
+                    if (cl.hasOption("i")) {
+                        String text = cl.getOptionValue("t");
+                        String idx = cl.getOptionValue("i");
+                        result = writeObject(mClient, AutomationServer.getViewCenter(text, Integer.parseInt(idx)));
+                    } else {
+                        String id = cl.getOptionValue("t");
+                        result = writeObject(mClient, AutomationServer.getViewCenter(id));
+                    }
+                } catch (ParseException e) {
+                    Log.w(LOG_TAG, e.getCause());
+                    result = false;
+                }
             } else {
                 result = windowCommand(mClient, command, parameters);
             }
-            Log.w(LOG_TAG, "execute command: " + command);
+            Log.w(LOG_TAG, "execute command: " + request);
             if (!result) {
-                Log.w(LOG_TAG, "An error occurred with the command: " + command);
+                Log.w(LOG_TAG, "An error occurred with the command: " + request);
             }
         } catch (IOException e) {
             Log.w(LOG_TAG, "Connection error: ", e);
@@ -127,42 +198,17 @@ public class AutomationServerWorker implements Runnable, WindowListener {
                     in.close();
 
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.w(LOG_TAG, "error: ", e);
                 }
             }
             if (mClient != null) {
                 try {
                     mClient.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.w(LOG_TAG, "error: ", e);
                 }
             }
         }
-    }
-
-    private static boolean writeValue(Socket client, String value) {
-        boolean result;
-        BufferedWriter out = null;
-        try {
-            OutputStream clientStream = client.getOutputStream();
-            out = new BufferedWriter(new OutputStreamWriter(clientStream), 8 * 1024);
-            out.write(value);
-            out.write("\n");
-            out.flush();
-            result = true;
-        } catch (Exception e) {
-            result = false;
-            Log.w(LOG_TAG, "Error:", e);
-        } finally {
-            if (out != null) {
-                try {
-                    out.close();
-                } catch (IOException e) {
-                    result = false;
-                }
-            }
-        }
-        return result;
     }
 
     private boolean windowCommand(Socket client, String command, String parameters) {
@@ -199,7 +245,8 @@ public class AutomationServerWorker implements Runnable, WindowListener {
 
             if (!client.isOutputShutdown()) {
                 out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-                out.write("DONE\n");
+                out.write("DONE");
+                out.newLine();
                 out.flush();
             }
 
@@ -255,11 +302,13 @@ public class AutomationServerWorker implements Runnable, WindowListener {
                     }
                 }
                 if (needWindowListUpdate) {
-                    out.write("LIST UPDATE\n");
+                    out.write("LIST UPDATE");
+                    out.newLine();
                     out.flush();
                 }
                 if (needFocusedWindowUpdate) {
-                    out.write("FOCUS UPDATE\n");
+                    out.write("FOCUS UPDATE");
+                    out.newLine();
                     out.flush();
                 }
             }

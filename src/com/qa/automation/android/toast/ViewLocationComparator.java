@@ -1,4 +1,4 @@
-package com.qa.automation.android.view;
+package com.qa.automation.android.toast;
 
 import android.view.View;
 

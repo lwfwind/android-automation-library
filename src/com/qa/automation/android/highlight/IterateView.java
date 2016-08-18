@@ -12,11 +12,22 @@ import java.util.List;
 public class IterateView {
     private List<View> views = new ArrayList<View>();
 
+    /**
+     * Gets views.
+     *
+     * @return the views
+     */
     public List<View> getViews() {
         return views;
     }
 
-    public void iterate(View view) {
+    /**
+     * Iterate list.
+     *
+     * @param view the view
+     * @return the list
+     */
+    public List<View> iterate(View view) {
         if (view instanceof ViewGroup) {
             iterateViewChildren(view);
         } else {
@@ -24,6 +35,7 @@ public class IterateView {
                 views.add(view);
             }
         }
+        return views;
     }
 
     private void iterateViewChildren(View view) {
