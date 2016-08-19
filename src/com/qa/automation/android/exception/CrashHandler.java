@@ -117,7 +117,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 try {
                     sUserInfo = getUserInfo();
                     String[] emails = emailTo.split(" ");
-                    MailSender.sendTextMail("EmmageePlus@126.com", "Lwfwind789", "smtp.126.com",
+                    MailSender.sendTextMail("android_automation@126.com", "Automation123", "smtp.126.com",
                             "android-automation-library uncatched exception",sUserInfo+getErrorTrace(ex),
                             null, emails);
                 } catch (MessagingException e) {
@@ -161,7 +161,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     public String getUserInfo() {
         StringBuilder info = new StringBuilder();
         String newline = System.lineSeparator();
-        info.append("time:").append(new Date().toLocaleString()).append(newline);
+        info.append("time:").append(new Date().toString()).append(newline);
         info.append("processName:").append(AppInfoUtil.getCurProcessName()).append(newline);
         info.append("app version:").append(AppInfoUtil.getAPPVersion()).append(newline);
         info.append("app channel:").append(AppInfoUtil.getChannelName()).append(newline);

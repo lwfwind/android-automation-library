@@ -94,7 +94,7 @@
             </resource>
         </resources>
         <plugins>
-            <!--mvn clean deploy-->
+            <!--mvn clean deploy -Dmaven.test.skip=true-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
