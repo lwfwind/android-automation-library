@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
 import android.webkit.WebView;
-import com.qa.automation.android.toast.Sleeper;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

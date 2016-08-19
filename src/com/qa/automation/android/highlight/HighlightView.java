@@ -7,9 +7,11 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.os.Build;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import com.qa.automation.android.find.IterateView;
+import com.qa.automation.android.AutomationServer;
+import com.qa.automation.android.find.ViewFetcher;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import java.util.HashMap;
  * The type Highlight view.
  */
 public class HighlightView {
+    private static String LOG_TAG = "HighlightView";
     private static ShapeDrawable shape = null;
     private static Activity activity = null;
     private static ArrayList<Activity> highlightedActivityList = new ArrayList<>();
@@ -76,9 +79,8 @@ public class HighlightView {
             }
         };
 
-        IterateView iterateView = new IterateView();
-        iterateView.iterate(activity.getWindow().getDecorView().getRootView());
-        for (View view : iterateView.getViews()) {
+        ViewFetcher viewFetcher = new ViewFetcher(AutomationServer.getCurrContext());
+        for (View view : viewFetcher.getAllViews(true)) {
             boolean flag = false;
             if (!hasTouchListener(view)) {
                 view.setOnTouchListener(touchListener);
@@ -132,7 +134,7 @@ public class HighlightView {
                 return touchListener != null;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.w(LOG_TAG, "hasTouchListener exception:" + e.getMessage());
         }
         return true;
     }
@@ -159,7 +161,7 @@ public class HighlightView {
                 return clickListener != null;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.w(LOG_TAG, "hasClickListener exception:" + e.getMessage());
         }
         return true;
     }

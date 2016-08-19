@@ -5,11 +5,23 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+/**
+ * The type Parse test.
+ */
 public class ParseTest {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         testParse();
         testParse2();
     }
+
+    /**
+     * Test parse.
+     */
     public static void testParse() {
         String parameters = "-t 20000 -ex 请稍候...";
         Options options = new Options();
@@ -33,6 +45,9 @@ public class ParseTest {
         }
     }
 
+    /**
+     * Test parse 2.
+     */
     public static void testParse2() {
         String parameters = "-t 20000";
         Options options = new Options();
