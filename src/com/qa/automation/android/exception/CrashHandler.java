@@ -4,9 +4,14 @@ import android.content.Context;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
+import com.qa.automation.android.util.AppInfoUtil;
+import com.qa.automation.android.util.DeviceUtil;
 import com.qa.automation.android.util.email.MailSender;
 
 import javax.mail.MessagingException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Date;
 
 /**
  * The type Crash handler.
@@ -17,7 +22,8 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     private static CrashHandler instance; // 单例模式
     private Context context; // 程序Context对象
     private Thread.UncaughtExceptionHandler defaultHandler; // 系统默认的UncaughtException处理类
-    private String emailTo = "wind@abc360.com";
+    private String emailTo = "lwfwind@126.com";
+    private String sUserInfo = "";
 
     private CrashHandler() {
 
@@ -39,10 +45,20 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         return instance;
     }
 
+    /**
+     * Gets email to.
+     *
+     * @return the email to
+     */
     public String getEmailTo() {
         return emailTo;
     }
 
+    /**
+     * Sets email to.
+     *
+     * @param emailTo the email to
+     */
     public void setEmailTo(String emailTo) {
         this.emailTo = emailTo;
     }
@@ -97,23 +113,12 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         new Thread() {
             @Override
             public void run() {
-                Looper.prepare();
-                Log.w(TAG, "error : ", ex);
-                String err = "[" + ex.getMessage() + "]";
-                Toast.makeText(context, "程序出现异常." + err, Toast.LENGTH_LONG)
-                        .show();
-                Looper.loop();
+                Log.w(TAG, "error : ", ex);;
                 try {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(ex.getMessage());
-                    sb.append(System.lineSeparator());
-                    for (StackTraceElement e : ex.getStackTrace()) {
-                        sb.append(e.toString());
-                        sb.append(System.lineSeparator());
-                    }
+                    sUserInfo = getUserInfo();
                     String[] emails = emailTo.split(" ");
                     MailSender.sendTextMail("EmmageePlus@126.com", "Lwfwind789", "smtp.126.com",
-                            "android-automation-library uncatched exception", sb.toString(),
+                            "android-automation-library uncatched exception",sUserInfo+getErrorTrace(ex),
                             null, emails);
                 } catch (MessagingException e) {
                     Log.w(TAG, "send mail error : ", e);
@@ -121,6 +126,53 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             }
         }.start();
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return true;
+    }
+
+    /**
+     * Gets error trace.
+     *
+     * @param ex the ex
+     * @return the error trace
+     */
+    public String getErrorTrace(Throwable ex) {
+        StringWriter stringWrite = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWrite);
+        ex.printStackTrace(printWriter);
+        Throwable cause = ex.getCause();
+        while (cause != null) {
+            cause.printStackTrace(printWriter);
+            cause = cause.getCause();
+        }
+        printWriter.close();
+        return stringWrite.toString();
+    }
+
+    /**
+     * Gets user info.
+     *
+     * @return the user info
+     */
+    public String getUserInfo() {
+        StringBuilder info = new StringBuilder();
+        String newline = System.lineSeparator();
+        info.append("time:").append(new Date().toLocaleString()).append(newline);
+        info.append("processName:").append(AppInfoUtil.getCurProcessName()).append(newline);
+        info.append("app version:").append(AppInfoUtil.getAPPVersion()).append(newline);
+        info.append("app channel:").append(AppInfoUtil.getChannelName()).append(newline);
+        info.append("device model:").append(DeviceUtil.getDeviceMode()).append(newline);
+        info.append("device id:").append(DeviceUtil.getDeviceId()).append(newline);
+        info.append("device version code:").append(DeviceUtil.getDeviceVersionCode()).append(newline);
+        info.append("device net state:").append(DeviceUtil.getNetworkType()).append(newline);
+        info.append(newline);
+        info.append("====================");
+        info.append("error message:");
+        info.append(newline);
+        return info.toString();
     }
 }

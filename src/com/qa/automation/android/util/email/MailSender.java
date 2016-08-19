@@ -34,6 +34,7 @@ public class MailSender {
      * @param file            the file
      * @param mailList        the mailList
      * @return the boolean
+     * @throws MessagingException the messaging exception
      */
     public static boolean sendTextMail(String sender, String decryptPassword, String smtp, String subject, String content, String file,
                                        String[] mailList) throws MessagingException {

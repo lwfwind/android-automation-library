@@ -38,12 +38,23 @@ public class Finder {
         mContext = context;
         this.timeout = timeout;
     }
+
     ;
 
+    /**
+     * Gets timeout.
+     *
+     * @return the timeout
+     */
     public int getTimeout() {
         return timeout;
     }
 
+    /**
+     * Sets timeout.
+     *
+     * @param timeout the timeout
+     */
     public void setTimeout(int timeout) {
         this.timeout = timeout;
     }
@@ -111,8 +122,8 @@ public class Finder {
      * Waits for a certain view.
      *
      * @param id          the id of the view to wait for
-     * @param index       the index of the {@link View}. {@code 0} if only one is available
      * @param excludeText exclude the specify text of the view
+     * @param index       the index of the {@link View}. {@code 0} if only one is available
      * @return the specified View
      * @throws Exception the exception
      */

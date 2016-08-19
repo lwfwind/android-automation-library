@@ -21,9 +21,12 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.util.Log;
 import android.widget.TextView;
+import com.qa.automation.android.exception.CrashHandler;
 import com.qa.automation.android.find.Finder;
 import com.qa.automation.android.hook.HookHelper;
 import com.qa.automation.android.popupwindow.PopupWindow;
+import com.qa.automation.android.util.AppInfoUtil;
+import com.qa.automation.android.util.DeviceUtil;
 import com.qa.automation.android.window.WindowManager;
 import com.qa.serializable.Point;
 
@@ -115,7 +118,7 @@ public class AutomationServer implements Runnable {
      *
      * @return the automation server
      */
-    public static AutomationServer startListening() {
+    public static AutomationServer startListening(Context context) {
         if (sServer == null) {
             sServer = new AutomationServer(AutomationServer.VIEW_SERVER_DEFAULT_PORT);
         }
@@ -128,9 +131,17 @@ public class AutomationServer implements Runnable {
             }
         }
 
-        // 在这里进行Hook
-        HookHelper.start();
+        currContext = context;
+        init();
         return sServer;
+    }
+
+    public static void init(){
+        HookHelper.start();
+        AppInfoUtil.init(currContext);
+        DeviceUtil.init(currContext);
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(currContext);
     }
 
     /**
@@ -188,8 +199,8 @@ public class AutomationServer implements Runnable {
      * @return the last toast
      */
     public static String getLastToast(int timeout) {
-        Finder getter = new Finder(currContext, timeout);
-        TextView toastTextView = (TextView) getter.getView("message", 0);
+        Finder finder = new Finder(currContext, timeout);
+        TextView toastTextView = (TextView) finder.getView("message", 0);
         if (null != toastTextView) {
             return toastTextView.getText().toString();
         }
@@ -204,8 +215,8 @@ public class AutomationServer implements Runnable {
      * @return the last toast
      */
     public static String getLastToast(int timeout, String excludeText) {
-        Finder getter = new Finder(currContext, timeout);
-        TextView toastTextView = (TextView) getter.getTextView("message", excludeText, 0);
+        Finder finder = new Finder(currContext, timeout);
+        TextView toastTextView = (TextView) finder.getTextView("message", excludeText, 0);
         if (null != toastTextView) {
             return toastTextView.getText().toString();
         }
@@ -269,8 +280,8 @@ public class AutomationServer implements Runnable {
      *
      * @return True if the server was successfully created, or false if it already exists.
      * @throws IOException If the server cannot be created.
-     * @see #stop() #stop()#stop()#stop()#stop()#stop()
-     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
+     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()
+     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
      */
     public boolean start() throws IOException {
         if (mThread != null) {
@@ -286,8 +297,8 @@ public class AutomationServer implements Runnable {
      * Stops the server.
      *
      * @return True if the server was stopped, false if an error occurred or if the server wasn't started.
-     * @see #start() #start()#start()#start()#start()#start()
-     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
+     * @see #start() #start()#start()#start()#start()#start()#start()
+     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
      */
     public boolean stop() {
         if (mThread != null) {
@@ -319,8 +330,8 @@ public class AutomationServer implements Runnable {
      * Indicates whether the server is currently running.
      *
      * @return True if the server is running, false otherwise.
-     * @see #start() #start()#start()#start()#start()#start()
-     * @see #stop() #stop()#stop()#stop()#stop()#stop()
+     * @see #start() #start()#start()#start()#start()#start()#start()
+     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()
      */
     public boolean isRunning() {
         return mThread != null && mThread.isAlive();
