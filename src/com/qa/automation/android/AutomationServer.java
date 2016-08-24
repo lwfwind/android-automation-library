@@ -54,7 +54,7 @@ public class AutomationServer implements Runnable {
     private static WindowManager windowManager = new WindowManager();
     private static Context currContext;
     private static Activity currActivity;
-    private static boolean mHighlightFlag = false;
+    private static boolean mHighlightFlag = true;
     private final int mPort;
     private ServerSocket mServer;
     private Thread mThread;
@@ -116,6 +116,7 @@ public class AutomationServer implements Runnable {
      * called from the main thread of your application. The server will have
      * the same lifetime as your process.
      *
+     * @param context the context
      * @return the automation server
      */
     public static AutomationServer startListening(Context context) {
@@ -136,7 +137,10 @@ public class AutomationServer implements Runnable {
         return sServer;
     }
 
-    public static void init(){
+    /**
+     * Init.
+     */
+    public static void init() {
         HookHelper.start();
         AppInfoUtil.init(currContext);
         DeviceUtil.init(currContext);
@@ -280,8 +284,8 @@ public class AutomationServer implements Runnable {
      *
      * @return True if the server was successfully created, or false if it already exists.
      * @throws IOException If the server cannot be created.
-     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()
-     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
+     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()#stop()
+     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
      */
     public boolean start() throws IOException {
         if (mThread != null) {
@@ -297,8 +301,8 @@ public class AutomationServer implements Runnable {
      * Stops the server.
      *
      * @return True if the server was stopped, false if an error occurred or if the server wasn't started.
-     * @see #start() #start()#start()#start()#start()#start()#start()
-     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
+     * @see #start() #start()#start()#start()#start()#start()#start()#start()
+     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
      */
     public boolean stop() {
         if (mThread != null) {
@@ -330,8 +334,8 @@ public class AutomationServer implements Runnable {
      * Indicates whether the server is currently running.
      *
      * @return True if the server is running, false otherwise.
-     * @see #start() #start()#start()#start()#start()#start()#start()
-     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()
+     * @see #start() #start()#start()#start()#start()#start()#start()#start()
+     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()#stop()
      */
     public boolean isRunning() {
         return mThread != null && mThread.isAlive();

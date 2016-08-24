@@ -10,7 +10,7 @@ import android.os.Build;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import com.qa.automation.android.AutomationServer;
+import android.view.ViewGroup;
 import com.qa.automation.android.find.ViewFetcher;
 
 import java.lang.reflect.Field;
@@ -23,10 +23,11 @@ import java.util.HashMap;
 public class HighlightView {
     private static String LOG_TAG = "HighlightView";
     private static ShapeDrawable shape = null;
-    private static Activity activity = null;
+    private static Activity currActivity = null;
     private static ArrayList<Activity> highlightedActivityList = new ArrayList<>();
     private static HashMap<View, Drawable> highlightedViewDrawableMap = new HashMap<>();
-    private static HashMap<Activity, ArrayList<View>> highlightedActivityViewListMap = new HashMap<>();
+    private static HashMap<Activity, View> highlightedActivityViewMap = new HashMap<>();
+    private static ViewFetcher viewFetcher = new ViewFetcher();
 
     static {
         // Create a border programmatically
@@ -37,26 +38,36 @@ public class HighlightView {
     }
 
     /**
+     * Remove highlighted activity.
+     *
+     * @param activity the activity
+     */
+    public static void removeHighlightedActivity(Activity activity) {
+        if (highlightedActivityList.indexOf(activity) > -1) {
+            if (highlightedActivityViewMap.get(activity) != null) {
+                View v = highlightedActivityViewMap.get(activity);
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    v.setBackgroundDrawable(highlightedViewDrawableMap.get(v));
+                } else {
+                    v.setBackground(highlightedViewDrawableMap.get(v));
+                }
+                v.invalidate();
+            }
+        }
+    }
+
+    /**
      * Highlight.
      *
-     * @param act the act
+     * @param activity  the activity
+     * @param decorView the decor view
      */
-    public static void highlight(Activity act) {
-        activity = act;
-        if (highlightedActivityList.indexOf(activity) > -1) {
-            if (highlightedActivityViewListMap.get(activity) != null) {
-                for (View v : highlightedActivityViewListMap.get(activity)) {
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                        v.setBackgroundDrawable(highlightedViewDrawableMap.get(v));
-                    } else {
-                        v.setBackground(highlightedViewDrawableMap.get(v));
-                    }
-                    v.invalidate();
-                }
-            }
+    public static void highlight(Activity activity, View decorView) {
+        if (activity == null || !viewFetcher.isDecorView(decorView)) {
             return;
         }
-        highlightedActivityList.add(activity);
+        currActivity = activity;
+        highlightedActivityList.add(currActivity);
         View.OnTouchListener touchListener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -79,15 +90,21 @@ public class HighlightView {
             }
         };
 
-        ViewFetcher viewFetcher = new ViewFetcher(AutomationServer.getCurrContext());
-        for (View view : viewFetcher.getAllViews(true)) {
-            boolean flag = false;
-            if (!hasTouchListener(view)) {
-                view.setOnTouchListener(touchListener);
-                flag = true;
-            }
-            if (!hasClickListener(view) && !flag) {
-                view.setOnClickListener(clickListener);
+        ArrayList<View> allViews = new ArrayList<View>();
+        try {
+            viewFetcher.addChildren(allViews, (ViewGroup) decorView, false);
+        } catch (Exception ignored) {
+        }
+        for (View view : allViews) {
+            if (view.getId() != -1 && !(view instanceof ViewGroup)) {
+                boolean flag = false;
+                if (!hasTouchListener(view)) {
+                    view.setOnTouchListener(touchListener);
+                    flag = true;
+                }
+                if (!hasClickListener(view) && !flag) {
+                    view.setOnClickListener(clickListener);
+                }
             }
         }
     }
@@ -95,12 +112,16 @@ public class HighlightView {
     private static void setBackground(View v) {
         if (v.getBackground() != shape) {
             highlightedViewDrawableMap.put(v, v.getBackground());
-            if (highlightedActivityViewListMap.get(activity) != null) {
-                highlightedActivityViewListMap.get(activity).add(v);
+            if (highlightedActivityViewMap.get(currActivity) == null) {
+                highlightedActivityViewMap.put(currActivity, v);
             } else {
-                ArrayList<View> viewList = new ArrayList<>();
-                viewList.add(v);
-                highlightedActivityViewListMap.put(activity, viewList);
+                View preView = highlightedActivityViewMap.get(currActivity);
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    preView.setBackgroundDrawable(highlightedViewDrawableMap.get(preView));
+                } else {
+                    preView.setBackground(highlightedViewDrawableMap.get(preView));
+                }
+                highlightedActivityViewMap.put(currActivity, v);
             }
             // Assign the created border to view
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {

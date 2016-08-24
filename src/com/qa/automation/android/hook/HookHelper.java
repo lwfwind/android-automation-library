@@ -29,10 +29,8 @@ public class HookHelper {
             mInstrumentationField.setAccessible(true);
             Instrumentation mInstrumentation = (Instrumentation) mInstrumentationField.get(currentActivityThread);
 
-            // 创建代理对象
             Instrumentation myInstrumentation = new MyInstrumentation(mInstrumentation);
 
-            // 偷梁换柱
             mInstrumentationField.set(currentActivityThread, myInstrumentation);
         } catch (Exception e) {
             Log.w(TAG, e.getMessage(), e);

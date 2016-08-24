@@ -70,6 +70,13 @@ public class ViewFetcher {
     }
 
     /**
+     * Constructs this object.
+     */
+    public ViewFetcher() {
+        setWindowManagerString();
+    }
+
+    /**
      * Returns the absolute top parent {@code View} in for a given {@code View}.
      *
      * @param view the {@code View} whose top parent is requested
@@ -216,9 +223,10 @@ public class ViewFetcher {
     /**
      * Returns whether a view is a DecorView
      *
+     * @param view the view
      * @return true if view is a DecorView, false otherwise
      */
-    private boolean isDecorView(View view) {
+    public boolean isDecorView(View view) {
         if (view == null) {
             return false;
         }
@@ -261,8 +269,7 @@ public class ViewFetcher {
      * @param viewGroup               the {@code ViewGroup} to extract children from
      * @param onlySufficientlyVisible if only sufficiently visible views should be returned
      */
-
-    private void addChildren(ArrayList<View> views, ViewGroup viewGroup, boolean onlySufficientlyVisible) {
+    public void addChildren(ArrayList<View> views, ViewGroup viewGroup, boolean onlySufficientlyVisible) {
         if (viewGroup != null) {
             for (int i = 0; i < viewGroup.getChildCount(); i++) {
                 final View child = viewGroup.getChildAt(i);

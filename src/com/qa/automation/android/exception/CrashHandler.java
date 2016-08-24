@@ -1,9 +1,7 @@
 package com.qa.automation.android.exception;
 
 import android.content.Context;
-import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
 import com.qa.automation.android.util.AppInfoUtil;
 import com.qa.automation.android.util.DeviceUtil;
 import com.qa.automation.android.util.email.MailSender;
@@ -113,12 +111,13 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         new Thread() {
             @Override
             public void run() {
-                Log.w(TAG, "error : ", ex);;
+                Log.w(TAG, "error : ", ex);
+                ;
                 try {
                     sUserInfo = getUserInfo();
                     String[] emails = emailTo.split(" ");
                     MailSender.sendTextMail("android_automation@126.com", "Automation123", "smtp.126.com",
-                            "android-automation-library uncatched exception",sUserInfo+getErrorTrace(ex),
+                            "android-automation-library uncatched exception", sUserInfo + getErrorTrace(ex),
                             null, emails);
                 } catch (MessagingException e) {
                     Log.w(TAG, "send mail error : ", e);
