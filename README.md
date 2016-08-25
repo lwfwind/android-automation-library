@@ -10,7 +10,7 @@ Currently android uiautomator library doesn't support Toast and PopupWindow,this
 
 ## Usage
 ##### 1. Add gradle dependency in target app
-```xml
+```groovy
 dependencies {
     compile 'com.github.lwfwind.automation:android-automation-library:2.1'
 }
