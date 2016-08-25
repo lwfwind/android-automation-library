@@ -9,6 +9,7 @@ import com.qa.automation.android.highlight.HighlightView;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -33,25 +34,22 @@ public class ProxyWMInvocationHandler implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Object ret = null;
-        if (method.getName().equalsIgnoreCase("addview")) {
-            View decorView = (View) args[0];
-            Log.w(TAG, method.getName()+" "+getActivity(decorView));
-            ret = method.invoke(target, args);
-            HighlightView.highlight(this.activity, decorView);
-            try {
-                Field instanceField = Activity.class.getDeclaredField("mWindowManager");
-                instanceField.setAccessible(true);
-                instanceField.set(this.activity, this.target);
-            } catch (Exception e) {
-                Log.w(TAG, e.getMessage(), e);
-            }
-        }
-        else
-        {
-            if(method.getName().contains("view")) {
+        try {
+            if (method.getName().equalsIgnoreCase("addview")) {
                 View decorView = (View) args[0];
-                Log.w(TAG, method.getName()+" "+getActivity(decorView));
+                Log.w(TAG, method.getName() + " " + getActivity(decorView));
+                ret = method.invoke(target, args);
+                HighlightView.highlight(this.activity, decorView);
+                try {
+                    Field instanceField = Activity.class.getDeclaredField("mWindowManager");
+                    instanceField.setAccessible(true);
+                    instanceField.set(this.activity, this.target);
+                } catch (Exception e) {
+                    Log.w(TAG, e.getMessage(), e);
+                }
             }
+        } catch (InvocationTargetException e) {
+            Log.w(TAG, e);
         }
         return ret;
     }
@@ -60,9 +58,9 @@ public class ProxyWMInvocationHandler implements InvocationHandler {
         Context context = view.getContext();
         while (context instanceof ContextWrapper) {
             if (context instanceof Activity) {
-                return (Activity)context;
+                return (Activity) context;
             }
-            context = ((ContextWrapper)context).getBaseContext();
+            context = ((ContextWrapper) context).getBaseContext();
         }
         return null;
     }

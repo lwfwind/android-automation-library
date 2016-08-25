@@ -43,15 +43,12 @@ public class HighlightView {
      * @param activity the activity
      */
     public static void removeHighlightedActivity(Activity activity) {
-        if (highlightedActivityList.indexOf(activity) > -1) {
+        currActivity = activity;
+        if (highlightedActivityList.contains(activity)) {
             if (highlightedActivityViewMap.get(activity) != null) {
                 View v = highlightedActivityViewMap.get(activity);
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                    v.setBackgroundDrawable(highlightedViewDrawableMap.get(v));
-                } else {
-                    v.setBackground(highlightedViewDrawableMap.get(v));
-                }
-                v.invalidate();
+                Drawable drawable = highlightedViewDrawableMap.get(v);
+                setBackground(v, drawable);
             }
         }
     }
@@ -63,7 +60,7 @@ public class HighlightView {
      * @param decorView the decor view
      */
     public static void highlight(Activity activity, View decorView) {
-        if (activity == null || !viewFetcher.isDecorView(decorView)) {
+        if (activity == null || !viewFetcher.isDecorView(decorView) || highlightedActivityList.contains(activity)) {
             return;
         }
         currActivity = activity;
@@ -116,21 +113,23 @@ public class HighlightView {
                 highlightedActivityViewMap.put(currActivity, v);
             } else {
                 View preView = highlightedActivityViewMap.get(currActivity);
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                    preView.setBackgroundDrawable(highlightedViewDrawableMap.get(preView));
-                } else {
-                    preView.setBackground(highlightedViewDrawableMap.get(preView));
-                }
+                setBackground(preView, highlightedViewDrawableMap.get(preView));
                 highlightedActivityViewMap.put(currActivity, v);
             }
             // Assign the created border to view
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                v.setBackgroundDrawable(shape);
-            } else {
-                v.setBackground(shape);
-            }
-            v.invalidate();
+            setBackground(v, shape);
         }
+    }
+
+    private static void setBackground(View view, Drawable drawable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            //Android系统大于等于API16，使用setBackground
+            view.setBackground(drawable);
+        } else {
+            //Android系统小于API16，使用setBackground
+            view.setBackgroundDrawable(drawable);
+        }
+        view.invalidate();
     }
 
     private static boolean hasTouchListener(View view) {
