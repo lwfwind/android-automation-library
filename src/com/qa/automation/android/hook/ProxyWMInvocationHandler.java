@@ -46,6 +46,13 @@ public class ProxyWMInvocationHandler implements InvocationHandler {
                 Log.w(TAG, e.getMessage(), e);
             }
         }
+        else
+        {
+            if(method.getName().contains("view")) {
+                View decorView = (View) args[0];
+                Log.w(TAG, method.getName()+" "+getActivity(decorView));
+            }
+        }
         return ret;
     }
 

@@ -96,7 +96,7 @@ public class HighlightView {
         } catch (Exception ignored) {
         }
         for (View view : allViews) {
-            if (view.getId() != -1 && !(view instanceof ViewGroup)) {
+            if (!(view instanceof ViewGroup)) {
                 boolean flag = false;
                 if (!hasTouchListener(view)) {
                     view.setOnTouchListener(touchListener);
