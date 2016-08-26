@@ -3,6 +3,7 @@ package com.qa.automation.android.hook;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.WindowManager;
 import com.qa.automation.android.AutomationServer;
@@ -53,6 +54,18 @@ public class MyInstrumentation extends Instrumentation {
         Log.w(TAG, "afterOnCreate:" + activity.getClass().getSimpleName());
         AutomationServer.setActivity(activity);
         AutomationServer.setCurrentContext(activity).addWindow(activity);
+        if (AutomationServer.getHighlightFlag()) {
+            FragmentActivityAdapter fragmentActivityAdapter = new FragmentActivityAdapter(activity);
+            final FragmentManager fragmentManager=fragmentActivityAdapter.getFragmentActivity().getSupportFragmentManager();
+            FragmentManager.OnBackStackChangedListener listener = new FragmentManager.OnBackStackChangedListener() {
+                @Override
+                public void onBackStackChanged() {
+                    Log.w(TAG, "onBackStackChanged:"+fragmentManager.getBackStackEntryCount());
+                }
+            };
+            fragmentManager.addOnBackStackChangedListener(listener);
+
+        }
     }
 
 
@@ -84,6 +97,7 @@ public class MyInstrumentation extends Instrumentation {
                 Field instanceField = Activity.class.getDeclaredField("mWindowManager");
                 instanceField.setAccessible(true);
                 instanceField.set(activity, proxyWindowManager);
+                Log.w(TAG, "proxy mWindowManager from " + windowManager + " to " + proxyWindowManager.toString());
             } catch (Exception e) {
                 Log.w(TAG, e.getMessage(), e);
             }

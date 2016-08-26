@@ -25,6 +25,7 @@ public class HighlightView {
     private static ShapeDrawable shape = null;
     private static Activity currActivity = null;
     private static ArrayList<Activity> highlightedActivityList = new ArrayList<>();
+    private static ArrayList<HashMap<Activity, View>> existedActivityViewList = new ArrayList<HashMap<Activity, View>>();
     private static HashMap<View, Drawable> highlightedViewDrawableMap = new HashMap<>();
     private static HashMap<Activity, View> highlightedActivityViewMap = new HashMap<>();
     private static ViewFetcher viewFetcher = new ViewFetcher();
@@ -57,14 +58,17 @@ public class HighlightView {
      * Highlight.
      *
      * @param activity  the activity
-     * @param decorView the decor view
+     * @param view the view
      */
-    public static void highlight(Activity activity, View decorView) {
-        if (activity == null || !viewFetcher.isDecorView(decorView) || highlightedActivityList.contains(activity)) {
+    public static void highlight(Activity activity, View view) {
+        HashMap<Activity, View> activityViewHashMap = new HashMap<Activity, View>();
+        activityViewHashMap.put(activity,view);
+        if(existedActivityViewList.contains(activityViewHashMap)){
             return;
         }
         currActivity = activity;
         highlightedActivityList.add(currActivity);
+        existedActivityViewList.add(activityViewHashMap);
         View.OnTouchListener touchListener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -89,18 +93,18 @@ public class HighlightView {
 
         ArrayList<View> allViews = new ArrayList<View>();
         try {
-            viewFetcher.addChildren(allViews, (ViewGroup) decorView, false);
+            viewFetcher.addChildren(allViews, (ViewGroup) view, false);
         } catch (Exception ignored) {
         }
-        for (View view : allViews) {
-            if (!(view instanceof ViewGroup)) {
+        for (View v : allViews) {
+            if (!(v instanceof ViewGroup)) {
                 boolean flag = false;
-                if (!hasTouchListener(view)) {
-                    view.setOnTouchListener(touchListener);
+                if (!hasTouchListener(v)) {
+                    v.setOnTouchListener(touchListener);
                     flag = true;
                 }
-                if (!hasClickListener(view) && !flag) {
-                    view.setOnClickListener(clickListener);
+                if (!hasClickListener(v) && !flag) {
+                    v.setOnClickListener(clickListener);
                 }
             }
         }

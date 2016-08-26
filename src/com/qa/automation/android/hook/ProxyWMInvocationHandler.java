@@ -44,6 +44,7 @@ public class ProxyWMInvocationHandler implements InvocationHandler {
                     Field instanceField = Activity.class.getDeclaredField("mWindowManager");
                     instanceField.setAccessible(true);
                     instanceField.set(this.activity, this.target);
+                    Log.w(TAG, "revert mWindowManager to " + this.target);
                 } catch (Exception e) {
                     Log.w(TAG, e.getMessage(), e);
                 }
