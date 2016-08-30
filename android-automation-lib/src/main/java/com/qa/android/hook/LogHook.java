@@ -3,57 +3,69 @@ package com.qa.android.hook;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+import com.lody.legend.Hook;
 import com.qa.android.util.log.LogQueueGlobal;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class LogHook {
+
+    @Hook("android.util.Log::v@java.lang.String#java.lang.String")
     public static int v(String tag, String msg) {
         println(Log.VERBOSE, tag, msg);
         return 0;
     }
 
+    @Hook("android.util.Log::d@java.lang.String#java.lang.String")
     public static int d(String tag, String msg) {
         println(Log.DEBUG, tag, msg);
         return 0;
     }
 
+    @Hook("android.util.Log::i@java.lang.String#java.lang.String")
     public static int i(String tag, String msg) {
         println(Log.INFO, tag, msg);
         return 0;
     }
 
+    @Hook("android.util.Log::w@java.lang.String#java.lang.String")
     public static int w(String tag, String msg) {
         println(Log.WARN, tag, msg);
         return 0;
     }
 
+    @Hook("android.util.Log::e@java.lang.String#java.lang.String")
     public static int e(String tag, String msg) {
         println(Log.ERROR, tag, msg);
         return 0;
     }
 
+    @Hook("android.util.Log::v@java.lang.String#java.lang.String#java.lang.Throwable")
     public static int v(String tag, String msg, Throwable tr) {
         println(Log.VERBOSE, tag, msg, tr);
         return 0;
     }
 
+    @Hook("android.util.Log::d@java.lang.String#java.lang.String#java.lang.Throwable")
     public static int d(String tag, String msg, Throwable tr) {
         println(Log.DEBUG, tag, msg, tr);
         return 0;
     }
 
+    @Hook("android.util.Log::i@java.lang.String#java.lang.String#java.lang.Throwable")
     public static int i(String tag, String msg, Throwable tr) {
         println(Log.INFO, tag, msg, tr);
         return 0;
     }
 
+    @Hook("android.util.Log::w@java.lang.String#java.lang.String#java.lang.Throwable")
     public static int w(String tag, String msg, Throwable tr) {
         println(Log.WARN, tag, msg, tr);
         return 0;
     }
 
+    @Hook("android.util.Log::e@java.lang.String#java.lang.String#java.lang.Throwable")
     public static int e(String tag, String msg, Throwable tr) {
         println(Log.ERROR, tag, msg, tr);
         return 0;
@@ -89,7 +101,7 @@ public class LogHook {
         }
         LogQueueGlobal.getInstance().add(log);
         Log.println(priority, tag, msg);
-        //System.out.println(log);
+        System.out.println(log);
     }
 
     /**

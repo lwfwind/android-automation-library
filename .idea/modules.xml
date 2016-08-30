@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android-automation-lib/android-automation-lib.iml" filepath="$PROJECT_DIR$/android-automation-lib/android-automation-lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-automation-library.iml" filepath="$PROJECT_DIR$/android-automation-library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/legendCore/legendCore.iml" filepath="$PROJECT_DIR$/legendCore/legendCore.iml" />
     </modules>
   </component>
 </project>

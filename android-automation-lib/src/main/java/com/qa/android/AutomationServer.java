@@ -22,9 +22,11 @@ import android.media.AudioManager;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.lody.legend.HookManager;
 import com.qa.android.exception.CrashHandler;
 import com.qa.android.find.Finder;
-import com.qa.android.hook.HookHelper;
+import com.qa.android.hook.InstrumentationHook;
+import com.qa.android.hook.LogHook;
 import com.qa.android.popupwindow.PopupWindow;
 import com.qa.android.util.AppInfoUtil;
 import com.qa.android.util.DeviceUtil;
@@ -139,7 +141,8 @@ public class AutomationServer implements Runnable {
      * Init.
      */
     public static void init() {
-        HookHelper.start();
+        InstrumentationHook.start();
+        HookManager.getDefault().applyHooks(LogHook.class);
         AppInfoUtil.init(currContext);
         DeviceUtil.init(currContext);
         CrashHandler crashHandler = CrashHandler.getInstance();

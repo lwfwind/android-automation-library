@@ -1,18 +1,17 @@
 package com.qa;
 
 import android.test.ApplicationTestCase;
-import android.test.suitebuilder.annotation.SmallTest;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
-public class ApplicationTest extends ApplicationTestCase<MyApplication> {
+public class AndFixApplicationTest extends ApplicationTestCase<AndFixApplication> {
 
     /**
      * Instantiates a new Application test.
      */
-    public ApplicationTest() {
-        super(MyApplication.class);
+    public AndFixApplicationTest() {
+        super(AndFixApplication.class);
     }
 
     @Override

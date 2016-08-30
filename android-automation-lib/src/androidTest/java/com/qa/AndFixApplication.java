@@ -11,8 +11,8 @@ import java.lang.reflect.Method;
 /**
  * The type My application.
  */
-public class MyApplication extends Application {
-    private static final String TAG = "AndFixTest";
+public class AndFixApplication extends Application {
+    private static final String TAG = "AndFixApplication";
 
     @Override
     public void onCreate() {
@@ -23,8 +23,8 @@ public class MyApplication extends Application {
                 Log.e(TAG, "AndFix not support !");
                 return;
             }
-            Method original = MyApplication.class.getDeclaredMethod("andFixOriginal");
-            Method target = MyApplication.class.getDeclaredMethod("andFixReplaceMethod");
+            Method original = AndFixApplication.class.getDeclaredMethod("andFixOriginal");
+            Method target = AndFixApplication.class.getDeclaredMethod("andFixReplaceMethod");
             AndFix.addReplaceMethod(original, target);
 
             Method log_original = Log.class.getDeclaredMethod("e",String.class,String.class);
