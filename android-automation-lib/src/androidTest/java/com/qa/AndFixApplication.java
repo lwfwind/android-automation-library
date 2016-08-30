@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.alipay.euler.andfix.AndFix;
+import com.qa.android.hook.AndFixHookManager;
 import com.qa.android.hook.LogHook;
 
 import java.lang.reflect.Method;
@@ -23,25 +24,11 @@ public class AndFixApplication extends Application {
                 Log.e(TAG, "AndFix not support !");
                 return;
             }
-            Method original = AndFixApplication.class.getDeclaredMethod("andFixOriginal");
-            Method target = AndFixApplication.class.getDeclaredMethod("andFixReplaceMethod");
-            AndFix.addReplaceMethod(original, target);
-
-            Method log_original = Log.class.getDeclaredMethod("e",String.class,String.class);
-            Method log_target = LogHook.class.getDeclaredMethod("e",String.class,String.class);
-            AndFix.addReplaceMethod(log_original, log_target);
+            AndFixHookManager.getGlobalInstance().applyHooks(LogHook.class);
         } catch (Exception e) {
             Log.e(TAG,e.getMessage());
         }
-        andFixOriginal();
-    }
-
-    private void andFixOriginal() {
         Log.e(TAG, "Execute: AndFix original method.");
-    }
-
-    private void andFixReplaceMethod() {
-        Log.e(TAG, "Execute: AndFix replace method.");
     }
 
 }

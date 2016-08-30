@@ -1,16 +1,10 @@
 package com.qa.android.hook;
 
-import android.annotation.SuppressLint;
 import android.app.Instrumentation;
 import android.util.Log;
 
-import com.alipay.euler.andfix.AndFix;
-import com.qa.android.util.log.LogQueueGlobal;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * The type Hook helper.

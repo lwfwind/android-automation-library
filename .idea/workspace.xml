@@ -5,20 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cfdac5c2-f785-4425-ad9c-319c34581bb9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/InstrumentationHook.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/HookHelper.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-automation-lib/build.gradle" afterPath="$PROJECT_DIR$/android-automation-lib/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/AndFixApplication.java" afterPath="$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/AndFixApplication.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/AutomationServer.java" afterPath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/AutomationServer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/GlobalVariables.java" afterPath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/GlobalVariables.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/exception/CrashHandler.java" afterPath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/exception/CrashHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/InstrumentationHook.java" afterPath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/InstrumentationHook.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/LogHook.java" afterPath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/LogHook.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/MyInstrumentation.java" afterPath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/MyInstrumentation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/window/WindowManager.java" afterPath="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/window/WindowManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle.properties" afterPath="$PROJECT_DIR$/gradle.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/ApplicationTest.java" afterPath="$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/AndFixApplicationTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/MyApplication.java" afterPath="$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/AndFixApplication.java" />
     </list>
     <ignored path="android-automation-library.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,6 +30,11 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -122,34 +123,81 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="StructMember.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/legendCore/src/main/java/com/lody/legend/utility/StructMember.java">
+      <file leaf-file-name="AndFixHookManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/AndFixHookManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="60" column="31" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
+              <caret line="35" column="66" selection-start-line="35" selection-start-column="66" selection-end-line="35" selection-end-column="66" />
               <folding>
-                <element signature="e#1258#1259#0" expanded="true" />
-                <element signature="e#1341#1342#0" expanded="true" />
+                <element signature="e#496#497#0" expanded="true" />
+                <element signature="e#526#527#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LegendNative.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/legendCore/src/main/java/com/lody/legend/utility/LegendNative.java">
+      <file leaf-file-name="Hook.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/legendCore/src/main/java/com/lody/legend/Hook.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="38" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="38" />
+              <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="legend_native.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/legendCore/src/main/jni/legend_native.cpp">
+      <file leaf-file-name="Hook.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/Hook.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="9.848485">
-              <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Logger.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/legendCore/src/main/java/com/lody/legend/utility/Logger.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="19" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="19" />
+              <folding>
+                <element signature="e#1027#1028#0" expanded="true" />
+                <element signature="e#1073#1074#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Logger.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/util/Logger.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogHook.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/LogHook.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="187" column="40" selection-start-line="187" selection-start-column="40" selection-end-line="187" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GlobalVariables.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/GlobalVariables.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="81" selection-start-line="11" selection-start-column="81" selection-end-line="11" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -158,71 +206,28 @@
       <file leaf-file-name="gradle.properties" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gradle.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7798165">
-              <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.8715596">
+              <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
+      <file leaf-file-name="AndFixApplication.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/AndFixApplication.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+              <caret line="28" column="38" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/legendCore/build.gradle">
+      <file leaf-file-name="AutomationServer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/AutomationServer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="8" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android-automation-lib/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="legend_native.hpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/legendCore/src/main/jni/legend_native.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DalvikMethodStruct.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/legendCore/src/main/java/com/lody/legend/dalvik/DalvikMethodStruct.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="48" column="24" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
-              <folding>
-                <element signature="e#1657#1658#0" expanded="true" />
-                <element signature="e#1710#1711#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Platform.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/legendCore/src/main/java/com/lody/legend/Platform.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+              <caret line="152" column="9" selection-start-line="152" selection-start-column="9" selection-end-line="152" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -3045,7 +3050,6 @@
         <option value="$PROJECT_DIR$/android-automation-lib/src/test/java/com/qa/EmailTest.java" />
         <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/util/log/LogQueueGlobal.java" />
         <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/util/email/MailSender.java" />
-        <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/GlobalVariables.java" />
         <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/exception/CrashHandler.java" />
         <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/AutomationServerWorker.java" />
         <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/MyInstrumentation.java" />
@@ -3054,13 +3058,17 @@
         <option value="$PROJECT_DIR$/android-automation-lib/build.gradle" />
         <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/HookHelper.java" />
         <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/InstrumentationHook.java" />
-        <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/AutomationServer.java" />
         <option value="$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/ApplicationTest.java" />
         <option value="$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/AndFixApplicationTest.java" />
         <option value="$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/LegendApplicationTest.java" />
-        <option value="$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/AndFixApplication.java" />
         <option value="$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/LegendApplication.java" />
+        <option value="$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/AndFixApplication.java" />
+        <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/util/Logger.java" />
+        <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/Hook.java" />
+        <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/AndFixHookManager.java" />
         <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/LogHook.java" />
+        <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/AutomationServer.java" />
+        <option value="$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/GlobalVariables.java" />
         <option value="$PROJECT_DIR$/gradle.properties" />
       </list>
     </option>
@@ -3276,52 +3284,6 @@
               <option name="myItemId" value="android-automation-library" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="legendCore" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android-automation-library" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="legendCore" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jniLibs" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android-automation-library" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="legendCore" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jni" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android-automation-library" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="legendCore" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -3431,6 +3393,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-automation-library" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-automation-lib" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qa" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="hook" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -3455,6 +3443,8 @@
       <recent name="com.qa.android.util.log" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.qa.android.hook" />
+      <recent name="com.qa.android.util" />
       <recent name="com.qa" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -3462,24 +3452,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Gradle.android-automation-library [installDebug]">
-    <configuration default="false" name="android-automation-library [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="buildDependents" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <method />
-    </configuration>
     <configuration default="false" name="android-automation-library:android-automation-lib [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -3548,6 +3520,39 @@
       <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
       <option name="METHOD_NAME" value="testLegend" />
       <option name="CLASS_NAME" value="com.qa.LegendApplicationTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <Native>
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+      </Native>
+      <Java />
+      <Hybrid>
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+      </Hybrid>
+      <Profilers>
+        <option name="GAPID_DISABLE_PCS" value="false" />
+      </Profilers>
+      <method />
+    </configuration>
+    <configuration default="false" name="testAndFix()" type="AndroidTestRunConfigurationType" factoryName="Android Tests" temporary="true" nameIsGenerated="true">
+      <module name="android-automation-lib" />
+      <option name="TESTING_TYPE" value="3" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="testAndFix" />
+      <option name="CLASS_NAME" value="com.qa.AndFixApplicationTest" />
       <option name="PACKAGE_NAME" value="" />
       <option name="EXTRA_OPTIONS" value="" />
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
@@ -3883,19 +3888,19 @@
     <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Android Application.app" />
       <item index="1" class="java.lang.String" itemvalue="Android Application.android-automation-lib" />
-      <item index="2" class="java.lang.String" itemvalue="Gradle.android-automation-library [buildDependents]" />
-      <item index="3" class="java.lang.String" itemvalue="Gradle.android-automation-library:android-automation-lib [clean]" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.EmailTest.mailTest" />
-      <item index="5" class="java.lang.String" itemvalue="Gradle.android-automation-library [installDebug]" />
-      <item index="6" class="java.lang.String" itemvalue="Android Tests.testLegend()" />
+      <item index="2" class="java.lang.String" itemvalue="Gradle.android-automation-library:android-automation-lib [clean]" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.EmailTest.mailTest" />
+      <item index="4" class="java.lang.String" itemvalue="Gradle.android-automation-library [installDebug]" />
+      <item index="5" class="java.lang.String" itemvalue="Android Tests.testLegend()" />
+      <item index="6" class="java.lang.String" itemvalue="Android Tests.testAndFix()" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Android Tests.testLegend()" />
-        <item index="1" class="java.lang.String" itemvalue="Gradle.android-automation-library [installDebug]" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.EmailTest.mailTest" />
-        <item index="3" class="java.lang.String" itemvalue="Gradle.android-automation-library:android-automation-lib [clean]" />
-        <item index="4" class="java.lang.String" itemvalue="Gradle.android-automation-library [buildDependents]" />
+        <item index="0" class="java.lang.String" itemvalue="Android Tests.testAndFix()" />
+        <item index="1" class="java.lang.String" itemvalue="Android Tests.testLegend()" />
+        <item index="2" class="java.lang.String" itemvalue="Gradle.android-automation-library [installDebug]" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.EmailTest.mailTest" />
+        <item index="4" class="java.lang.String" itemvalue="Gradle.android-automation-library:android-automation-lib [clean]" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
@@ -3925,20 +3930,20 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="testLegend() - 2016.08.30 at 15h 46m 01s.xml">
-      <configuration name="testLegend()" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="testAndFix() - 2016.08.30 at 17h 19m 28s.xml">
+      <configuration name="testAndFix()" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="testLegend() - 2016.08.30 at 15h 54m 20s.xml">
-      <configuration name="testLegend()" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="testAndFix() - 2016.08.30 at 17h 26m 38s.xml">
+      <configuration name="testAndFix()" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="testLegend() - 2016.08.30 at 15h 57m 53s.xml">
-      <configuration name="testLegend()" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="testAndFix() - 2016.08.30 at 17h 27m 48s.xml">
+      <configuration name="testAndFix()" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="testLegend() - 2016.08.30 at 15h 58m 18s.xml">
-      <configuration name="testLegend()" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="testAndFix() - 2016.08.30 at 17h 28m 27s.xml">
+      <configuration name="testAndFix()" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="testLegend() - 2016.08.30 at 16h 01m 20s.xml">
-      <configuration name="testLegend()" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="testAndFix() - 2016.08.30 at 17h 29m 43s.xml">
+      <configuration name="testAndFix()" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
     <history-entry file="testLegend() - 2016.08.30 at 16h 08m 50s.xml">
       <configuration name="testLegend()" configurationId="AndroidTestRunConfigurationType" />
@@ -3974,7 +3979,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26205787" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19667739" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946634" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16613077" sideWeight="0.4929078" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973205" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -4009,71 +4014,12 @@
           <properties />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/legendCore/src/main/java/com/lody/legend/HookManager.java</url>
-          <line>176</line>
-          <properties />
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="21" />
+      <option name="time" value="22" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/popupwindow/PopupWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="34" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/Tools/Android/sdk/sources/android-23/android/app/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.1611724">
-          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/test/java/com/qa/ParseTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5060729">
-          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.3030305">
-          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/util/email/CustomizedAuthenticator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/Tools/Android/sdk/sources/android-23/java/util/LinkedList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33249685">
-          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/Tools/Android/sdk/sources/android-23/android/test/ApplicationTestCase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33270678">
-          <caret line="111" column="25" selection-start-line="111" selection-start-column="25" selection-end-line="111" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://E:/Tools/Android/sdk/sources/android-23/java/io/PrintStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.097165994">
@@ -4144,13 +4090,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.32417583">
           <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/GlobalVariables.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2747253">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -4191,6 +4130,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45180723">
           <caret line="19" column="81" selection-start-line="19" selection-start-column="61" selection-end-line="19" selection-end-column="81" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4250,30 +4190,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/AndFixApplicationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="80" selection-start-line="7" selection-start-column="63" selection-end-line="7" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/AndFixApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="56" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/AutomationServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="144" column="8" selection-start-line="144" selection-start-column="8" selection-end-line="144" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/legendCore/src/main/java/com/lody/legend/utility/Runtime.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -4303,16 +4219,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/legendCore/src/main/java/com/lody/legend/Hook.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/LegendApplicationTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4321,28 +4227,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/LogHook.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="66" selection-start-line="25" selection-start-column="66" selection-end-line="25" selection-end-column="66" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/LegendApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/legendCore/src/main/java/com/lody/legend/HookManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="162" column="52" selection-start-line="162" selection-start-column="52" selection-end-line="162" selection-end-column="52" />
           <folding />
         </state>
       </provider>
@@ -4360,8 +4248,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="48" column="24" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
           <folding>
-            <element signature="e#1657#1658#0" expanded="true" />
-            <element signature="e#1710#1711#0" expanded="true" />
+            <element signature="e#1657#1658#0" expanded="false" />
+            <element signature="e#1710#1711#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -4371,8 +4259,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="60" column="31" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
           <folding>
-            <element signature="e#1258#1259#0" expanded="true" />
-            <element signature="e#1341#1342#0" expanded="true" />
+            <element signature="e#1258#1259#0" expanded="false" />
+            <element signature="e#1341#1342#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -4393,17 +4281,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/legendCore/src/main/jni/legend_native.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="9.848485">
-          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/legendCore/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.04587156">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="8" selection-end-column="57" />
           <folding />
         </state>
@@ -4411,7 +4291,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/android-automation-lib/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.8715596">
           <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
           <folding />
         </state>
@@ -4419,16 +4299,149 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.40550458">
           <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/legendCore/src/main/jni/legend_native.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-26.515152">
+          <caret line="89" column="20" selection-start-line="89" selection-start-column="6" selection-end-line="89" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/legendCore/src/main/jni/Application.mk">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/legendCore/src/main/jni/Android.mk">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/legendCore/src/main/jni/common.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/legendCore/src/main/java/com/lody/legend/HookManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="116" column="5" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="5" />
+          <folding>
+            <element signature="e#1377#1378#0" expanded="true" />
+            <element signature="e#1408#1409#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/AndFixApplicationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="19" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/androidTest/java/com/qa/AndFixApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="38" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/legendCore/src/main/java/com/lody/legend/utility/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="19" />
+          <folding>
+            <element signature="e#1027#1028#0" expanded="true" />
+            <element signature="e#1073#1074#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/util/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/AndFixHookManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="66" selection-start-line="35" selection-start-column="66" selection-end-line="35" selection-end-column="66" />
+          <folding>
+            <element signature="e#496#497#0" expanded="true" />
+            <element signature="e#526#527#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/legendCore/src/main/java/com/lody/legend/Hook.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/Hook.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/hook/LogHook.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="187" column="40" selection-start-line="187" selection-start-column="40" selection-end-line="187" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/AutomationServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="152" column="9" selection-start-line="152" selection-start-column="9" selection-end-line="152" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android-automation-lib/src/main/java/com/qa/android/GlobalVariables.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="81" selection-start-line="11" selection-start-column="81" selection-end-line="11" selection-end-column="81" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gradle.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7798165">
-          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.8715596">
+          <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
           <folding />
         </state>
       </provider>

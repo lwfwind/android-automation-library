@@ -49,7 +49,7 @@ public class MyInstrumentation extends Instrumentation {
         long onCreateStartTime = SystemClock.uptimeMillis();
         mBase.callActivityOnCreate(activity, icicle);
         long onCreateEndTime = SystemClock.uptimeMillis();
-        if (GlobalVariables.activityDurationMap.get(activity.getClass().getName()) == null) {
+        if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activity.getClass().getName()) == null) {
             onDuration.put("OnCreate", (int) (onCreateEndTime - onCreateStartTime));
         }
         afterOnCreate(activity);
@@ -78,7 +78,7 @@ public class MyInstrumentation extends Instrumentation {
         long onStartStartTime = SystemClock.uptimeMillis();
         mBase.callActivityOnStart(activity);
         long onStartEndTime = SystemClock.uptimeMillis();
-        if (GlobalVariables.activityDurationMap.get(activity.getClass().getName()) == null) {
+        if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activity.getClass().getName()) == null) {
             onDuration.put("OnStart", (int) (onStartEndTime - onStartStartTime));
         }
         afterOnStart(activity);
@@ -117,15 +117,15 @@ public class MyInstrumentation extends Instrumentation {
         long onResumeStartTime = SystemClock.uptimeMillis();
         mBase.callActivityOnResume(activity);
         long onResumeEndTime = SystemClock.uptimeMillis();
-        if (GlobalVariables.activityDurationMap.get(activity.getClass().getName()) == null) {
+        if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activity.getClass().getName()) == null) {
             onDuration.put("OnResume", (int) (onResumeStartTime - onResumeEndTime));
             int total = onDuration.get("OnCreate") + onDuration.get("OnStart") + onDuration.get("OnResume");
             onDuration.put("TotalDuration", total);
-            GlobalVariables.activityDurationMap.put(activity.getClass().getName(), onDuration);
+            GlobalVariables.ACTIVITY_DURATION_MAP.put(activity.getClass().getName(), onDuration);
             onDuration.clear();
             if (total > 400) {
                 AutomationServer.sendActivityDuration();
-                GlobalVariables.activityDurationMap.clear();
+                GlobalVariables.ACTIVITY_DURATION_MAP.clear();
             }
         }
         afterOnResume(activity);

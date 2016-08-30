@@ -22,9 +22,11 @@ import android.media.AudioManager;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.alipay.euler.andfix.AndFix;
 import com.lody.legend.HookManager;
 import com.qa.android.exception.CrashHandler;
 import com.qa.android.find.Finder;
+import com.qa.android.hook.AndFixHookManager;
 import com.qa.android.hook.InstrumentationHook;
 import com.qa.android.hook.LogHook;
 import com.qa.android.popupwindow.PopupWindow;
@@ -142,7 +144,13 @@ public class AutomationServer implements Runnable {
      */
     public static void init() {
         InstrumentationHook.start();
-        HookManager.getDefault().applyHooks(LogHook.class);
+        if(GlobalVariables.ENABLE_HOOK) {
+            if (AndFix.setup()) {
+                AndFixHookManager.getGlobalInstance().applyHooks(LogHook.class);
+            } else {
+                HookManager.getDefault().applyHooks(LogHook.class);
+            }
+        }
         AppInfoUtil.init(currContext);
         DeviceUtil.init(currContext);
         CrashHandler crashHandler = CrashHandler.getInstance();
@@ -242,20 +250,23 @@ public class AutomationServer implements Runnable {
         return am.isMusicActive();
     }
 
+    /**
+     * Send activity duration.
+     */
     public static void sendActivityDuration() {
         final StringBuilder durationInfo = new StringBuilder();
         String newline = System.lineSeparator();
-        for (String activityNames : GlobalVariables.activityDurationMap.keySet()) {
+        for (String activityNames : GlobalVariables.ACTIVITY_DURATION_MAP.keySet()) {
             durationInfo.append("Activity Name:").append(activityNames);
-            if (GlobalVariables.activityDurationMap.get(activityNames).get("TotalDuration") > 400) {
-                durationInfo.append(" Total Duration:").append("<font color=\"red\">").append(GlobalVariables.activityDurationMap.get(activityNames).get("TotalDuration").toString()).append("</font>");
+            if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activityNames).get("TotalDuration") > 400) {
+                durationInfo.append(" Total Duration:").append("<font color=\"red\">").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityNames).get("TotalDuration").toString()).append("</font>");
             } else {
-                durationInfo.append(" Total Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("TotalDuration").toString());
+                durationInfo.append(" Total Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityNames).get("TotalDuration").toString());
             }
-            durationInfo.append(" Total Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("TotalDuration").toString());
-            durationInfo.append(" OnCreate Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("OnCreate").toString());
-            durationInfo.append(" OnStart Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("OnStart").toString());
-            durationInfo.append(" OnResume Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("OnResume").toString());
+            durationInfo.append(" Total Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityNames).get("TotalDuration").toString());
+            durationInfo.append(" OnCreate Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityNames).get("OnCreate").toString());
+            durationInfo.append(" OnStart Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityNames).get("OnStart").toString());
+            durationInfo.append(" OnResume Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityNames).get("OnResume").toString());
             durationInfo.append(newline);
         }
         new Thread() {
@@ -263,7 +274,7 @@ public class AutomationServer implements Runnable {
             public void run() {
                 Log.w(TAG, durationInfo.toString());
                 try {
-                    String[] emails = GlobalVariables.emailTo.split(" ");
+                    String[] emails = GlobalVariables.EMAIL_TO.split(" ");
                     MailSender.sendHTMLMail("android_automation@126.com", "Automation123", "smtp.126.com",
                             "Activity Duration Report", durationInfo.toString(),
                             null, emails);
@@ -317,8 +328,8 @@ public class AutomationServer implements Runnable {
      *
      * @return True if the server was successfully created, or false if it already exists.
      * @throws IOException If the server cannot be created.
-     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()
-     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
+     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()
+     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
      */
     public boolean start() throws IOException {
         if (mThread != null) {
@@ -334,8 +345,8 @@ public class AutomationServer implements Runnable {
      * Stops the server.
      *
      * @return True if the server was stopped, false if an error occurred or if the server wasn't started.
-     * @see #start() #start()#start()#start()#start()#start()#start()#start()#start()#start()#start()
-     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
+     * @see #start() #start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()
+     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
      */
     public boolean stop() {
         if (mThread != null) {
@@ -367,8 +378,8 @@ public class AutomationServer implements Runnable {
      * Indicates whether the server is currently running.
      *
      * @return True if the server is running, false otherwise.
-     * @see #start() #start()#start()#start()#start()#start()#start()#start()#start()#start()#start()
-     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()
+     * @see #start() #start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()
+     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()
      */
     public boolean isRunning() {
         return mThread != null && mThread.isAlive();

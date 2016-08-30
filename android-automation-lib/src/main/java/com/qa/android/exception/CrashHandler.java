@@ -104,7 +104,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 ;
                 try {
                     sUserInfo = getUserInfo();
-                    String[] emails = GlobalVariables.emailTo.split(" ");
+                    String[] emails = GlobalVariables.EMAIL_TO.split(" ");
                     MailSender.sendHTMLMail("android_automation@126.com", "Automation123", "smtp.126.com",
                             "android-automation-library uncatched exception", sUserInfo + getErrorTrace(ex) + getRecentLogs(),
                             null, emails);
