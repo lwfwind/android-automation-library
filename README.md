@@ -4,6 +4,7 @@ Currently android uiautomator library doesn't support Toast and PopupWindow,this
 * Tags: Appium, uiautomator, Toast, PopupWindow, Automation, Test,Android
 
 ## Features
+* Support HierarchyViewer on real device
 * Identify Toast
 * Identify PopupWindow
 * Highlight Element
