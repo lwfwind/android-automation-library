@@ -2,7 +2,7 @@ package com.qa.android.hook;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
-import com.qa.android.exception.LogQueueGlobal;
+import com.qa.android.util.log.LogQueueGlobal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

@@ -3,21 +3,25 @@ package com.qa.android.hook;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.WindowManager;
 
 import com.qa.android.AutomationServer;
+import com.qa.android.GlobalVariables;
 import com.qa.android.highlight.HighlightView;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
+import java.util.HashMap;
 
 /**
  * The type My instrumentation.
  */
 public class MyInstrumentation extends Instrumentation {
     private static final String TAG = "MyInstrumentation";
+    private static HashMap<String, Integer> onDuration = new HashMap<>();
 
     /**
      * ActivityThread中原始的对象, 保存起来
@@ -42,7 +46,12 @@ public class MyInstrumentation extends Instrumentation {
      */
     public void callActivityOnCreate(Activity activity, Bundle icicle) {
         beforeOnCreate(activity);
+        long onCreateStartTime = SystemClock.uptimeMillis();
         mBase.callActivityOnCreate(activity, icicle);
+        long onCreateEndTime = SystemClock.uptimeMillis();
+        if(GlobalVariables.activityDurationMap.get(activity.getClass().getName()) == null) {
+            onDuration.put("OnCreate", (int) (onCreateEndTime - onCreateStartTime));
+        }
         afterOnCreate(activity);
     }
 
@@ -66,7 +75,12 @@ public class MyInstrumentation extends Instrumentation {
     @Override
     public void callActivityOnStart(Activity activity) {
         beforeOnStart(activity);
+        long onStartStartTime = SystemClock.uptimeMillis();
         mBase.callActivityOnStart(activity);
+        long onStartEndTime = SystemClock.uptimeMillis();
+        if(GlobalVariables.activityDurationMap.get(activity.getClass().getName()) == null) {
+            onDuration.put("OnStart", (int) (onStartEndTime - onStartStartTime));
+        }
         afterOnStart(activity);
     }
 
@@ -100,7 +114,15 @@ public class MyInstrumentation extends Instrumentation {
      */
     public void callActivityOnResume(Activity activity) {
         beforeOnResume(activity);
+        long onResumeStartTime = SystemClock.uptimeMillis();
         mBase.callActivityOnResume(activity);
+        long onResumeEndTime = SystemClock.uptimeMillis();
+        if(GlobalVariables.activityDurationMap.get(activity.getClass().getName()) == null) {
+            onDuration.put("OnResume", (int) (onResumeStartTime - onResumeEndTime));
+            onDuration.put("TotalDuration",onDuration.get("OnCreate")+onDuration.get("OnStart")+onDuration.get("OnResume"));
+            GlobalVariables.activityDurationMap.put(activity.getClass().getName(),onDuration);
+            onDuration.clear();
+        }
         afterOnResume(activity);
     }
 

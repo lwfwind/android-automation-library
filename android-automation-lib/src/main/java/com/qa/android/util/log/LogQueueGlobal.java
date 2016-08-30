@@ -1,4 +1,4 @@
-package com.qa.android.exception;
+package com.qa.android.util.log;
 
 /**
  * The type Log queue global.

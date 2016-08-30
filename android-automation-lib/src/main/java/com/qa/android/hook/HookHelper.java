@@ -5,7 +5,7 @@ import android.app.Instrumentation;
 import android.util.Log;
 
 import com.alipay.euler.andfix.AndFix;
-import com.qa.android.exception.LogQueueGlobal;
+import com.qa.android.util.log.LogQueueGlobal;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

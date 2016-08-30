@@ -47,7 +47,7 @@ public class MailSender {
      * @return the boolean
      * @throws MessagingException the messaging exception
      */
-    public static boolean sendTextMail(String sender, String decryptPassword, String smtp, String subject, String content, String file,
+    public static boolean sendHTMLMail(String sender, String decryptPassword, String smtp, String subject, String content, String file,
                                        String[] mailList) throws MessagingException {
         if (mailList == null || mailList.length == 0 || ("".equals(mailList[0].trim()))) {
             return false;
@@ -87,7 +87,7 @@ public class MailSender {
 
             Multipart multipart = new MimeMultipart();
             BodyPart bodyPart = new MimeBodyPart();
-            bodyPart.setText(content);
+            bodyPart.setContent(content,"text/html; charset=utf-8");
             multipart.addBodyPart(bodyPart);
 
             if (file != null) {
@@ -100,7 +100,7 @@ public class MailSender {
                     multipart.addBodyPart(attachPart);
                 }
             }
-            mailMessage.setContent(multipart);
+            mailMessage.setContent(multipart,"text/html; charset=utf-8");
             MailcapCommandMap mc = (MailcapCommandMap) CommandMap.getDefaultCommandMap();
             mc.addMailcap("text/html;; x-java-content-handler=com.sun.mail.handlers.text_html");
             mc.addMailcap("text/xml;; x-java-content-handler=com.sun.mail.handlers.text_xml");

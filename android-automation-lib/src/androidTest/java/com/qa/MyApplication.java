@@ -1,16 +1,12 @@
 package com.qa;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.util.Log;
 
 import com.alipay.euler.andfix.AndFix;
-import com.qa.android.exception.LogQueueGlobal;
 import com.qa.android.hook.LogHook;
 
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * The type My application.

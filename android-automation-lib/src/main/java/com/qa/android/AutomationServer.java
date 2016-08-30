@@ -28,6 +28,7 @@ import com.qa.android.hook.HookHelper;
 import com.qa.android.popupwindow.PopupWindow;
 import com.qa.android.util.AppInfoUtil;
 import com.qa.android.util.DeviceUtil;
+import com.qa.android.util.email.MailSender;
 import com.qa.android.window.WindowManager;
 import com.qa.serializable.Point;
 
@@ -38,19 +39,15 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.mail.MessagingException;
+
 /**
  * The type Automation server.
  */
 public class AutomationServer implements Runnable {
-    /**
-     * The default port used to start view servers.
-     */
+    private static final String TAG = "AutomationServer";
     private static final int VIEW_SERVER_DEFAULT_PORT = 4939;
     private static final int VIEW_SERVER_MAX_CONNECTIONS = 10;
-
-    // Debug facility
-    private static final String LOG_TAG = "AutomationServer";
-
     private static AutomationServer sServer;
     private static WindowManager windowManager = new WindowManager();
     private static Context currContext;
@@ -129,7 +126,7 @@ public class AutomationServer implements Runnable {
             try {
                 sServer.start();
             } catch (IOException e) {
-                Log.w(LOG_TAG, "Error:", e);
+                Log.w(TAG, "Error:", e);
             }
         }
 
@@ -236,10 +233,37 @@ public class AutomationServer implements Runnable {
     public static boolean isMusicActive() {
         final AudioManager am = (AudioManager) currContext.getSystemService(Context.AUDIO_SERVICE);
         if (am == null) {
-            Log.w(LOG_TAG, "isMusicActive: couldn't get AudioManager reference");
+            Log.w(TAG, "isMusicActive: couldn't get AudioManager reference");
             return false;
         }
         return am.isMusicActive();
+    }
+
+    public static void printActivityDuration(){
+        final StringBuilder durationInfo = new StringBuilder();
+        String newline = System.lineSeparator();
+        for(String activityNames : GlobalVariables.activityDurationMap.keySet()){
+            durationInfo.append("Activity Name:").append(activityNames);
+            durationInfo.append(" Total Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("Total").toString());
+            durationInfo.append(" OnCreate Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("OnCreate").toString());
+            durationInfo.append(" OnStart Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("OnStart").toString());
+            durationInfo.append(" OnResume Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("OnResume").toString());
+            durationInfo.append(newline);
+        }
+        new Thread() {
+            @Override
+            public void run() {
+                Log.w(TAG,durationInfo.toString());
+                try {
+                    String[] emails = GlobalVariables.emailTo.split(" ");
+                    MailSender.sendHTMLMail("android_automation@126.com", "Automation123", "smtp.126.com",
+                            "Activity Duration Report", durationInfo.toString(),
+                            null, emails);
+                } catch (MessagingException e) {
+                    Log.w(TAG, "send mail error : ", e);
+                }
+            }
+        }.start();
     }
 
     /**
@@ -312,7 +336,7 @@ public class AutomationServer implements Runnable {
                 try {
                     mThreadPool.shutdownNow();
                 } catch (SecurityException e) {
-                    Log.w(LOG_TAG, "Could not stop all view server threads");
+                    Log.w(TAG, "Could not stop all view server threads");
                 }
             }
             mThreadPool = null;
@@ -323,7 +347,7 @@ public class AutomationServer implements Runnable {
                 mServer = null;
                 return true;
             } catch (IOException e) {
-                Log.w(LOG_TAG, "Could not close the view server");
+                Log.w(TAG, "Could not close the view server");
             }
         }
         windowManager.clearWindows();
@@ -349,7 +373,7 @@ public class AutomationServer implements Runnable {
         try {
             mServer = new ServerSocket(mPort, VIEW_SERVER_MAX_CONNECTIONS, InetAddress.getLocalHost());
         } catch (Exception e) {
-            Log.w(LOG_TAG, "Starting ServerSocket error: ", e);
+            Log.w(TAG, "Starting ServerSocket error: ", e);
         }
 
         while (mServer != null && Thread.currentThread() == mThread) {
@@ -366,7 +390,7 @@ public class AutomationServer implements Runnable {
                     }
                 }
             } catch (Exception e) {
-                Log.w(LOG_TAG, "Connection error: ", e);
+                Log.w(TAG, "Connection error: ", e);
             }
         }
     }

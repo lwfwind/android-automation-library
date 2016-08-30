@@ -5,9 +5,11 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
+import com.qa.android.GlobalVariables;
 import com.qa.android.util.AppInfoUtil;
 import com.qa.android.util.DeviceUtil;
 import com.qa.android.util.email.MailSender;
+import com.qa.android.util.log.LogQueueGlobal;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -24,7 +26,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     private static CrashHandler instance; // 单例模式
     private Context context; // 程序Context对象
     private Thread.UncaughtExceptionHandler defaultHandler; // 系统默认的UncaughtException处理类
-    private String emailTo = "lwfwind@126.com";
+
     private String sUserInfo = "";
 
 
@@ -46,24 +48,6 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             }
         }
         return instance;
-    }
-
-    /**
-     * Gets email to.
-     *
-     * @return the email to
-     */
-    public String getEmailTo() {
-        return emailTo;
-    }
-
-    /**
-     * Sets email to.
-     *
-     * @param emailTo the email to
-     */
-    public void setEmailTo(String emailTo) {
-        this.emailTo = emailTo;
     }
 
     /**
@@ -120,8 +104,8 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 ;
                 try {
                     sUserInfo = getUserInfo();
-                    String[] emails = emailTo.split(" ");
-                    MailSender.sendTextMail("android_automation@126.com", "Automation123", "smtp.126.com",
+                    String[] emails = GlobalVariables.emailTo.split(" ");
+                    MailSender.sendHTMLMail("android_automation@126.com", "Automation123", "smtp.126.com",
                             "android-automation-library uncatched exception", sUserInfo + getErrorTrace(ex) + getRecentLogs(),
                             null, emails);
                 } catch (MessagingException e) {
