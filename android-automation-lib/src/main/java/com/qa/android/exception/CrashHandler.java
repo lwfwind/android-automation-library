@@ -173,7 +173,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public String getRecentLogs() {
         StringBuilder sb = new StringBuilder();
-        String newline =  System.lineSeparator();
+        String newline = System.lineSeparator();
         sb.append(newline).append(newline).append("=============================Logs:").append(newline);
         for (Object log : LogQueueGlobal.getInstance().getLogQueue()) {
             sb.append(log).append(newline);

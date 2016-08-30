@@ -239,12 +239,17 @@ public class AutomationServer implements Runnable {
         return am.isMusicActive();
     }
 
-    public static void printActivityDuration(){
+    public static void sendActivityDuration() {
         final StringBuilder durationInfo = new StringBuilder();
         String newline = System.lineSeparator();
-        for(String activityNames : GlobalVariables.activityDurationMap.keySet()){
+        for (String activityNames : GlobalVariables.activityDurationMap.keySet()) {
             durationInfo.append("Activity Name:").append(activityNames);
-            durationInfo.append(" Total Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("Total").toString());
+            if (GlobalVariables.activityDurationMap.get(activityNames).get("TotalDuration") > 400) {
+                durationInfo.append(" Total Duration:").append("<font color=\"red\">").append(GlobalVariables.activityDurationMap.get(activityNames).get("TotalDuration").toString()).append("</font>");
+            } else {
+                durationInfo.append(" Total Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("TotalDuration").toString());
+            }
+            durationInfo.append(" Total Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("TotalDuration").toString());
             durationInfo.append(" OnCreate Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("OnCreate").toString());
             durationInfo.append(" OnStart Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("OnStart").toString());
             durationInfo.append(" OnResume Duration:").append(GlobalVariables.activityDurationMap.get(activityNames).get("OnResume").toString());
@@ -253,7 +258,7 @@ public class AutomationServer implements Runnable {
         new Thread() {
             @Override
             public void run() {
-                Log.w(TAG,durationInfo.toString());
+                Log.w(TAG, durationInfo.toString());
                 try {
                     String[] emails = GlobalVariables.emailTo.split(" ");
                     MailSender.sendHTMLMail("android_automation@126.com", "Automation123", "smtp.126.com",

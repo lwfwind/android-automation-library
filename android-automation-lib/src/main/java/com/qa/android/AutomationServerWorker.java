@@ -46,7 +46,7 @@ public class AutomationServerWorker implements Runnable, WindowListener {
     private static final String COMMAND_GET_CENTER = "center";
     private static final String COMMAND_GET_TOAST = "toast";
     private static final String COMMAND_HIGHLIGHT = "highlight";
-    private static final String COMMAND_ACTIVITY_DURATION = "printActivityDuration";
+    private static final String COMMAND_ACTIVITY_DURATION = "sendActivityDuration";
     private static WindowManager windowManager = AutomationServer.getWindowManagerInstance();
     private final Object[] mLock = new Object[0];
     private Socket mClient;
@@ -174,7 +174,7 @@ public class AutomationServerWorker implements Runnable, WindowListener {
             } else if (COMMAND_IS_MUSIC_ACTIVE.equalsIgnoreCase(command)) {
                 result = writeValue(mClient, AutomationServer.isMusicActive() ? "true" : "false");
             } else if (COMMAND_ACTIVITY_DURATION.equalsIgnoreCase(command)) {
-                AutomationServer.printActivityDuration();
+                AutomationServer.sendActivityDuration();
                 result = true;
             } else if (COMMAND_GET_CENTER.equalsIgnoreCase(command)) {
                 Options options = new Options();

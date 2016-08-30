@@ -30,7 +30,7 @@ public class LogQueueGlobal {
      *
      * @param s the s
      */
-    public void add(String s){
+    public void add(String s) {
         logQueue.inque(s);
     }
 
@@ -39,7 +39,7 @@ public class LogQueueGlobal {
      *
      * @return the log queue
      */
-    public LogQueue<String> getLogQueue(){
+    public LogQueue<String> getLogQueue() {
         return logQueue;
     }
 

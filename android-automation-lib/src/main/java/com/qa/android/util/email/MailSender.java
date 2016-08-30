@@ -87,7 +87,7 @@ public class MailSender {
 
             Multipart multipart = new MimeMultipart();
             BodyPart bodyPart = new MimeBodyPart();
-            bodyPart.setContent(content,"text/html; charset=utf-8");
+            bodyPart.setContent(content, "text/html; charset=utf-8");
             multipart.addBodyPart(bodyPart);
 
             if (file != null) {
@@ -100,7 +100,7 @@ public class MailSender {
                     multipart.addBodyPart(attachPart);
                 }
             }
-            mailMessage.setContent(multipart,"text/html; charset=utf-8");
+            mailMessage.setContent(multipart, "text/html; charset=utf-8");
             MailcapCommandMap mc = (MailcapCommandMap) CommandMap.getDefaultCommandMap();
             mc.addMailcap("text/html;; x-java-content-handler=com.sun.mail.handlers.text_html");
             mc.addMailcap("text/xml;; x-java-content-handler=com.sun.mail.handlers.text_xml");

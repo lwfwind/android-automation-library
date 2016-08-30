@@ -42,8 +42,8 @@ public class HookHelper {
                 Log.e(TAG, "AndFix not support !");
                 return;
             }
-            Method original = Log.class.getDeclaredMethod("println",int.class,String.class,String.class);
-            Method target = HookHelper.class.getDeclaredMethod("println",int.class,String.class,String.class);
+            Method original = Log.class.getDeclaredMethod("println", int.class, String.class, String.class);
+            Method target = HookHelper.class.getDeclaredMethod("println", int.class, String.class, String.class);
             AndFix.addReplaceMethod(original, target);
         } catch (Exception e) {
             Log.w(TAG, e.getMessage(), e);
@@ -83,7 +83,7 @@ public class HookHelper {
         String log = getLongStandardString(new Date()) + " " + level + "/ TAG:" + tag + ",msg:" + msg;
         LogQueueGlobal.getInstance().add(log);
         System.out.println(log);
-        return Log.println(priority,tag,msg);
+        return Log.println(priority, tag, msg);
     }
 
     /**
