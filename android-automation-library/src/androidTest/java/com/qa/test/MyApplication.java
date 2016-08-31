@@ -6,9 +6,9 @@ import android.widget.Toast;
 
 import com.alipay.euler.andfix.AndFix;
 import com.lody.legend.HookManager;
-import com.qa.android.hook.AndFixHookManager;
-import com.qa.android.hook.LogHook;
-import com.qa.android.util.log.LogQueueGlobal;
+import com.qa.automation.android.hook.AndFixHookManager;
+import com.qa.automation.android.hook.LogHook;
+import com.qa.automation.android.util.log.LogQueueGlobal;
 import com.qa.test.legend.ToastTest;
 
 import junit.framework.Assert;
