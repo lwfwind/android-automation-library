@@ -1,14 +1,15 @@
-package com.qa;
+package com.qa.test;
 
 import android.app.Application;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.alipay.euler.andfix.AndFix;
 import com.lody.legend.HookManager;
 import com.qa.android.hook.AndFixHookManager;
 import com.qa.android.hook.LogHook;
 import com.qa.android.util.log.LogQueueGlobal;
-import com.qa.legend.LogHookTest;
+import com.qa.test.legend.ToastTest;
 
 import junit.framework.Assert;
 
@@ -45,9 +46,9 @@ public class MyApplication extends Application {
      * Legend.
      */
     public void Legend() {
-        HookManager.getDefault().applyHooks(LogHookTest.class);
-        Log.e(TAG, "Legend");
-        Assert.assertTrue(LogQueueGlobal.getInstance().getLogQueue().toString().contains("Legend"));
+        HookManager.getDefault().applyHooks(ToastTest.class);
+        Toast.makeText(getApplicationContext(),"LegendTest",Toast.LENGTH_SHORT).show();
+        Assert.assertTrue(LogQueueGlobal.getInstance().getLogQueue().toString().contains("Toast_show"));
     }
 
 

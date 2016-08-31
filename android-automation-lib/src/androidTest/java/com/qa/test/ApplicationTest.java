@@ -1,4 +1,4 @@
-package com.qa;
+package com.qa.test;
 
 import android.test.ApplicationTestCase;
 
