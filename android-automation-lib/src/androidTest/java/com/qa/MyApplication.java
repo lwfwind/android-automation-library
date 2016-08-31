@@ -8,6 +8,7 @@ import com.lody.legend.HookManager;
 import com.qa.android.hook.AndFixHookManager;
 import com.qa.android.hook.LogHook;
 import com.qa.android.util.log.LogQueueGlobal;
+import com.qa.legend.LogHookTest;
 
 import junit.framework.Assert;
 
@@ -44,7 +45,7 @@ public class MyApplication extends Application {
      * Legend.
      */
     public void Legend() {
-        HookManager.getDefault().applyHooks(LogHook.class);
+        HookManager.getDefault().applyHooks(LogHookTest.class);
         Log.e(TAG, "Legend");
         Assert.assertTrue(LogQueueGlobal.getInstance().getLogQueue().toString().contains("Legend"));
     }
