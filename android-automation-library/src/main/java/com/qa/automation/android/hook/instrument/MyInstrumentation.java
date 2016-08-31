@@ -23,7 +23,8 @@ import java.util.HashMap;
  */
 public class MyInstrumentation extends Instrumentation {
     private static final String TAG = "MyInstrumentation";
-    private static HashMap<String, Integer> onDuration = new HashMap<>();
+    private static HashMap<String, Integer> onDuration;
+    private static boolean isFirstLaunch = true;
 
     /**
      * ActivityThread中原始的对象, 保存起来
@@ -67,7 +68,9 @@ public class MyInstrumentation extends Instrumentation {
         mBase.callActivityOnCreate(activity, icicle);
         long onCreateEndTime = SystemClock.uptimeMillis();
         if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activity.getClass().getName()) == null) {
-            onDuration.put("OnCreate", (int) (onCreateEndTime - onCreateStartTime));
+            onDuration = new HashMap<>();
+            int onCreateDuration = (int) (onCreateEndTime - onCreateStartTime);
+            onDuration.put("OnCreate", onCreateDuration);
         }
         afterOnCreate(activity);
     }
@@ -140,10 +143,16 @@ public class MyInstrumentation extends Instrumentation {
             onDuration.put("TotalDuration", total);
             Log.w(TAG, activity.getClass().getName()+" TotalDuration:" + total);
             GlobalVariables.ACTIVITY_DURATION_MAP.put(activity.getClass().getName(), onDuration);
-            onDuration.clear();
-            if (total > 400) {
-                AutomationServer.sendActivityDuration();
-                GlobalVariables.ACTIVITY_DURATION_MAP.clear();
+            if(isFirstLaunch){
+                isFirstLaunch = false;
+                if(total+Integer.parseInt(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")) > 400){
+                    AutomationServer.sendActivityDuration(activity.getClass().getName(),true);
+                }
+            }
+            else {
+                if (total > 400) {
+                    AutomationServer.sendActivityDuration(activity.getClass().getName(),false);
+                }
             }
         }
         afterOnResume(activity);

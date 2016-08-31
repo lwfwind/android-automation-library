@@ -146,23 +146,20 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      *
      * @return the user info
      */
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     public String getUserInfo() {
-        StringBuilder info = new StringBuilder();
-        String newline = System.lineSeparator();
-        info.append("time:").append(new Date().toString()).append(newline);
-        info.append("processName:").append(AppInfoUtil.getCurProcessName()).append(newline);
-        info.append("app version:").append(AppInfoUtil.getAPPVersion()).append(newline);
-        info.append("app channel:").append(AppInfoUtil.getChannelName()).append(newline);
-        info.append("device model:").append(DeviceUtil.getDeviceMode()).append(newline);
-        info.append("device id:").append(DeviceUtil.getDeviceId()).append(newline);
-        info.append("device version code:").append(DeviceUtil.getDeviceVersionCode()).append(newline);
-        info.append("device net state:").append(DeviceUtil.getNetworkType()).append(newline);
-        info.append(newline);
-        info.append("====================");
-        info.append("error message:");
-        info.append(newline);
-        return info.toString();
+        String newline = "\n";
+        return "time:" + new Date().toString() + newline +
+                "processName:" + AppInfoUtil.getCurProcessName() + newline +
+                "app version:" + AppInfoUtil.getAPPVersion() + newline +
+                "app channel:" + AppInfoUtil.getChannelName() + newline +
+                "device model:" + DeviceUtil.getDeviceMode() + newline +
+                "device id:" + DeviceUtil.getDeviceId() + newline +
+                "device version code:" + DeviceUtil.getDeviceVersionCode() + newline +
+                "device net state:" + DeviceUtil.getNetworkType() + newline +
+                newline +
+                "====================" +
+                "error message:" +
+                newline;
     }
 
     /**
@@ -170,10 +167,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      *
      * @return the recent logs
      */
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     public String getRecentLogs() {
         StringBuilder sb = new StringBuilder();
-        String newline = System.lineSeparator();
+        String newline = "\n";
         sb.append(newline).append(newline).append("=============================Logs:").append(newline);
         for (Object log : LogQueueGlobal.getInstance().getLogQueue()) {
             sb.append(log).append(newline);

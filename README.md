@@ -5,30 +5,31 @@ Currently android uiautomator library doesn't support Toast and PopupWindow,this
 
 ## Features
 * Support HierarchyViewer on real device
-* Identify Toast
-* Identify PopupWindow
+* Identify Toast and PopupWindow
+* Collect statistics of first application launch time and all activity OnCreate/OnStart/OnResume time
+* Collect all crash stack trace and logs
 * Highlight Element
 
 ## Usage
 ##### 1. Add gradle dependency in target app
 ```groovy
 dependencies {
-    compile 'com.github.lwfwind.automation:android-automation-library:2.1'
+    compile 'com.github.lwfwind.automation:android-automation-library:2.3'
 }
 ```
 
-##### 2. Add below in onCreate method of Application class
+##### 2. Add below in attachBaseContext method of Application class
 
 ```java
-public class MyApplication extends MultiDexApplication {
-     public void onCreate() {
-            super.onCreate();
-    
-            //automation
-            if (EnvConfig.currentEnv() != EnvConfig.ENV_MASTER) {
-                AutomationServer.startListening(this);
-            }
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+		
+        //wind automation
+        if (EnvConfig.currentEnv() != EnvConfig.ENV_MASTER) {
+            AutomationServer.startListening(this);
+        }
+		
     }
-}
 ```
 

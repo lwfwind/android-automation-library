@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 buildscript {
     repositories {
@@ -15,7 +15,6 @@ android {
     buildToolsVersion "24.0.2"
 
     defaultConfig {
-        applicationId "com.qa.automation.android"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1

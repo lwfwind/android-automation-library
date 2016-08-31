@@ -250,24 +250,65 @@ public class AutomationServer implements Runnable {
         return am.isMusicActive();
     }
 
+    public static void reportAllActivityDuration() {
+        final StringBuilder durationInfo = new StringBuilder();
+        String newline = "\n";
+        durationInfo.append("App Name:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("AppName")).append(" OnCreate Duration:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")).append(newline).append(newline);
+        for (String activityName : GlobalVariables.ACTIVITY_DURATION_MAP.keySet()) {
+            durationInfo.append("Activity Name:").append(activityName);
+            if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration") > 400) {
+                durationInfo.append(" Total Duration:").append("<font color=\"red\">").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration").toString()).append("</font>");
+            } else {
+                durationInfo.append(" Total Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration").toString());
+            }
+            durationInfo.append(" OnCreate Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("OnCreate").toString());
+            durationInfo.append(" OnStart Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("OnStart").toString());
+            durationInfo.append(" OnResume Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("OnResume").toString());
+            durationInfo.append(newline);
+        }
+        new Thread() {
+            @Override
+            public void run() {
+                Log.w(TAG, durationInfo.toString());
+                try {
+                    String[] emails = GlobalVariables.EMAIL_TO.split(" ");
+                    MailSender.sendHTMLMail("android_automation@126.com", "Automation123", "smtp.126.com",
+                            "Activity Duration Report", durationInfo.toString(),
+                            null, emails);
+                } catch (MessagingException e) {
+                    Log.w(TAG, "send mail error : ", e);
+                }
+            }
+        }.start();
+    }
+
     /**
      * Send activity duration.
      */
-    public static void sendActivityDuration() {
+    public static void sendActivityDuration(String activityName,boolean isFirst) {
         final StringBuilder durationInfo = new StringBuilder();
-        String newline = System.lineSeparator();
-        durationInfo.append("App Name:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("AppName")).append(" OnCreate Duration:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")).append(newline).append(newline);
-        for (String activityNames : GlobalVariables.ACTIVITY_DURATION_MAP.keySet()) {
-            durationInfo.append("Activity Name:").append(activityNames);
-            if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activityNames).get("TotalDuration") > 400) {
-                durationInfo.append(" Total Duration:").append("<font color=\"red\">").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityNames).get("TotalDuration").toString()).append("</font>");
+        String newline = "\n";
+        if(isFirst){
+            durationInfo.append("App Name:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("AppName")).append(" OnCreate Duration:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")).append(newline).append(newline);
+            durationInfo.append("Activity Name:").append(activityName);
+            durationInfo.append(" Activity Total Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration").toString());
+            durationInfo.append(" OnCreate Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("OnCreate").toString());
+            durationInfo.append(" OnStart Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("OnStart").toString());
+            durationInfo.append(" OnResume Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("OnResume").toString());
+            durationInfo.append(newline);
+            durationInfo.append(" App Launch Total Duration:").append("<font color=\"red\">").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration") + Integer.parseInt(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate"))+"").append("</font>");
+        }
+        else
+        {
+            durationInfo.append("Activity Name:").append(activityName);
+            if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration") > 400) {
+                durationInfo.append(" Total Duration:").append("<font color=\"red\">").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration").toString()).append("</font>");
             } else {
-                durationInfo.append(" Total Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityNames).get("TotalDuration").toString());
+                durationInfo.append(" Total Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration").toString());
             }
-            durationInfo.append(" Total Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityNames).get("TotalDuration").toString());
-            durationInfo.append(" OnCreate Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityNames).get("OnCreate").toString());
-            durationInfo.append(" OnStart Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityNames).get("OnStart").toString());
-            durationInfo.append(" OnResume Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityNames).get("OnResume").toString());
+            durationInfo.append(" OnCreate Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("OnCreate").toString());
+            durationInfo.append(" OnStart Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("OnStart").toString());
+            durationInfo.append(" OnResume Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("OnResume").toString());
             durationInfo.append(newline);
         }
         new Thread() {

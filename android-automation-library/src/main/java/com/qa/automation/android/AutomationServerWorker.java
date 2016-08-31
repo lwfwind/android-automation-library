@@ -174,7 +174,7 @@ public class AutomationServerWorker implements Runnable, WindowListener {
             } else if (COMMAND_IS_MUSIC_ACTIVE.equalsIgnoreCase(command)) {
                 result = writeValue(mClient, AutomationServer.isMusicActive() ? "true" : "false");
             } else if (COMMAND_ACTIVITY_DURATION.equalsIgnoreCase(command)) {
-                AutomationServer.sendActivityDuration();
+                AutomationServer.reportAllActivityDuration();
                 result = true;
             } else if (COMMAND_GET_CENTER.equalsIgnoreCase(command)) {
                 Options options = new Options();
