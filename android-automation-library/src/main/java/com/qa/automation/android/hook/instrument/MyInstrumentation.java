@@ -46,14 +46,17 @@ public class MyInstrumentation extends Instrumentation {
         mBase.callApplicationOnCreate(app);
         long onAppCreateEndTime = SystemClock.uptimeMillis();
         int duration = (int) (onAppCreateEndTime - onAppCreateStartTime);
-        GlobalVariables.APP_LAUNCH_DURATION_MAP.put("AppName",app.getClass().getName());
-        GlobalVariables.APP_LAUNCH_DURATION_MAP.put("OnCreate",""+duration);
-        Log.w(TAG, "OnAppCreate Duration:" +duration);
+        GlobalVariables.APP_LAUNCH_DURATION_MAP.put("AppName", app.getClass().getName());
+        GlobalVariables.APP_LAUNCH_DURATION_MAP.put("OnCreate", "" + duration);
+        Log.w(TAG, "OnAppCreate Duration:" + duration);
         afterCallApplicationOnCreate(app);
     }
 
-    public void beforeCallApplicationOnCreate(Application app) {}
-    public void afterCallApplicationOnCreate(Application app) {}
+    public void beforeCallApplicationOnCreate(Application app) {
+    }
+
+    public void afterCallApplicationOnCreate(Application app) {
+    }
 
     /**
      * Perform calling of an activity's {@link Activity#onCreate}
@@ -141,17 +144,16 @@ public class MyInstrumentation extends Instrumentation {
             onDuration.put("OnResume", (int) (onResumeStartTime - onResumeEndTime));
             int total = onDuration.get("OnCreate") + onDuration.get("OnStart") + onDuration.get("OnResume");
             onDuration.put("TotalDuration", total);
-            Log.w(TAG, activity.getClass().getName()+" TotalDuration:" + total);
+            Log.w(TAG, activity.getClass().getName() + " TotalDuration:" + total);
             GlobalVariables.ACTIVITY_DURATION_MAP.put(activity.getClass().getName(), onDuration);
-            if(isFirstLaunch){
+            if (isFirstLaunch) {
                 isFirstLaunch = false;
-                if(total+Integer.parseInt(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")) > 400){
-                    AutomationServer.sendActivityDuration(activity.getClass().getName(),true);
+                if (total + Integer.parseInt(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")) > 400) {
+                    AutomationServer.sendActivityDuration(activity.getClass().getName(), true);
                 }
-            }
-            else {
+            } else {
                 if (total > 400) {
-                    AutomationServer.sendActivityDuration(activity.getClass().getName(),false);
+                    AutomationServer.sendActivityDuration(activity.getClass().getName(), false);
                 }
             }
         }

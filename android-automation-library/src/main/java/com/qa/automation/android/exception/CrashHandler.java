@@ -1,8 +1,6 @@
 package com.qa.automation.android.exception;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
 
 import com.qa.automation.android.GlobalVariables;
