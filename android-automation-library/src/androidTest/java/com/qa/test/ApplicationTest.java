@@ -27,11 +27,4 @@ public class ApplicationTest extends ApplicationTestCase<MyApplication> {
         getApplication().AndFix();
     }
 
-    /**
-     * Test legend.
-     */
-    public void testLegend() {
-        getApplication().Legend();
-    }
-
 }

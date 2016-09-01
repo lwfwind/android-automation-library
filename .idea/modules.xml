@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidAutomationLibrary.iml" filepath="$PROJECT_DIR$/AndroidAutomationLibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android-automation-library/android-automation-library.iml" filepath="$PROJECT_DIR$/android-automation-library/android-automation-library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/legendCore/legendCore.iml" filepath="$PROJECT_DIR$/legendCore/legendCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-automation-library.iml" filepath="$PROJECT_DIR$/android-automation-library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-automation-library/android-automation-library-android-automation-library.iml" filepath="$PROJECT_DIR$/android-automation-library/android-automation-library-android-automation-library.iml" />
     </modules>
   </component>
 </project>

@@ -36,7 +36,6 @@ dependencies {
     compile 'commons-cli:commons-cli:1.3.1'
     compile 'com.sun.mail:android-mail:1.5.5'
     compile 'com.sun.mail:android-activation:1.5.5'
-    compile project(path: ':legendCore')
 }
 
 apply from: 'bintrayPublish.gradle'

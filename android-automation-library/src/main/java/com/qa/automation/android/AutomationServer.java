@@ -23,12 +23,11 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.alipay.euler.andfix.AndFix;
-import com.lody.legend.HookManager;
 import com.qa.automation.android.exception.CrashHandler;
 import com.qa.automation.android.find.Finder;
 import com.qa.automation.android.hook.AndFixHookManager;
-import com.qa.automation.android.hook.instrument.InstrumentationHook;
 import com.qa.automation.android.hook.LogHook;
+import com.qa.automation.android.hook.instrument.InstrumentationHook;
 import com.qa.automation.android.popupwindow.PopupWindow;
 import com.qa.automation.android.util.AppInfoUtil;
 import com.qa.automation.android.util.DeviceUtil;
@@ -144,11 +143,9 @@ public class AutomationServer implements Runnable {
      */
     public static void init() {
         InstrumentationHook.start();
-        if(GlobalVariables.ENABLE_HOOK) {
+        if (GlobalVariables.ENABLE_ANDFIX_HOOK) {
             if (AndFix.setup()) {
                 AndFixHookManager.getGlobalInstance().applyHooks(LogHook.class);
-            } else {
-                HookManager.getDefault().applyHooks(LogHook.class);
             }
         }
         AppInfoUtil.init(currContext);
@@ -285,10 +282,10 @@ public class AutomationServer implements Runnable {
     /**
      * Send activity duration.
      */
-    public static void sendActivityDuration(String activityName,boolean isFirst) {
+    public static void sendActivityDuration(String activityName, boolean isFirst) {
         final StringBuilder durationInfo = new StringBuilder();
         String newline = "\n";
-        if(isFirst){
+        if (isFirst) {
             durationInfo.append("App Name:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("AppName")).append(" OnCreate Duration:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")).append(newline).append(newline);
             durationInfo.append("Activity Name:").append(activityName);
             durationInfo.append(" Activity Total Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration").toString());
@@ -296,10 +293,8 @@ public class AutomationServer implements Runnable {
             durationInfo.append(" OnStart Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("OnStart").toString());
             durationInfo.append(" OnResume Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("OnResume").toString());
             durationInfo.append(newline);
-            durationInfo.append(" App Launch Total Duration:").append("<font color=\"red\">").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration") + Integer.parseInt(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate"))+"").append("</font>");
-        }
-        else
-        {
+            durationInfo.append(" App Launch Total Duration:").append("<font color=\"red\">").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration") + Integer.parseInt(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")) + "").append("</font>");
+        } else {
             durationInfo.append("Activity Name:").append(activityName);
             if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration") > 400) {
                 durationInfo.append(" Total Duration:").append("<font color=\"red\">").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration").toString()).append("</font>");

@@ -19,5 +19,5 @@ public class GlobalVariables {
     /**
      * The constant ENABLE_HOOK.
      */
-    public static boolean ENABLE_HOOK = true;
+    public static boolean ENABLE_ANDFIX_HOOK = true;
 }

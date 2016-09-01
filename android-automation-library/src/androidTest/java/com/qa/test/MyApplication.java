@@ -2,14 +2,11 @@ package com.qa.test;
 
 import android.app.Application;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.alipay.euler.andfix.AndFix;
-import com.lody.legend.HookManager;
 import com.qa.automation.android.hook.AndFixHookManager;
 import com.qa.automation.android.hook.LogHook;
 import com.qa.automation.android.util.log.LogQueueGlobal;
-import com.qa.test.legend.ToastTest;
 
 import junit.framework.Assert;
 
@@ -40,15 +37,6 @@ public class MyApplication extends Application {
         }
         Log.e(TAG, "AndFix");
         Assert.assertTrue(LogQueueGlobal.getInstance().getLogQueue().toString().contains("AndFix"));
-    }
-
-    /**
-     * Legend.
-     */
-    public void Legend() {
-        HookManager.getDefault().applyHooks(ToastTest.class);
-        Toast.makeText(getApplicationContext(),"LegendTest",Toast.LENGTH_SHORT).show();
-        Assert.assertTrue(LogQueueGlobal.getInstance().getLogQueue().toString().contains("Toast_show"));
     }
 
 

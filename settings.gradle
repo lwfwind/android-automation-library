@@ -1,1 +1,1 @@
-include ':android-automation-library', ':legendCore'
+include ':android-automation-library'
