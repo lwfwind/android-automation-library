@@ -47,7 +47,7 @@ public class ProxyWMInvocationHandler implements InvocationHandler {
                         Sleeper sleeper = new Sleeper();
                         long endTime = SystemClock.uptimeMillis() + 2000;
                         while (SystemClock.uptimeMillis() <= endTime) {
-                            HighlightView.highlight(activity, decorView);
+                            HighlightView.highlight(activity.getClass().getName(), decorView);
                             sleeper.sleep();
                         }
                     }

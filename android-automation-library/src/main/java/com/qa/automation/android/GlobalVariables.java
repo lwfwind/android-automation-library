@@ -10,6 +10,9 @@ public class GlobalVariables {
      * The constant ACTIVITY_DURATION_MAP.
      */
     public static HashMap<String, HashMap<String, Integer>> ACTIVITY_DURATION_MAP = new HashMap<>();
+    /**
+     * The constant APP_LAUNCH_DURATION_MAP.
+     */
     public static HashMap<String, String> APP_LAUNCH_DURATION_MAP = new HashMap<>();
     /**
      * The constant EMAIL_TO.
@@ -20,4 +23,9 @@ public class GlobalVariables {
      * The constant ENABLE_HOOK.
      */
     public static boolean ENABLE_ANDFIX_HOOK = true;
+
+    /**
+     * The constant ENABLE_HIGHLIGHT.
+     */
+    public static boolean ENABLE_HIGHLIGHT = false;
 }

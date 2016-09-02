@@ -52,9 +52,19 @@ public class MyInstrumentation extends Instrumentation {
         afterCallApplicationOnCreate(app);
     }
 
+    /**
+     * Before call application on create.
+     *
+     * @param app the app
+     */
     public void beforeCallApplicationOnCreate(Application app) {
     }
 
+    /**
+     * After call application on create.
+     *
+     * @param app the app
+     */
     public void afterCallApplicationOnCreate(Application app) {
     }
 
@@ -113,7 +123,7 @@ public class MyInstrumentation extends Instrumentation {
 
     private void afterOnStart(Activity activity) {
         Log.w(TAG, "afterOnStart:" + activity.getClass().getSimpleName());
-        if (AutomationServer.getHighlightFlag()) {
+        if (GlobalVariables.ENABLE_HIGHLIGHT) {
             //proxy WindowManagerImp
             WindowManager windowManager = activity.getWindowManager();
             InvocationHandler handler = new ProxyWMInvocationHandler(windowManager, activity);
@@ -163,8 +173,8 @@ public class MyInstrumentation extends Instrumentation {
     private void afterOnResume(Activity activity) {
         Log.w(TAG, "afterOnResume:" + activity.getClass().getSimpleName());
         AutomationServer.setFocusedWindow(activity);
-        if (AutomationServer.getHighlightFlag()) {
-            HighlightView.removeHighlightedActivity(activity);
+        if (GlobalVariables.ENABLE_HIGHLIGHT) {
+            HighlightView.removeHighlightedActivity(activity.getClass().getName());
         }
     }
 

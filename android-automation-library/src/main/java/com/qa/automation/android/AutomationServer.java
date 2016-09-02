@@ -55,7 +55,6 @@ public class AutomationServer implements Runnable {
     private static WindowManager windowManager = new WindowManager();
     private static Context currContext;
     private static Activity currActivity;
-    private static boolean mHighlightFlag = false;
     private final int mPort;
     private ServerSocket mServer;
     private Thread mThread;
@@ -164,24 +163,6 @@ public class AutomationServer implements Runnable {
     }
 
     /**
-     * Gets highlight flag.
-     *
-     * @return the highlight flag
-     */
-    public static boolean getHighlightFlag() {
-        return mHighlightFlag;
-    }
-
-    /**
-     * Sets highlight flag.
-     *
-     * @param flag the flag
-     */
-    public static void setHighlightFlag(boolean flag) {
-        mHighlightFlag = flag;
-    }
-
-    /**
      * Gets view center.
      *
      * @param text  the text
@@ -247,6 +228,9 @@ public class AutomationServer implements Runnable {
         return am.isMusicActive();
     }
 
+    /**
+     * Report all activity duration.
+     */
     public static void reportAllActivityDuration() {
         final StringBuilder durationInfo = new StringBuilder();
         String newline = "\n";
@@ -281,6 +265,9 @@ public class AutomationServer implements Runnable {
 
     /**
      * Send activity duration.
+     *
+     * @param activityName the activity name
+     * @param isFirst      the is first
      */
     public static void sendActivityDuration(String activityName, boolean isFirst) {
         final StringBuilder durationInfo = new StringBuilder();
@@ -365,8 +352,8 @@ public class AutomationServer implements Runnable {
      *
      * @return True if the server was successfully created, or false if it already exists.
      * @throws IOException If the server cannot be created.
-     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()
-     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
+     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()
+     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
      */
     public boolean start() throws IOException {
         if (mThread != null) {
@@ -382,8 +369,8 @@ public class AutomationServer implements Runnable {
      * Stops the server.
      *
      * @return True if the server was stopped, false if an error occurred or if the server wasn't started.
-     * @see #start() #start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()
-     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
+     * @see #start() #start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()
+     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
      */
     public boolean stop() {
         if (mThread != null) {
@@ -415,8 +402,8 @@ public class AutomationServer implements Runnable {
      * Indicates whether the server is currently running.
      *
      * @return True if the server is running, false otherwise.
-     * @see #start() #start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()
-     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()
+     * @see #start() #start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()
+     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()
      */
     public boolean isRunning() {
         return mThread != null && mThread.isAlive();

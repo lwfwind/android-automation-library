@@ -1,6 +1,5 @@
 package com.qa.automation.android.highlight;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -24,11 +23,11 @@ import java.util.HashMap;
 public class HighlightView {
     private static String LOG_TAG = "HighlightView";
     private static ShapeDrawable shape = null;
-    private static Activity currActivity = null;
-    private static ArrayList<Activity> highlightedActivityList = new ArrayList<>();
-    private static ArrayList<HashMap<Activity, View>> existedActivityViewList = new ArrayList<HashMap<Activity, View>>();
+    private static String currActivityName = null;
+    private static ArrayList<String> highlightedActivityList = new ArrayList<>();
+    private static ArrayList<HashMap<String, View>> existedActivityViewList = new ArrayList<HashMap<String, View>>();
     private static HashMap<View, Drawable> highlightedViewDrawableMap = new HashMap<>();
-    private static HashMap<Activity, View> highlightedActivityViewMap = new HashMap<>();
+    private static HashMap<String, View> highlightedActivityViewMap = new HashMap<>();
     private static ViewFetcher viewFetcher = new ViewFetcher();
 
     static {
@@ -42,13 +41,13 @@ public class HighlightView {
     /**
      * Remove highlighted activity.
      *
-     * @param activity the activity
+     * @param activityName the activity name
      */
-    public static void removeHighlightedActivity(Activity activity) {
-        currActivity = activity;
-        if (highlightedActivityList.contains(activity)) {
-            if (highlightedActivityViewMap.get(activity) != null) {
-                View v = highlightedActivityViewMap.get(activity);
+    public static void removeHighlightedActivity(String activityName) {
+        currActivityName = activityName;
+        if (highlightedActivityList.contains(activityName)) {
+            if (highlightedActivityViewMap.get(activityName) != null) {
+                View v = highlightedActivityViewMap.get(activityName);
                 Drawable drawable = highlightedViewDrawableMap.get(v);
                 setBackground(v, drawable);
             }
@@ -58,17 +57,17 @@ public class HighlightView {
     /**
      * Highlight.
      *
-     * @param activity the activity
-     * @param view     the view
+     * @param activityName the activity name
+     * @param view         the view
      */
-    public static void highlight(Activity activity, View view) {
-        HashMap<Activity, View> activityViewHashMap = new HashMap<Activity, View>();
-        activityViewHashMap.put(activity, view);
+    public static void highlight(String activityName, View view) {
+        HashMap<String, View> activityViewHashMap = new HashMap<String, View>();
+        activityViewHashMap.put(activityName, view);
         if (!existedActivityViewList.contains(activityViewHashMap)) {
             existedActivityViewList.add(activityViewHashMap);
         }
-        currActivity = activity;
-        highlightedActivityList.add(currActivity);
+        currActivityName = activityName;
+        highlightedActivityList.add(currActivityName);
         View.OnTouchListener touchListener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -113,12 +112,12 @@ public class HighlightView {
     private static void setBackground(View v) {
         if (v.getBackground() != shape) {
             highlightedViewDrawableMap.put(v, v.getBackground());
-            if (highlightedActivityViewMap.get(currActivity) == null) {
-                highlightedActivityViewMap.put(currActivity, v);
+            if (highlightedActivityViewMap.get(currActivityName) == null) {
+                highlightedActivityViewMap.put(currActivityName, v);
             } else {
-                View preView = highlightedActivityViewMap.get(currActivity);
+                View preView = highlightedActivityViewMap.get(currActivityName);
                 setBackground(preView, highlightedViewDrawableMap.get(preView));
-                highlightedActivityViewMap.put(currActivity, v);
+                highlightedActivityViewMap.put(currActivityName, v);
             }
             // Assign the created border to view
             setBackground(v, shape);

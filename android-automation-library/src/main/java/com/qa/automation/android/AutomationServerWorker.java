@@ -145,11 +145,7 @@ public class AutomationServerWorker implements Runnable, WindowListener {
             } else if (COMMAND_WINDOW_MANAGER_AUTOLIST.equalsIgnoreCase(command)) {
                 result = windowManagerAutolistLoop();
             } else if (COMMAND_HIGHLIGHT.equalsIgnoreCase(command)) {
-                if (parameters.trim().equals("1")) {
-                    AutomationServer.setHighlightFlag(true);
-                } else {
-                    AutomationServer.setHighlightFlag(false);
-                }
+                GlobalVariables.ENABLE_HIGHLIGHT = parameters.trim().equals("1");
                 result = true;
             } else if (COMMAND_GET_TOAST.equalsIgnoreCase(command)) {
                 Options options = new Options();
