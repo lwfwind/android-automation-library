@@ -25,6 +25,11 @@ public class GlobalVariables {
     public static boolean ENABLE_ANDFIX_HOOK = true;
 
     /**
+     * The constant ENABLE_HOOK.
+     */
+    public static boolean ENABLE_STRICT_MODE = true;
+
+    /**
      * The constant ENABLE_HIGHLIGHT.
      */
     public static boolean ENABLE_HIGHLIGHT = false;

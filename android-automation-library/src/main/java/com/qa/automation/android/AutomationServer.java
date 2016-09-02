@@ -16,8 +16,10 @@
 
 package com.qa.automation.android;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.media.AudioManager;
 import android.util.Log;
 import android.widget.TextView;
@@ -36,6 +38,7 @@ import com.qa.automation.android.window.WindowManager;
 import com.qa.serializable.Point;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -54,7 +57,6 @@ public class AutomationServer implements Runnable {
     private static AutomationServer sServer;
     private static WindowManager windowManager = new WindowManager();
     private static Context currContext;
-    private static Activity currActivity;
     private final int mPort;
     private ServerSocket mServer;
     private Thread mThread;
@@ -94,24 +96,6 @@ public class AutomationServer implements Runnable {
     }
 
     /**
-     * Gets activity.
-     *
-     * @return the activity
-     */
-    public static Activity getActivity() {
-        return currActivity;
-    }
-
-    /**
-     * Sets activity.
-     *
-     * @param activity the activity
-     */
-    public static void setActivity(Activity activity) {
-        AutomationServer.currActivity = activity;
-    }
-
-    /**
      * Returns a unique instance of the AutomationServer. This method should only be
      * called from the main thread of your application. The server will have
      * the same lifetime as your process.
@@ -147,17 +131,31 @@ public class AutomationServer implements Runnable {
                 AndFixHookManager.getGlobalInstance().applyHooks(LogHook.class);
             }
         }
+        if (GlobalVariables.ENABLE_ANDFIX_HOOK) {
+            initStrictMode();
+        }
         AppInfoUtil.init(currContext);
         DeviceUtil.init(currContext);
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(currContext);
     }
 
-    /**
-     * Gets window manager instance.
-     *
-     * @return the window manager instance
-     */
+    @SuppressWarnings("unchecked")
+    public static void initStrictMode() {
+        int appFlags = currContext.getApplicationInfo().flags;
+        if ((appFlags & ApplicationInfo.FLAG_DEBUGGABLE) != 0) {
+            try {
+                //Android 2.3及以上调用严苛模式
+                Class sMode = Class.forName("android.os.StrictMode");
+                Method enableDefaults = sMode.getMethod("enableDefaults");
+                enableDefaults.invoke(null);
+            } catch (Exception e) {
+                // StrictMode not supported on this device, punt
+                Log.v("StrictMode", "... not supported. Skipping...");
+            }
+        }
+    }
+
     public static WindowManager getWindowManagerInstance() {
         return windowManager;
     }

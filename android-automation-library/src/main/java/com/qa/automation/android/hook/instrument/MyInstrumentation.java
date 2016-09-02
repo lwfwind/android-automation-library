@@ -94,7 +94,6 @@ public class MyInstrumentation extends Instrumentation {
 
     private void afterOnCreate(Activity activity) {
         Log.w(TAG, "afterOnCreate:" + activity.getClass().getSimpleName());
-        AutomationServer.setActivity(activity);
         AutomationServer.setCurrentContext(activity).addWindow(activity);
     }
 
