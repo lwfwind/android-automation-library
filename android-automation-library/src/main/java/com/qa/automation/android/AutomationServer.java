@@ -42,6 +42,12 @@ import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -231,10 +237,17 @@ public class AutomationServer implements Runnable {
      * Report all activity duration.
      */
     public static void reportAllActivityDuration() {
+        List<Map.Entry<String,HashMap<String, Integer>>> orderMapList = new ArrayList<Map.Entry<String,HashMap<String, Integer>>>(GlobalVariables.ACTIVITY_DURATION_MAP.entrySet());
+        Collections.sort(orderMapList, new Comparator<Map.Entry<String, HashMap<String, Integer>>>() {
+            public int compare(Map.Entry<String, HashMap<String, Integer>> o1, Map.Entry<String, HashMap<String, Integer>> o2) {
+                return o1.getValue().get("TotalDuration").compareTo(o2.getValue().get("TotalDuration"));
+            }
+        });
         final StringBuilder durationInfo = new StringBuilder();
         String newline = "\n";
         durationInfo.append("App Name:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("AppName")).append(" OnCreate Duration:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")).append(newline).append(newline);
-        for (String activityName : GlobalVariables.ACTIVITY_DURATION_MAP.keySet()) {
+        for (Map.Entry<String,HashMap<String, Integer>> map : orderMapList) {
+            String activityName = map.getKey();
             durationInfo.append("Activity Name:").append(activityName);
             if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration") > 400) {
                 durationInfo.append(" Total Duration:").append("<font color=\"red\">").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration").toString()).append("</font>");
