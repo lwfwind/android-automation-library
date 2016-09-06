@@ -24,8 +24,6 @@ import javax.mail.internet.MimeMultipart;
 
 /**
  * 发送邮件给多个接收者、抄送邮件
- *
- * @author andrewleo
  */
 public class MailSender {
 
@@ -34,7 +32,6 @@ public class MailSender {
 
     /**
      * 以文本格式发送邮件
-     * <p/>
      * 待发送的邮件的信息
      *
      * @param sender          the sender

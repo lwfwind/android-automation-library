@@ -149,9 +149,10 @@ public class AutomationServer implements Runnable {
                 Class sMode = Class.forName("android.os.StrictMode");
                 Method enableDefaults = sMode.getMethod("enableDefaults");
                 enableDefaults.invoke(null);
+                Log.w("StrictMode", "Start StrictMode");
             } catch (Exception e) {
                 // StrictMode not supported on this device, punt
-                Log.v("StrictMode", "... not supported. Skipping...");
+                Log.w("StrictMode", "... not supported. Skipping...");
             }
         }
     }

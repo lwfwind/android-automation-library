@@ -62,7 +62,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = "android-automation-library"    //发布到JCenter上的项目名字
+        name = "com.github.lwfwind.automation:android-automation-library"    //发布到JCenter上的项目名字
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
