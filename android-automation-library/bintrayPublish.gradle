@@ -4,7 +4,7 @@ apply plugin: 'com.jfrog.bintray'
 def siteUrl = 'https://github.com/lwfwind/android-automation-library'
 def gitUrl = 'https://github.com/lwfwind/android-automation-library.git'
 group = "com.github.lwfwind.automation"
-version = "2.3"
+version = "2.4"
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters

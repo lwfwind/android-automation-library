@@ -150,7 +150,7 @@ public class MyInstrumentation extends Instrumentation {
         mBase.callActivityOnResume(activity);
         long onResumeEndTime = SystemClock.uptimeMillis();
         if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activity.getClass().getName()) == null) {
-            onDuration.put("OnResume", (int) (onResumeStartTime - onResumeEndTime));
+            onDuration.put("OnResume", (int) (onResumeEndTime - onResumeStartTime));
             int total = onDuration.get("OnCreate") + onDuration.get("OnStart") + onDuration.get("OnResume");
             onDuration.put("TotalDuration", total);
             Log.w(TAG, activity.getClass().getName() + " TotalDuration:" + total);
