@@ -244,7 +244,7 @@ public class AutomationServer implements Runnable {
             }
         });
         final StringBuilder durationInfo = new StringBuilder();
-        String newline = "\n";
+        String newline = "\n<br>";
         durationInfo.append("App Name:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("AppName")).append(newline).append(" OnCreate Duration:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")).append(newline);
         for (Map.Entry<String,HashMap<String, Integer>> map : orderMapList) {
             String activityName = map.getKey();
@@ -284,7 +284,7 @@ public class AutomationServer implements Runnable {
     public static void sendActivityDuration(String activityName, boolean isFirst) {
         final StringBuilder durationInfo = new StringBuilder();
         String emailTitle = "";
-        String newline = "\n";
+        String newline = "\n<br>";
         if (isFirst) {
             emailTitle = "App First Launch Duration";
             durationInfo.append("App Name:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("AppName")).append(newline).append(" OnCreate Duration:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")).append(newline);

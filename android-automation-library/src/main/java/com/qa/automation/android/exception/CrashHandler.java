@@ -145,7 +145,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      * @return the user info
      */
     public String getUserInfo() {
-        String newline = "\n";
+        String newline = "\n<br>";
         return "time:" + new Date().toString() + newline +
                 "processName:" + AppInfoUtil.getCurProcessName() + newline +
                 "app version:" + AppInfoUtil.getAPPVersion() + newline +
@@ -167,7 +167,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      */
     public String getRecentLogs() {
         StringBuilder sb = new StringBuilder();
-        String newline = "\n";
+        String newline = "\n<br>";
         sb.append(newline).append(newline).append("=============================Logs:").append(newline);
         for (Object log : LogQueueGlobal.getInstance().getLogQueue()) {
             sb.append(log).append(newline);

@@ -17,7 +17,7 @@ public class EmailTest {
     public void mailTest() {
         try {
             MailSender.sendHTMLMail("android_automation@126.com", "Automation123", "smtp.126.com",
-                    "mail from android_automation@126.com", "<font color=\"red\">mail</font> to lwfwind@126.com",
+                    "mail from android_automation@126.com", "<font color=\"red\">mail</font> to lwfwind@126.com\n<br>abc360",
                     null, (new String[]{"lwfwind@126.com"}));
         } catch (MessagingException e) {
             e.printStackTrace();
