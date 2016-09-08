@@ -1,6 +1,6 @@
 package com.qa.automation.android.hook;
 
-import com.alipay.euler.andfix.AndFix;
+/*import com.alipay.euler.andfix.AndFix;*/
 import com.qa.automation.android.util.Logger;
 
 import java.lang.reflect.Method;
@@ -63,7 +63,7 @@ public class AndFixHookManager {
                                             }
                                         }
                                         if (isMatch) {
-                                            AndFix.addReplaceMethod(method, hookMethod);
+                                            /*AndFix.addReplaceMethod(method, hookMethod);*/
                                             isResolve = true;
                                             Logger.d("[+++] %s have hooked.", method.getName());
                                         }

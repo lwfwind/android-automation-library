@@ -24,7 +24,7 @@ import android.media.AudioManager;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.alipay.euler.andfix.AndFix;
+/*import com.alipay.euler.andfix.AndFix;*/
 import com.qa.automation.android.exception.CrashHandler;
 import com.qa.automation.android.find.Finder;
 import com.qa.automation.android.hook.AndFixHookManager;
@@ -133,9 +133,9 @@ public class AutomationServer implements Runnable {
     public static void init() {
         InstrumentationHook.start();
         if (GlobalVariables.ENABLE_ANDFIX_HOOK) {
-            if (AndFix.setup()) {
+/*            if (AndFix.setup()) {
                 AndFixHookManager.getGlobalInstance().applyHooks(LogHook.class);
-            }
+            }*/
         }
         if (GlobalVariables.ENABLE_ANDFIX_HOOK) {
             initStrictMode();
