@@ -5,14 +5,11 @@ package com.qa.automation.android.find;
  */
 public class Sleeper {
 
-    private final int PAUSE = 500;
-    private final int MINIPAUSE = 300;
-
     /**
      * Sleeps the current thread for a default pause length.
      */
     public void sleep() {
-        sleep(PAUSE);
+        sleep(500);
     }
 
 
@@ -20,7 +17,7 @@ public class Sleeper {
      * Sleeps the current thread for a default mini pause length.
      */
     public void sleepMini() {
-        sleep(MINIPAUSE);
+        sleep(300);
     }
 
 
