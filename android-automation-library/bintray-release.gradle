@@ -1,0 +1,12 @@
+apply plugin: 'com.novoda.bintray-release' // must be applied after your artifact generating plugin (eg. java / com.android.library)
+
+
+publish {
+    userOrg = 'lwfwind'
+    groupId = 'com.github.lwfwind.automation'
+    artifactId = 'android-automation-library'
+    publishVersion = '2.7'
+    uploadName = 'com.github.lwfwind.automation:android-automation-library'
+    desc = 'Support android ui automaton such as identify Toast and PopupWindow for appium'
+    website = 'https://github.com/lwfwind/android-automation-library'
+}

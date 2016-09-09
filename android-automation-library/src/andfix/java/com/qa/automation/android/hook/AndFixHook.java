@@ -7,10 +7,8 @@ import com.qa.automation.android.GlobalVariables;
 public class AndFixHook {
 
     public static void init(){
-        if (GlobalVariables.ENABLE_ANDFIX_HOOK) {
-            if (AndFix.setup()) {
-                AndFixHookManager.getGlobalInstance().applyHooks(LogHook.class);
-            }
+        if (AndFix.setup()) {
+            AndFixHookManager.getGlobalInstance().applyHooks(LogHook.class);
         }
     }
 }

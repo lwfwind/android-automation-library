@@ -106,7 +106,7 @@ public class AutomationServer implements Runnable {
      * @param context the context
      * @return the automation server
      */
-    public static AutomationServer startListening(Context context) {
+    public static AutomationServer install(Context context) {
         if (sServer == null) {
             sServer = new AutomationServer(AutomationServer.VIEW_SERVER_DEFAULT_PORT);
         }
@@ -130,7 +130,7 @@ public class AutomationServer implements Runnable {
     public static void init() {
         InstrumentationHook.start();
         AndFixHook.init();
-        if (GlobalVariables.ENABLE_ANDFIX_HOOK) {
+        if (GlobalVariables.ENABLE_STRICT_MODE) {
             initStrictMode();
         }
         AppInfoUtil.init(currContext);

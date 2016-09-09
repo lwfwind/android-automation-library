@@ -14,7 +14,7 @@ Currently android uiautomator library doesn't support Toast and PopupWindow,this
 ##### 1. Add gradle dependency in target app
 ```groovy
 dependencies {
-    compile 'com.github.lwfwind.automation:android-automation-library:2.4'
+    compile 'com.github.lwfwind.automation:android-automation-library:2.6'
 }
 ```
 
@@ -26,9 +26,7 @@ dependencies {
         super.attachBaseContext(base);
 		
         //wind automation
-        if (EnvConfig.currentEnv() != EnvConfig.ENV_MASTER) {
-            AutomationServer.startListening(this);
-        }
+		AutomationServer.install(this);
 		
     }
 ```
