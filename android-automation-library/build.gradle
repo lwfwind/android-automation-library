@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
+        classpath 'com.novoda:bintray-release:0.3.4'
     }
 }
 android {
@@ -34,6 +35,10 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
@@ -46,5 +51,5 @@ dependencies {
     compile 'com.sun.mail:android-activation:1.5.5'
 }
 
-apply from: 'bintrayPublish.gradle'
+apply from: 'novoda-bintray-upload.gradle'
 

@@ -25,6 +25,7 @@ public class ApplicationTest extends ApplicationTestCase<MyApplication> {
      */
     public void testAndFix() {
         getApplication().AndFix();
+
     }
 
 }
