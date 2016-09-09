@@ -9,6 +9,7 @@ public class AndFixHook {
     public static void init(){
         if (AndFix.setup()) {
             AndFixHookManager.getGlobalInstance().applyHooks(LogHook.class);
+            GlobalVariables.ENABLE_ANDFIX_MODE=true;
         }
     }
 }
