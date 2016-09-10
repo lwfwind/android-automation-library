@@ -6,7 +6,7 @@ publish {
     userOrg = 'lwfwind'
     groupId = 'com.github.lwfwind.automation'
     artifactId = 'android-automation-library'
-    publishVersion = '2.6'
+    publishVersion = '2.7'
     bintrayUser = properties.getProperty("bintray.user")
     bintrayKey = properties.getProperty("bintray.apikey")
     dryRun = false
