@@ -8,13 +8,12 @@ Currently android uiautomator library doesn't support Toast and PopupWindow,this
 * Identify Toast and PopupWindow
 * Collect statistics of first application launch time and all activity OnCreate/OnStart/OnResume time
 * Collect all crash stack trace and logs
-* Highlight Element
 
 ## Usage
 ##### 1. Add gradle dependency in target app
 ```groovy
 dependencies {
-    compile 'com.github.lwfwind.automation:android-automation-library:2.6'
+    compile 'com.github.lwfwind.automation:android-automation-library:2.7'
 }
 ```
 

@@ -157,11 +157,11 @@ public class MyInstrumentation extends Instrumentation {
             GlobalVariables.ACTIVITY_DURATION_MAP.put(activity.getClass().getName(), onDuration);
             if (isFirstLaunch) {
                 isFirstLaunch = false;
-                if (total + Integer.parseInt(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")) > 400) {
+                if (total + Integer.parseInt(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")) > 800) {
                     AutomationServer.sendActivityDuration(activity.getClass().getName(), true);
                 }
             } else {
-                if (total > 400) {
+                if (total > 800) {
                     AutomationServer.sendActivityDuration(activity.getClass().getName(), false);
                 }
             }

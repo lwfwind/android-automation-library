@@ -242,7 +242,7 @@ public class AutomationServer implements Runnable {
         for (Map.Entry<String,HashMap<String, Integer>> map : orderMapList) {
             String activityName = map.getKey();
             durationInfo.append("Activity Name:").append(activityName).append(newline);
-            if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration") > 400) {
+            if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration") > 800) {
                 durationInfo.append(" Total Duration:").append("<font color=\"red\">").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration").toString()).append("</font>").append(newline);
             } else {
                 durationInfo.append(" Total Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration").toString()).append(newline);
@@ -290,7 +290,7 @@ public class AutomationServer implements Runnable {
         } else {
             emailTitle = "Activity Duration Report";
             durationInfo.append("Activity Name:").append(activityName);
-            if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration") > 400) {
+            if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration") > 800) {
                 durationInfo.append(" Total Duration:").append("<font color=\"red\">").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration").toString()).append("</font>").append(newline);
             } else {
                 durationInfo.append(" Total Duration:").append(GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration").toString()).append(newline);
