@@ -1,12 +1,8 @@
 package com.qa.test;
 
 import android.app.Application;
-import android.util.Log;
 
 /*import com.alipay.euler.andfix.AndFixHook;*/
-import com.qa.automation.android.util.log.LogQueueGlobal;
-
-import junit.framework.Assert;
 
 /**
  * The type My application.

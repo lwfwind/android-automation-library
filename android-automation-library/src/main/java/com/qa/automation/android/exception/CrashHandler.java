@@ -7,6 +7,7 @@ import com.qa.automation.android.GlobalVariables;
 import com.qa.automation.android.util.AppInfoUtil;
 import com.qa.automation.android.util.DeviceUtil;
 import com.qa.automation.android.util.email.MailSender;
+import com.qa.automation.android.util.log.LogCat;
 import com.qa.automation.android.util.log.LogQueueGlobal;
 
 import java.io.PrintWriter;
@@ -22,7 +23,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     private static final String TAG = CrashHandler.class.getSimpleName();
 
     private static CrashHandler instance; // 单例模式
-    private Context context; // 程序Context对象
+    private Context mContext; // 程序Context对象
     private Thread.UncaughtExceptionHandler defaultHandler; // 系统默认的UncaughtException处理类
 
     private String sUserInfo = "";
@@ -51,10 +52,10 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     /**
      * 异常处理初始化
      *
-     * @param context the context
+     * @param context the mContext
      */
     public void init(Context context) {
-        this.context = context;
+        this.mContext = context;
         // 获取系统默认的UncaughtException处理器
         defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
         // 设置该CrashHandler为程序的默认处理器
@@ -169,6 +170,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         StringBuilder sb = new StringBuilder();
         String newline = "\n<br>";
         sb.append(newline).append(newline).append("=============================Logs:").append(newline);
+        if(!GlobalVariables.ENABLE_ANDFIX_MODE) {
+            LogCat.getRecentLogs();
+        }
         for (Object log : LogQueueGlobal.getInstance().getLogQueue()) {
             sb.append(log).append(newline);
         }

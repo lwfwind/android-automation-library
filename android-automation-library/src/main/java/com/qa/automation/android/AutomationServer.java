@@ -139,6 +139,9 @@ public class AutomationServer implements Runnable {
         crashHandler.init(currContext);
     }
 
+    /**
+     * Init strict mode.
+     */
     @SuppressWarnings("unchecked")
     public static void initStrictMode() {
         int appFlags = currContext.getApplicationInfo().flags;
@@ -156,6 +159,11 @@ public class AutomationServer implements Runnable {
         }
     }
 
+    /**
+     * Gets window manager instance.
+     *
+     * @return the window manager instance
+     */
     public static WindowManager getWindowManagerInstance() {
         return windowManager;
     }
@@ -359,8 +367,8 @@ public class AutomationServer implements Runnable {
      *
      * @return True if the server was successfully created, or false if it already exists.
      * @throws IOException If the server cannot be created.
-     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()
-     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
+     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()
+     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
      */
     public boolean start() throws IOException {
         if (mThread != null) {
@@ -376,8 +384,8 @@ public class AutomationServer implements Runnable {
      * Stops the server.
      *
      * @return True if the server was stopped, false if an error occurred or if the server wasn't started.
-     * @see #start() #start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()
-     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
+     * @see #start() #start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()
+     * @see #isRunning() #isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()#isRunning()
      */
     public boolean stop() {
         if (mThread != null) {
@@ -409,8 +417,8 @@ public class AutomationServer implements Runnable {
      * Indicates whether the server is currently running.
      *
      * @return True if the server is running, false otherwise.
-     * @see #start() #start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()
-     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()
+     * @see #start() #start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()#start()
+     * @see #stop() #stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()#stop()
      */
     public boolean isRunning() {
         return mThread != null && mThread.isAlive();
