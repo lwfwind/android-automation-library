@@ -22,8 +22,9 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+
 /**
- * 发送邮件给多个接收者、抄送邮件
+ * The type Mail sender.
  */
 public class MailSender {
 
@@ -31,8 +32,7 @@ public class MailSender {
     private static final int PORT = 25;
 
     /**
-     * 以文本格式发送邮件
-     * 待发送的邮件的信息
+     * Send html mail boolean.
      *
      * @param sender          the sender
      * @param decryptPassword the decrypt password
@@ -56,30 +56,20 @@ public class MailSender {
             props.put("mail.smtp.host", smtp);
             props.put("mail.smtp.port", PORT);
             // Get session
-            props.put("mail.smtp.auth", "true"); // 如果需要密码验证，把这里的false改成true
+            props.put("mail.smtp.auth", "true");
 
-            // 判断是否需要身份认证
             CustomizedAuthenticator authenticator = null;
-            // 如果需要身份认证，则创建一个密码验证器
             authenticator = new CustomizedAuthenticator(sender, decryptPassword);
-            // 根据邮件会话属性和密码验证器构造一个发送邮件的session
             Session sendMailSession = Session.getInstance(props, authenticator);
 
-            // 根据session创建一个邮件消息
             Message mailMessage = new MimeMessage(sendMailSession);
-            // 创建邮件发送者地址
             Address from = new InternetAddress(sender);
-            // 设置邮件消息的发送者
             mailMessage.setFrom(from);
-            // 创建邮件的接收者地址，并设置到邮件消息中
             for (String aMailList : mailList) {
-                // Message.RecipientType.TO属性表示接收者的类型为TO
                 mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(aMailList));
             }
 
-            // 设置邮件消息的主题
             mailMessage.setSubject(subject);
-            // 设置邮件消息发送的时间
             mailMessage.setSentDate(new Date());
 
             Multipart multipart = new MimeMultipart();

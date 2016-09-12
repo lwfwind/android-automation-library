@@ -159,8 +159,8 @@ public class WindowManager {
      * Invoke this method to register a new view hierarchy.
      *
      * @param activity The activity whose view hierarchy/window to register
-     * @see #addWindow(View, String) #addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)
-     * @see #removeWindow(Activity) #removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)
+     * @see #addWindow(View, String) #addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)
+     * @see #removeWindow(Activity) #removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)#removeWindow(Activity)
      */
     public void addWindow(Activity activity) {
         String name = activity.getTitle().toString();
@@ -177,8 +177,8 @@ public class WindowManager {
      * Invoke this method to unregister a view hierarchy.
      *
      * @param activity The activity whose view hierarchy/window to unregister
-     * @see #addWindow(Activity) #addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)
-     * @see #removeWindow(View) #removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)
+     * @see #addWindow(Activity) #addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)#addWindow(Activity)
+     * @see #removeWindow(View) #removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)
      */
     public void removeWindow(Activity activity) {
         removeWindow(activity.getWindow().getDecorView());
@@ -189,7 +189,7 @@ public class WindowManager {
      *
      * @param view A view that belongs to the view hierarchy/window to register
      * @param name The name of the view hierarchy/window to register
-     * @see #removeWindow(View) #removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)
+     * @see #removeWindow(View) #removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)#removeWindow(View)
      */
     public void addWindow(View view, String name) {
         mWindowsLock.writeLock().lock();
@@ -205,7 +205,7 @@ public class WindowManager {
      * Invoke this method to unregister a view hierarchy.
      *
      * @param view A view that belongs to the view hierarchy/window to unregister
-     * @see #addWindow(View, String) #addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)
+     * @see #addWindow(View, String) #addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)#addWindow(View, String)
      */
     public void removeWindow(View view) {
         View rootView;

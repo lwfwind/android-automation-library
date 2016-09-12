@@ -4,9 +4,7 @@ import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 
 /**
- * Customized Authenticator
- *
- * @author andrewleo
+ * The type Customized authenticator.
  */
 public class CustomizedAuthenticator extends Authenticator {
     /**
