@@ -30,7 +30,7 @@ public class GlobalVariables {
     public static boolean ENABLE_STRICT_MODE = false;
 
     /**
-     * The constant ENABLE_HIGHLIGHT.
+     * The constant ENABLE_SHAKE.
      */
-    public static boolean ENABLE_HIGHLIGHT = false;
+    public static boolean ENABLE_SHAKE = false;
 }

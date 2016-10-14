@@ -3,19 +3,17 @@ package com.qa.automation.android.hook.instrument;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Instrumentation;
+import android.hardware.SensorEvent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
-import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.qa.automation.android.AutomationServer;
 import com.qa.automation.android.GlobalVariables;
 import com.qa.automation.android.highlight.HighlightView;
-import com.qa.automation.android.hook.ProxyWMInvocationHandler;
+import com.qa.automation.android.util.shake.ShakeSensor;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Proxy;
 import java.util.HashMap;
 
 /**
@@ -24,6 +22,7 @@ import java.util.HashMap;
 public class MyInstrumentation extends Instrumentation {
     private static final String TAG = "MyInstrumentation";
     private static HashMap<String, Integer> onDuration;
+    private ShakeSensor mShakeSensor = null;
     private static boolean isFirstLaunch = true;
 
     /**
@@ -95,6 +94,16 @@ public class MyInstrumentation extends Instrumentation {
     private void afterOnCreate(Activity activity) {
         Log.w(TAG, "afterOnCreate:" + activity.getClass().getSimpleName());
         AutomationServer.setCurrentContext(activity).addWindow(activity);
+        final Activity currentAcitivity = activity;
+        if(GlobalVariables.ENABLE_SHAKE){
+            mShakeSensor = new ShakeSensor(currentAcitivity, 2200);
+            mShakeSensor.setShakeListener(new ShakeSensor.OnShakeListener() {
+                @Override
+                public void onShakeComplete(SensorEvent event) {
+                    Toast.makeText(currentAcitivity, "摇啊摇", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
 
@@ -122,20 +131,6 @@ public class MyInstrumentation extends Instrumentation {
 
     private void afterOnStart(Activity activity) {
         Log.w(TAG, "afterOnStart:" + activity.getClass().getSimpleName());
-        if (GlobalVariables.ENABLE_HIGHLIGHT) {
-            //proxy WindowManagerImp
-            WindowManager windowManager = activity.getWindowManager();
-            InvocationHandler handler = new ProxyWMInvocationHandler(windowManager, activity);
-            WindowManager proxyWindowManager = WindowManager.class.cast(Proxy.newProxyInstance(windowManager.getClass().getClassLoader(), windowManager.getClass().getInterfaces(), handler));
-            try {
-                Field instanceField = Activity.class.getDeclaredField("mWindowManager");
-                instanceField.setAccessible(true);
-                instanceField.set(activity, proxyWindowManager);
-                Log.w(TAG, "proxy mWindowManager from " + windowManager);
-            } catch (Exception e) {
-                Log.w(TAG, e.getMessage(), e);
-            }
-        }
     }
 
     /**
@@ -172,13 +167,30 @@ public class MyInstrumentation extends Instrumentation {
     private void afterOnResume(Activity activity) {
         Log.w(TAG, "afterOnResume:" + activity.getClass().getSimpleName());
         AutomationServer.setFocusedWindow(activity);
-        if (GlobalVariables.ENABLE_HIGHLIGHT) {
-            HighlightView.removeHighlightedActivity(activity.getClass().getName());
-        }
     }
 
     private void beforeOnResume(Activity activity) {
         Log.w(TAG, "beforeOnResume:" + activity.getClass().getSimpleName());
+        if(GlobalVariables.ENABLE_SHAKE) {
+            mShakeSensor.register();
+        }
+    }
+
+    public void callActivityOnStop(Activity activity) {
+        beforeOnStop(activity);
+        mBase.callActivityOnDestroy(activity);
+        afterOnStop(activity);
+    }
+
+    private void afterOnStop(Activity activity) {
+        Log.w(TAG, "afterOnStop:" + activity.getClass().getSimpleName());
+    }
+
+    private void beforeOnStop(Activity activity) {
+        Log.w(TAG, "beforeOnStop:" + activity.getClass().getSimpleName());
+        if(GlobalVariables.ENABLE_SHAKE) {
+            mShakeSensor.unregister();
+        }
     }
 
     public void callActivityOnDestroy(Activity activity) {

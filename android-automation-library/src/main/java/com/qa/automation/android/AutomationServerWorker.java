@@ -45,7 +45,6 @@ public class AutomationServerWorker implements Runnable, WindowListener {
     private static final String COMMAND_IS_MUSIC_ACTIVE = "isMusicActive";
     private static final String COMMAND_GET_CENTER = "center";
     private static final String COMMAND_GET_TOAST = "toast";
-    private static final String COMMAND_HIGHLIGHT = "highlight";
     private static final String COMMAND_ACTIVITY_DURATION = "sendActivityDuration";
     private static WindowManager windowManager = AutomationServer.getWindowManagerInstance();
     private final Object[] mLock = new Object[0];
@@ -144,10 +143,7 @@ public class AutomationServerWorker implements Runnable, WindowListener {
                 result = windowManager.getFocusedWindow(mClient);
             } else if (COMMAND_WINDOW_MANAGER_AUTOLIST.equalsIgnoreCase(command)) {
                 result = windowManagerAutolistLoop();
-            } else if (COMMAND_HIGHLIGHT.equalsIgnoreCase(command)) {
-                GlobalVariables.ENABLE_HIGHLIGHT = parameters.trim().equals("1");
-                result = true;
-            } else if (COMMAND_GET_TOAST.equalsIgnoreCase(command)) {
+            }  else if (COMMAND_GET_TOAST.equalsIgnoreCase(command)) {
                 Options options = new Options();
                 options.addOption("t", true, "timeout");
                 options.addOption("ex", true, "excludeText");
