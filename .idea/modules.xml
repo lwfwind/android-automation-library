@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android-automation-library.iml" filepath="$PROJECT_DIR$/android-automation-library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android-automation-library/android-automation-library-android-automation-library.iml" filepath="$PROJECT_DIR$/android-automation-library/android-automation-library-android-automation-library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
     </modules>
   </component>
 </project>

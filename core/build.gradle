@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.lwfwind.bintray-publish'
 
 buildscript {
     repositories {
@@ -6,9 +7,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
-        classpath 'com.novoda:bintray-release:0.3.4'
+        classpath 'com.lwfwind:bintray-publish:1.5'
     }
 }
 android {
@@ -37,5 +37,19 @@ dependencies {
     compile 'com.sun.mail:android-activation:1.5.5'
 }
 
-apply from: 'novoda-bintray-upload.gradle'
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+publish {
+    bintrayUser = properties.getProperty("bintray.user")
+    bintrayKey = properties.getProperty("bintray.apikey")
+    userOrg = 'lwfwind'
+    groupId = 'com.lwfwind'
+    artifactId = 'android-automation-library'
+    publishVersion = '2.8'
+    desc = 'Support android ui automaton such as identify Toast and PopupWindow for appium'
+    website = 'https://github.com/lwfwind/android-automation-library'
+    currentFlavor = 'normal'
+    dryRun = false
+}
+
 

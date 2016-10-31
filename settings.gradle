@@ -1,1 +1,1 @@
-include ':android-automation-library'
+include ':core'
