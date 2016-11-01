@@ -60,6 +60,27 @@ public class AutomationServer implements Runnable {
     private static AutomationServer sServer;
     private static WindowManager windowManager = new WindowManager();
     private static Context currContext;
+    /**
+     * The constant EMAIL_TO.
+     */
+    public static String EMAIL_TO = "lwfwind@126.com";
+
+    /**
+     * The constant ENABLE_HOOK.
+     */
+    public static boolean ENABLE_ANDFIX_MODE = false;
+
+    /**
+     * The constant ENABLE_HOOK.
+     */
+    public static boolean ENABLE_CRASH_CATCH = false;
+
+    /**
+     * The constant ENABLE_HOOK.
+     */
+    public static boolean ENABLE_STRICT_MODE = false;
+
+    public static boolean ENABLE_COLLECT_DURATION = false;
     private final int mPort;
     private ServerSocket mServer;
     private Thread mThread;
@@ -107,8 +128,10 @@ public class AutomationServer implements Runnable {
      * @return the automation server
      */
     public static AutomationServer install(Context context) {
-        if (sServer == null) {
-            sServer = new AutomationServer(AutomationServer.VIEW_SERVER_DEFAULT_PORT);
+        synchronized (AutomationServer.class) {
+            if (sServer == null) {
+                sServer = new AutomationServer(AutomationServer.VIEW_SERVER_DEFAULT_PORT);
+            }
         }
 
         if (!sServer.isRunning()) {
@@ -124,26 +147,55 @@ public class AutomationServer implements Runnable {
         return sServer;
     }
 
+    public AutomationServer setEmailTo(String emailTo) {
+        EMAIL_TO = emailTo;
+        return this;
+    }
+
+    public AutomationServer enableCrashCatch(boolean flag) {
+        ENABLE_CRASH_CATCH = flag;
+        return this;
+    }
+
+    public AutomationServer enableStrictMode(boolean flag) {
+        ENABLE_STRICT_MODE = flag;
+        return this;
+    }
+
+    public AutomationServer enableAndfixMode(boolean flag) {
+        ENABLE_ANDFIX_MODE = flag;
+        return this;
+    }
+
+    public AutomationServer enableCollectDuration(boolean flag){
+        ENABLE_COLLECT_DURATION = flag;
+        return this;
+    }
+
     /**
      * Init.
      */
-    public static void init() {
+    private static void init() {
         InstrumentationHook.start();
-        AndFixHook.init();
-        if (GlobalVariables.ENABLE_STRICT_MODE) {
-            initStrictMode();
-        }
         AppInfoUtil.init(currContext);
         DeviceUtil.init(currContext);
-        CrashHandler crashHandler = CrashHandler.getInstance();
-        crashHandler.init(currContext);
+        if(ENABLE_ANDFIX_MODE) {
+            AndFixHook.init();
+        }
+        if (ENABLE_STRICT_MODE) {
+            initStrictMode();
+        }
+        if (ENABLE_CRASH_CATCH) {
+            CrashHandler crashHandler = CrashHandler.getInstance();
+            crashHandler.init(currContext);
+        }
     }
 
     /**
      * Init strict mode.
      */
     @SuppressWarnings("unchecked")
-    public static void initStrictMode() {
+    private static void initStrictMode() {
         int appFlags = currContext.getApplicationInfo().flags;
         if ((appFlags & ApplicationInfo.FLAG_DEBUGGABLE) != 0) {
             try {
@@ -163,7 +215,7 @@ public class AutomationServer implements Runnable {
      *
      * @return the window manager instance
      */
-    public static WindowManager getWindowManagerInstance() {
+    static WindowManager getWindowManagerInstance() {
         return windowManager;
     }
 
@@ -174,7 +226,7 @@ public class AutomationServer implements Runnable {
      * @param index the index
      * @return the view center
      */
-    public static Point getViewCenter(String text, int index) {
+    static Point getViewCenter(String text, int index) {
         return PopupWindow.getElementCenterByText(text, index);
     }
 
@@ -184,7 +236,7 @@ public class AutomationServer implements Runnable {
      * @param id the id
      * @return the view center
      */
-    public static Point getViewCenter(String id) {
+    static Point getViewCenter(String id) {
         return PopupWindow.getElementCenterById(id);
     }
 
@@ -194,7 +246,7 @@ public class AutomationServer implements Runnable {
      * @param timeout the timeout
      * @return the last toast
      */
-    public static String getLastToast(int timeout) {
+    static String getLastToast(int timeout) {
         Finder finder = new Finder(currContext, timeout);
         TextView toastTextView = (TextView) finder.getView("message", 0);
         if (null != toastTextView) {
@@ -210,7 +262,7 @@ public class AutomationServer implements Runnable {
      * @param excludeText the exclude text
      * @return the last toast
      */
-    public static String getLastToast(int timeout, String excludeText) {
+    static String getLastToast(int timeout, String excludeText) {
         Finder finder = new Finder(currContext, timeout);
         TextView toastTextView = (TextView) finder.getTextView("message", excludeText, 0);
         if (null != toastTextView) {
@@ -224,7 +276,7 @@ public class AutomationServer implements Runnable {
      *
      * @return the boolean
      */
-    public static boolean isMusicActive() {
+    static boolean isMusicActive() {
         final AudioManager am = (AudioManager) currContext.getSystemService(Context.AUDIO_SERVICE);
         if (am == null) {
             Log.w(TAG, "isMusicActive: couldn't get AudioManager reference");
@@ -237,7 +289,7 @@ public class AutomationServer implements Runnable {
      * Report all activity duration.
      */
     public static void reportAllActivityDuration() {
-        List<Map.Entry<String,HashMap<String, Integer>>> orderMapList = new ArrayList<Map.Entry<String,HashMap<String, Integer>>>(GlobalVariables.ACTIVITY_DURATION_MAP.entrySet());
+        List<Map.Entry<String, HashMap<String, Integer>>> orderMapList = new ArrayList<Map.Entry<String, HashMap<String, Integer>>>(GlobalVariables.ACTIVITY_DURATION_MAP.entrySet());
         Collections.sort(orderMapList, new Comparator<Map.Entry<String, HashMap<String, Integer>>>() {
             public int compare(Map.Entry<String, HashMap<String, Integer>> o1, Map.Entry<String, HashMap<String, Integer>> o2) {
                 return o1.getValue().get("TotalDuration").compareTo(o2.getValue().get("TotalDuration"));
@@ -246,7 +298,7 @@ public class AutomationServer implements Runnable {
         final StringBuilder durationInfo = new StringBuilder();
         String newline = "\n<br>";
         durationInfo.append("App Name:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("AppName")).append(newline).append(" OnCreate Duration:").append(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")).append(newline);
-        for (Map.Entry<String,HashMap<String, Integer>> map : orderMapList) {
+        for (Map.Entry<String, HashMap<String, Integer>> map : orderMapList) {
             String activityName = map.getKey();
             durationInfo.append("Activity Name:").append(activityName).append(newline);
             if (GlobalVariables.ACTIVITY_DURATION_MAP.get(activityName).get("TotalDuration") > 800) {
@@ -264,7 +316,7 @@ public class AutomationServer implements Runnable {
             public void run() {
                 Log.w(TAG, durationInfo.toString());
                 try {
-                    String[] emails = GlobalVariables.EMAIL_TO.split(" ");
+                    String[] emails = EMAIL_TO.split(" ");
                     MailSender.sendHTMLMail("android_automation@126.com", "Automation123", "smtp.126.com",
                             "Activity Duration Report", durationInfo.toString(),
                             null, emails);
@@ -312,7 +364,7 @@ public class AutomationServer implements Runnable {
             public void run() {
                 Log.w(TAG, durationInfo.toString());
                 try {
-                    String[] emails = GlobalVariables.EMAIL_TO.split(" ");
+                    String[] emails = EMAIL_TO.split(" ");
                     MailSender.sendHTMLMail("android_automation@126.com", "Automation123", "smtp.126.com",
                             finalEmailTitle, durationInfo.toString(),
                             null, emails);

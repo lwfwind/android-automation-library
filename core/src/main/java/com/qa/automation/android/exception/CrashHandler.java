@@ -3,6 +3,7 @@ package com.qa.automation.android.exception;
 import android.content.Context;
 import android.util.Log;
 
+import com.qa.automation.android.AutomationServer;
 import com.qa.automation.android.GlobalVariables;
 import com.qa.automation.android.util.AppInfoUtil;
 import com.qa.automation.android.util.DeviceUtil;
@@ -88,7 +89,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 ;
                 try {
                     sUserInfo = getUserInfo();
-                    String[] emails = GlobalVariables.EMAIL_TO.split(" ");
+                    String[] emails = AutomationServer.EMAIL_TO.split(" ");
                     MailSender.sendHTMLMail("android_automation@126.com", "Automation123", "smtp.126.com",
                             "android-automation-library uncatched exception", sUserInfo + getErrorTrace(ex) + getRecentLogs(),
                             null, emails);
@@ -155,7 +156,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         StringBuilder sb = new StringBuilder();
         String newline = "\n<br>";
         sb.append(newline).append(newline).append("=============================Logs:").append(newline);
-        if(!GlobalVariables.ENABLE_ANDFIX_MODE) {
+        if (!AutomationServer.ENABLE_ANDFIX_MODE) {
             LogCat.getRecentLogs();
         }
         for (Object log : LogQueueGlobal.getInstance().getLogQueue()) {

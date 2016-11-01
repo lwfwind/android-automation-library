@@ -143,7 +143,7 @@ public class AutomationServerWorker implements Runnable, WindowListener {
                 result = windowManager.getFocusedWindow(mClient);
             } else if (COMMAND_WINDOW_MANAGER_AUTOLIST.equalsIgnoreCase(command)) {
                 result = windowManagerAutolistLoop();
-            }  else if (COMMAND_GET_TOAST.equalsIgnoreCase(command)) {
+            } else if (COMMAND_GET_TOAST.equalsIgnoreCase(command)) {
                 Options options = new Options();
                 options.addOption("t", true, "timeout");
                 options.addOption("ex", true, "excludeText");

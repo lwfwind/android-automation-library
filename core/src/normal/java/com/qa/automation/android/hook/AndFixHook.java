@@ -9,6 +9,6 @@ public class AndFixHook {
     /**
      * Init.
      */
-    public static void init(){
+    public static void init() {
     }
 }

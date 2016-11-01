@@ -3,39 +3,34 @@ package com.qa.automation.android.hook.instrument;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Instrumentation;
-import android.hardware.SensorEvent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.qa.automation.android.AutomationServer;
 import com.qa.automation.android.GlobalVariables;
-import com.qa.automation.android.highlight.HighlightView;
-import com.qa.automation.android.util.shake.ShakeSensor;
 
 import java.util.HashMap;
 
 /**
  * The type My instrumentation.
  */
-public class MyInstrumentation extends Instrumentation {
+class MyInstrumentation extends Instrumentation {
     private static final String TAG = "MyInstrumentation";
     private static HashMap<String, Integer> onDuration;
-    private ShakeSensor mShakeSensor = null;
     private static boolean isFirstLaunch = true;
 
     /**
      * ActivityThread中原始的对象, 保存起来
      */
-    Instrumentation mBase;
+    private Instrumentation mBase;
 
     /**
      * Instantiates a new My instrumentation.
      *
      * @param base the base
      */
-    public MyInstrumentation(Instrumentation base) {
+    MyInstrumentation(Instrumentation base) {
         mBase = base;
     }
 
@@ -56,7 +51,7 @@ public class MyInstrumentation extends Instrumentation {
      *
      * @param app the app
      */
-    public void beforeCallApplicationOnCreate(Application app) {
+    private void beforeCallApplicationOnCreate(Application app) {
     }
 
     /**
@@ -64,7 +59,7 @@ public class MyInstrumentation extends Instrumentation {
      *
      * @param app the app
      */
-    public void afterCallApplicationOnCreate(Application app) {
+    private void afterCallApplicationOnCreate(Application app) {
     }
 
     /**
@@ -94,16 +89,6 @@ public class MyInstrumentation extends Instrumentation {
     private void afterOnCreate(Activity activity) {
         Log.w(TAG, "afterOnCreate:" + activity.getClass().getSimpleName());
         AutomationServer.setCurrentContext(activity).addWindow(activity);
-        final Activity currentAcitivity = activity;
-        if(GlobalVariables.ENABLE_SHAKE){
-            mShakeSensor = new ShakeSensor(currentAcitivity, 2200);
-            mShakeSensor.setShakeListener(new ShakeSensor.OnShakeListener() {
-                @Override
-                public void onShakeComplete(SensorEvent event) {
-                    Toast.makeText(currentAcitivity, "摇啊摇", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
     }
 
 
@@ -150,14 +135,16 @@ public class MyInstrumentation extends Instrumentation {
             onDuration.put("TotalDuration", total);
             Log.w(TAG, activity.getClass().getName() + " TotalDuration:" + total);
             GlobalVariables.ACTIVITY_DURATION_MAP.put(activity.getClass().getName(), onDuration);
-            if (isFirstLaunch) {
-                isFirstLaunch = false;
-                if (total + Integer.parseInt(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")) > 800) {
-                    AutomationServer.sendActivityDuration(activity.getClass().getName(), true);
-                }
-            } else {
-                if (total > 800) {
-                    AutomationServer.sendActivityDuration(activity.getClass().getName(), false);
+            if(AutomationServer.ENABLE_COLLECT_DURATION) {
+                if (isFirstLaunch) {
+                    isFirstLaunch = false;
+                    if (total + Integer.parseInt(GlobalVariables.APP_LAUNCH_DURATION_MAP.get("OnCreate")) > 800) {
+                        AutomationServer.sendActivityDuration(activity.getClass().getName(), true);
+                    }
+                } else {
+                    if (total > 800) {
+                        AutomationServer.sendActivityDuration(activity.getClass().getName(), false);
+                    }
                 }
             }
         }
@@ -171,14 +158,11 @@ public class MyInstrumentation extends Instrumentation {
 
     private void beforeOnResume(Activity activity) {
         Log.w(TAG, "beforeOnResume:" + activity.getClass().getSimpleName());
-        if(GlobalVariables.ENABLE_SHAKE) {
-            mShakeSensor.register();
-        }
     }
 
     public void callActivityOnStop(Activity activity) {
         beforeOnStop(activity);
-        mBase.callActivityOnDestroy(activity);
+        mBase.callActivityOnStop(activity);
         afterOnStop(activity);
     }
 
@@ -188,9 +172,6 @@ public class MyInstrumentation extends Instrumentation {
 
     private void beforeOnStop(Activity activity) {
         Log.w(TAG, "beforeOnStop:" + activity.getClass().getSimpleName());
-        if(GlobalVariables.ENABLE_SHAKE) {
-            mShakeSensor.unregister();
-        }
     }
 
     public void callActivityOnDestroy(Activity activity) {

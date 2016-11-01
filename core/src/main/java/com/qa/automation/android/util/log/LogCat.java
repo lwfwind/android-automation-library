@@ -1,8 +1,8 @@
 package com.qa.automation.android.util.log;
 
 
-import com.qa.automation.android.GlobalVariables;
 import com.qa.automation.android.find.Sleeper;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -27,7 +27,7 @@ public class LogCat {
         try {
             // read output from logcat
             int id = android.os.Process.myPid();
-            p = Runtime.getRuntime().exec("logcat -d | grep "+id);
+            p = Runtime.getRuntime().exec("logcat -d | grep " + id);
             reader = new BufferedReader(
                     new InputStreamReader(p.getInputStream()));
 
@@ -69,10 +69,10 @@ public class LogCat {
     /**
      * Destroys the process and closes the BufferedReader.
      *
-     * @param p the process to destroy
+     * @param p      the process to destroy
      * @param reader the BufferedReader to close
      */
-    private static void destroy(Process p, BufferedReader reader){
+    private static void destroy(Process p, BufferedReader reader) {
         p.destroy();
         try {
             reader.close();

@@ -45,7 +45,7 @@ publish {
     userOrg = 'lwfwind'
     groupId = 'com.lwfwind'
     artifactId = 'android-automation-library'
-    publishVersion = '2.8'
+    publishVersion = '1.0'
     desc = 'Support android ui automaton such as identify Toast and PopupWindow for appium'
     website = 'https://github.com/lwfwind/android-automation-library'
     currentFlavor = 'normal'

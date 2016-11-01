@@ -1,11 +1,11 @@
 ## Android-automation-library - a light, common android ui automaton library
 
-Currently android uiautomator library doesn't support Toast and PopupWindow,this library used to support android ui automaton such as identify Toast and PopupWindow
+Currently android uiautomator library doesn't support Toast and PopupWindow,this library used to support android ui automaton such as identify Toast and PopupWindow for Appium
 * Tags: Appium, uiautomator, Toast, PopupWindow, Automation, Test, Android
 
 ## Features
-* Support HierarchyViewer on real device
 * Identify Toast and PopupWindow
+* Support HierarchyViewer on real device
 * Collect statistics of first application launch time and all activity OnCreate/OnStart/OnResume time
 * Collect all crash stack trace and logs
 
@@ -13,7 +13,7 @@ Currently android uiautomator library doesn't support Toast and PopupWindow,this
 ##### 1. Add gradle dependency in target app
 ```groovy
 dependencies {
-    compile 'com.github.lwfwind.automation:android-automation-library:2.7'
+    compile 'com.lwfwind:android-automation-library:1.0'
 }
 ```
 
@@ -25,7 +25,7 @@ dependencies {
         super.attachBaseContext(base);
 		
         //wind automation
-		AutomationServer.install(this);
+		AutomationServer.install(this).enableStrictMode(true).enableCrashCatch(true).enableCollectDuration(true).setEmailTo("A@mail.com B@mail.com");
 		
     }
 ```
